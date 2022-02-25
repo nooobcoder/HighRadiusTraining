@@ -1,25 +1,44 @@
+package telusko;
+
 import java.sql.*;
 
-public class ReadDatabase {
+public class DemoClass {
     static Connection conn = null;
     static String CONN_URL = "jdbc:mysql://192.168.0.118:3306/hrcdb?user=mysql&password=mysql";
     static Statement stmt = null;
+    static PreparedStatement pstmt;
     static ResultSet rs = null;
+
+    public static void readDB(String query) throws SQLException {
+        rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            String userData = rs.getInt(1) + " : " + rs.getString(2);
+            System.out.println(userData);
+        }
+    }
+
+    public static void insertRow(String query) throws SQLException {
+        int rowsAffected = stmt.executeUpdate(query);
+        System.out.println(rowsAffected);
+
+    }
 
     public static void main(String[] args) {
         try {
             conn = DriverManager.getConnection(CONN_URL);
             stmt = conn.createStatement();
 
-//             Do further operations
-            if (stmt.execute("SELECT * FROM DEPARTMENT LIMIT 5")) {
-                rs = stmt.getResultSet();
-            }
+            String query = "SELECT * FROM student";
+            readDB(query);
 
-            while (rs.next()) {
-                String _id = rs.getString("dept_id");
-                System.out.println(_id);
-            }
+            /*query = "INSERT INTO student(userName) VALUE ('Priyanka')";
+            insertRow(query);*/
+
+            /*String name = "Dhaval";
+            query = "INSERT INTO student(userName) VALUES (?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, name);
+            System.out.println(pstmt.executeUpdate());*/
         } catch (SQLException ex) {
             // handle the error
             System.out.println("SQLException: " + ex.getMessage());
@@ -34,7 +53,7 @@ public class ReadDatabase {
             if (rs != null) {
                 try {
                     rs.close();
-                } catch (SQLException sqlEx) {
+                } catch (SQLException ignored) {
                 } // ignore
 
                 rs = null;
@@ -43,7 +62,7 @@ public class ReadDatabase {
             if (stmt != null) {
                 try {
                     stmt.close();
-                } catch (SQLException sqlEx) {
+                } catch (SQLException ignored) {
                 } // ignore
 
                 stmt = null;
