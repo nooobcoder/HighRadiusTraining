@@ -10,7 +10,7 @@
     <title>My Java WebApp</title>
 </head>
 <body>
-Hello World
+Hello World2
 <p>Hey! I am done!</p>
 </body>
 </html>
