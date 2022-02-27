@@ -12,4 +12,13 @@
         <servlet-name>add</servlet-name>
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>sq</servlet-name>
+        <servlet-class>com.example.teluskoservlet.SqServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sq</servlet-name>
+        <url-pattern>/sq</url-pattern>
+    </servlet-mapping>
 </web-app>
