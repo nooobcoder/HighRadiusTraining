@@ -4,44 +4,44 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>add</servlet-name>
-        <servlet-class>com.example.teluskoservlet.AddServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>add</servlet-name>
-        <url-pattern>/add</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>add</servlet-name>-->
+<!--        <servlet-class>com.example.teluskoservlet.AddServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>add</servlet-name>-->
+<!--        <url-pattern>/add</url-pattern>-->
+<!--    </servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>sq</servlet-name>
-        <servlet-class>com.example.teluskoservlet.SqServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>sq</servlet-name>
-        <url-pattern>/sq</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>sq</servlet-name>-->
+<!--        <servlet-class>com.example.teluskoservlet.SqServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>sq</servlet-name>-->
+<!--        <url-pattern>/sq</url-pattern>-->
+<!--    </servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>myservlet</servlet-name>
-        <servlet-class>com.example.teluskoservlet.MyServlet</servlet-class>
-        <init-param>
-            <param-name>name</param-name>
-            <param-value>ANKUR PAUL</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>myservlet</servlet-name>
-        <url-pattern>/myservlet</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>myservlet</servlet-name>-->
+<!--        <servlet-class>com.example.teluskoservlet.MyServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>name</param-name>-->
+<!--            <param-value>ANKUR PAUL</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>myservlet</servlet-name>-->
+<!--        <url-pattern>/myservlet</url-pattern>-->
+<!--    </servlet-mapping>-->
 
-    <context-param>
-        <param-name>name</param-name>
-        <param-value>Ankur Paul</param-value>
-    </context-param>
+<!--    <context-param>-->
+<!--        <param-name>name</param-name>-->
+<!--        <param-value>Ankur Paul</param-value>-->
+<!--    </context-param>-->
 
-    <context-param>
-        <param-name>phone</param-name>
-        <param-value>Xiaomi</param-value>
-    </context-param>
+<!--    <context-param>-->
+<!--        <param-name>phone</param-name>-->
+<!--        <param-value>Xiaomi</param-value>-->
+<!--    </context-param>-->
 </web-app>

@@ -1,6 +1,7 @@
 package com.example.teluskoservlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet("/sq")
 public class SqServlet extends HttpServlet {
 
     @Override
@@ -26,7 +28,7 @@ public class SqServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 //            HttpSession session = request.getSession();
             Cookie[] cookies = request.getCookies();
-            int k=-1;
+            int k = -1;
             for (Cookie c : cookies) {
                 if (c.getName().equals("k")) {
                     k = Integer.parseInt(c.getValue());
