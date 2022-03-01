@@ -29,9 +29,9 @@ public class AddServlet extends HttpServlet {
 
 //            HttpSession session = req.getSession();
 //            session.setAttribute("k", sum);
+
             Cookie cookie = new Cookie("k", String.valueOf(sum));
             resp.addCookie(cookie);
-
             resp.sendRedirect("sq");
         } catch (Exception ignored) {
         }
