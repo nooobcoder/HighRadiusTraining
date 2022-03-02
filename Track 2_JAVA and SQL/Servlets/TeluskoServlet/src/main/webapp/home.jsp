@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%-- <%@ is a directive --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" errorPage="error.jsp" %>
 <html>
 <head>
     <title>JSP Page</title>
@@ -18,5 +18,8 @@
 %>
 <h1>Hello World!</h1>
 The value is <%=coef%>
+<%
+    int k = 9 / 0;
+%>
 </body>
 </html>
