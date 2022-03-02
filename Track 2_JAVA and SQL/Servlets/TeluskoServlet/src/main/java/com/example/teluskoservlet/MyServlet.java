@@ -13,8 +13,8 @@ import java.io.PrintWriter;
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        ServletContext ctx = getServletContext();
-//        String str = ctx.getInitParameter("name");
+//      ServletContext ctx = getServletContext();
+//      String str = ctx.getInitParameter("name");
 
         ServletConfig cfg = getServletConfig();
         String str = cfg.getInitParameter("name");

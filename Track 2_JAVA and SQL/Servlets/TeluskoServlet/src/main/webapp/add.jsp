@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
-<form action="add">
-    Enter 1st Number:<input type="text" name="num1"><br/>
-    Enter 2nd Number: <input type="text" name="num2"><br/>
-    <input type="submit">
-</form>
-<!--<a href="myservlet">My Servlet</a>-->
+<body bgcolor="#9370db">
+<%
+    int i = Integer.parseInt(request.getParameter("num1"));
+    int j = Integer.parseInt(request.getParameter("num2"));
+
+    int k = i + j;
+    response.getWriter().println("Output: " + k);
+%>
 </body>
 </html>
