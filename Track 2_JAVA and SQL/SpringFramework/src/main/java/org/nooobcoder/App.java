@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-        Vehicle obj = (Vehicle) applicationContext.getBean("vehicle");
+        Vehicle obj = (Vehicle) applicationContext.getBean("bike");
         obj.drive();
 
     }
