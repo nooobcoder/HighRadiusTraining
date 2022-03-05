@@ -32,7 +32,6 @@ Length: ${fn:length(str)}
     <br/>
     ${s}
 </c:forEach>
-<br/>
 index: ${fn:indexOf(str, "is")}
 </body>
 </html>

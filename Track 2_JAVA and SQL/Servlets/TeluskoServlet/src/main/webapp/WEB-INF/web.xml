@@ -6,7 +6,7 @@
 
 <!--    <servlet>-->
 <!--        <servlet-name>add</servlet-name>-->
-<!--        <servlet-class>com.example.teluskoservlet.AddServlet</servlet-class>-->
+<!--        <servlet-class>com.example.postservlet.AddServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>add</servlet-name>-->
@@ -15,7 +15,7 @@
 
 <!--    <servlet>-->
 <!--        <servlet-name>sq</servlet-name>-->
-<!--        <servlet-class>com.example.teluskoservlet.SqServlet</servlet-class>-->
+<!--        <servlet-class>com.example.postservlet.SqServlet</servlet-class>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
 <!--        <servlet-name>sq</servlet-name>-->
@@ -24,7 +24,7 @@
 
 <!--    <servlet>-->
 <!--        <servlet-name>myservlet</servlet-name>-->
-<!--        <servlet-class>com.example.teluskoservlet.MyServlet</servlet-class>-->
+<!--        <servlet-class>com.example.postservlet.MyServlet</servlet-class>-->
 <!--        <init-param>-->
 <!--            <param-name>name</param-name>-->
 <!--            <param-value>ANKUR PAUL</param-value>-->

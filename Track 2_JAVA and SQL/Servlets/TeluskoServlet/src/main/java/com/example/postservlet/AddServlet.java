@@ -1,4 +1,4 @@
-package com.example.teluskoservlet;
+package com.example.postservlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
