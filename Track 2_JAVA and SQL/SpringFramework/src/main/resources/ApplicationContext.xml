@@ -5,7 +5,8 @@
     <context:component-scan
             base-package="org.nooobcoder"/>
     <bean id="tyre" class="org.nooobcoder.Tyre">
-        <property name="brand" value="Ceat"/>
+<!--        <property name="brand" value="Ceat"/>-->
+        <constructor-arg value="MRF"></constructor-arg>
     </bean>
     <!--    <bean id="vehicle" class="org.nooobcoder.Car">-->
 
