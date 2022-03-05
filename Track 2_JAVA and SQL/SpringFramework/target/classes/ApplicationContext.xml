@@ -4,9 +4,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan
             base-package="org.nooobcoder"/>
-    <bean id="tyre" class="org.nooobcoder.Tyre">
-        <property name="brand" value="Ceat"/>
-    </bean>
+<!--    <bean id="tyre" class="org.nooobcoder.Tyre">-->
+<!--        <property name="brand" value="Ceat"/>-->
+<!--        <constructor-arg value="MRF"></constructor-arg>-->
+<!--    </bean>-->
     <!--    <bean id="vehicle" class="org.nooobcoder.Car">-->
 
     <!--    </bean>-->

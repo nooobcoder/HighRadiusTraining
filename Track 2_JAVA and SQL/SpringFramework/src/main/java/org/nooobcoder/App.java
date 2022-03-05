@@ -9,7 +9,10 @@ public class App {
         /*Vehicle obj = (Vehicle) applicationContext.getBean("bike");
         obj.drive();*/
 
-        Tyre tyre = (Tyre) applicationContext.getBean("tyre");
-        System.out.println(tyre);
+        /*Tyre tyre = (Tyre) applicationContext.getBean("tyre");
+        System.out.println(tyre);*/
+
+        Vehicle obj = (Car) applicationContext.getBean("car");
+        obj.drive();
     }
 }
