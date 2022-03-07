@@ -1,0 +1,20 @@
+{
+	"name": "htmlcssjsstarter",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"scripts": {
+		"clean": "rm dist/bundle.js",
+		"start": "snowpack dev --port 8888 --open none",
+		"build": "snowpack build --port 8888"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"snowpack": "^3.8.8",
+		"prettier": "^2.5.1",
+		"eslint": "^8.10.0"
+	}
+}
