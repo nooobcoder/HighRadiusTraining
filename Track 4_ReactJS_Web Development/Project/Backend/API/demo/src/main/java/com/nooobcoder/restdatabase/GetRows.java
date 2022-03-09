@@ -99,6 +99,7 @@ public class GetRows extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
 
+        resp.addHeader("Access-Control-Allow-Origin", "*");
         try {
             List<Map<String, Object>> rows = connection.executeQuery("SELECT * FROM winter_internship LIMIT 10,20;");
 
