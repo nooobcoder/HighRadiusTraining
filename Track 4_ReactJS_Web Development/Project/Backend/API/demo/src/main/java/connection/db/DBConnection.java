@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public class DBConnection {
-    String connectionURL, username, password, dbName,dbArgs;
+    String connectionURL, username, password, dbName, dbArgs;
     private static Connection conn;
 
-    public DBConnection(String connectionURL, String username, String password, String dbName,String dbArgs) {
+    public DBConnection(String connectionURL, String username, String password, String dbName, String dbArgs) {
         this.connectionURL = connectionURL;
         this.username = username;
         this.password = password;
@@ -20,13 +20,13 @@ public class DBConnection {
 
     private static DBConnection connectionobj = null;
 
-    public static DBConnection getInstance(String connectionURL, String username, String password, String dbName,String dbArgs) {
+    public static DBConnection getInstance(String connectionURL, String username, String password, String dbName, String dbArgs) {
         if (connectionobj == null) {
-            connectionobj = new DBConnection(connectionURL, username, password, dbName,dbArgs);
+            connectionobj = new DBConnection(connectionURL, username, password, dbName, dbArgs);
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection(connectionURL + dbName+dbArgs, username, password);
+                conn = DriverManager.getConnection(connectionURL + dbName + dbArgs, username, password);
                 System.out.println("Connected to database successfully!");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
@@ -67,9 +67,6 @@ public class DBConnection {
                 '}';
     }
 
-    public void initDB() {
-
-    }
 
     public List<Map<String, Object>> executeQuery(String query) throws SQLException {
         Statement statement = conn.createStatement();

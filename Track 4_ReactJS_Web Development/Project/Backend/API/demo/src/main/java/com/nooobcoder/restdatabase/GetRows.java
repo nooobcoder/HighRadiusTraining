@@ -54,15 +54,14 @@ public class GetRows extends HttpServlet {
     }
 
     public void initializeDB() {
-        String CONN_URL, DB_USER, DB_NAME, DB_PASSWORD,DB_ARGS;
+        String CONN_URL, DB_USER, DB_NAME, DB_PASSWORD, DB_ARGS;
         CONN_URL = initParamsMap.get("CONN_URL");
         DB_USER = initParamsMap.get("DB_USER");
         DB_NAME = initParamsMap.get("DB_NAME");
         DB_PASSWORD = initParamsMap.get("DB_PASSWORD");
         DB_ARGS = initParamsMap.get("DB_ARGS");
 
-        this.connection = DBConnection.getInstance(CONN_URL, DB_USER, DB_PASSWORD, DB_NAME,DB_ARGS);
-        this.connection.initDB();
+        this.connection = DBConnection.getInstance(CONN_URL, DB_USER, DB_PASSWORD, DB_NAME, DB_ARGS);
     }
 
     /**
@@ -96,23 +95,32 @@ public class GetRows extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
 
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-        try {
-            List<Map<String, Object>> rows = connection.executeQuery("SELECT * FROM winter_internship LIMIT 10,20;");
+        if (req.getMethod().equals("GET")) {
+            doGet(req, resp);
+        }else {
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+            try {
+                List<Map<String, Object>> rows = connection.executeQuery("SELECT * FROM winter_internship LIMIT 10,20;");
 
-            /*
-             * https://stackoverflow.com/questions/50814792/java-query-resultset-to-json#:~:text=response.setContentType(%22application/json%22)%3B%0Aresponse.setCharacterEncoding(%22UTF%2D8%22)%3B%0AObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AobjectMapper.writeValue(response.getOutputStream()%2C%20rows)%3B
-             * */
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("utf-8");
+                /*
+                 * https://stackoverflow.com/questions/50814792/java-query-resultset-to-json#:~:text=response.setContentType(%22application/json%22)%3B%0Aresponse.setCharacterEncoding(%22UTF%2D8%22)%3B%0AObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AobjectMapper.writeValue(response.getOutputStream()%2C%20rows)%3B
+                 * */
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("utf-8");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(resp.getOutputStream(), rows);
-        } catch (SQLException e) {
-            e.printStackTrace();
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.writeValue(resp.getOutputStream(), rows);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("--- SERVICE END ---");
     }
