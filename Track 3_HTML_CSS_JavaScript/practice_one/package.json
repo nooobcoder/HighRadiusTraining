@@ -11,10 +11,9 @@
 		"start": "snowpack dev --port 8888 --open none",
 		"build": "snowpack build --port 8888"
 	},
-	"dependencies": {},
 	"devDependencies": {
-		"snowpack": "^3.8.8",
+		"eslint": "^8.10.0",
 		"prettier": "^2.5.1",
-		"eslint": "^8.10.0"
+		"snowpack": "^3.8.8"
 	}
 }
