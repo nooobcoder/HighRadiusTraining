@@ -14,6 +14,8 @@ function App() {
 		if (status === 200) {
 			setRes(data);
 			console.log(data);
+		} else {
+			throw new Error("The Endpoint could not be reached!");
 		}
 	};
 
@@ -25,7 +27,7 @@ function App() {
 	}, []);
 
 	return (
-		<div class="bg-[#50d71e]">
+		<div className="bg-lime-300">
 			{/* Header Component */}
 			<Header />
 		</div>
