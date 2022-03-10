@@ -88,8 +88,8 @@ public class GetRows extends HttpServlet {
             startIndex = 0;
             limit = 10; // 10 is the default value of rows
         }
-//        System.out.println(startIndex);
-//        System.out.println(limit);
+        System.out.println(startIndex);
+        System.out.println(limit);
         System.out.println("--- SERVICE END ---");
         doPost(req, resp);
     }
@@ -105,10 +105,10 @@ public class GetRows extends HttpServlet {
 
         if (req.getMethod().equals("GET")) {
             doGet(req, resp);
-        }else {
+        } else {
             resp.addHeader("Access-Control-Allow-Origin", "*");
             try {
-                List<Map<String, Object>> rows = connection.executeQuery("SELECT * FROM winter_internship LIMIT 10,20;");
+                List<Map<String, Object>> rows = connection.executeQuery("SELECT * FROM winter_internship LIMIT ?,?;", startIndex, limit);
 
                 /*
                  * https://stackoverflow.com/questions/50814792/java-query-resultset-to-json#:~:text=response.setContentType(%22application/json%22)%3B%0Aresponse.setCharacterEncoding(%22UTF%2D8%22)%3B%0AObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AobjectMapper.writeValue(response.getOutputStream()%2C%20rows)%3B

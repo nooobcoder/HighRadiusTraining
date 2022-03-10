@@ -68,14 +68,38 @@ public class DBConnection {
     }
 
 
-    public List<Map<String, Object>> executeQuery(String query) throws SQLException {
-        Statement statement = conn.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        System.out.println("EXECUTING QUERY: " + query);
+    public List<Map<String, Object>> executeQuery(String query, Object... params) throws SQLException {
+        System.out.println("Params Length: " + params.length);
+        PreparedStatement statement = conn.prepareStatement(query);
+//        SELECT ? FROM ? LIMIT ?,?;
+//        1st Parameter -> Column Names or use * for all columns
+//        2nd Parameter -> Table Name
+//        3rd Parameter -> Start Row Index
+//        4th Parameter -> Limiting count
+//        Example: SELECT * FROM winter_internship LIMIT 10,5; // This gets 5 rows from the 11th row (top)
 
-        List<Map<String, Object>> rows = new ArrayList<>();
+        int index = 1; // Prepared Statements are 1 index based
+        for (Object param : params) {
+            if (param instanceof Long) {
+                statement.setLong(index++, (Long) param);
+            } else if (param instanceof Integer) {
+                statement.setInt(index++, (Integer) param);
+            } else if (param instanceof Date) {
+                statement.setTimestamp(index++, new Timestamp(((Date) param).getTime()));
+            } else {
+                statement.setString(index++, (String) param);
+            }
+        }
+
+
+        System.out.println();
+
+        System.out.println("EXECUTING QUERY: " + statement);
+        ResultSet resultSet = statement.executeQuery();
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int colCount = rsmd.getColumnCount();
+
+        List<Map<String, Object>> rows = new ArrayList<>();
 
         // https://stackoverflow.com/questions/50814792/java-query-resultset-to-json (ORM mapping to JSON)
         while (resultSet.next()) {
