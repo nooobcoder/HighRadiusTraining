@@ -1,7 +1,8 @@
 import "./App.css";
-import logo from "./logo.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+import Header from "./components/Header";
 
 function App() {
 	const [res, setRes] = useState({});
@@ -25,7 +26,8 @@ function App() {
 
 	return (
 		<div class="bg-[#50d71e]">
-			<p>Hello World</p>
+			{/* Header Component */}
+			<Header />
 		</div>
 	);
 }
