@@ -1,20 +1,23 @@
-import abc_company_logo from "../assets/abc_logo.png";
-import highradius_logo from "../assets/highradius_logo.png";
+import React from 'react';
+import AbcLogo from '../assets/AbcLogo.png';
+import HighradiusLogo from '../assets/HighradiusLogo.png';
 
-const Header = () => (
-	<div className="flex  justify-between px-5 py-3 ">
-		<img
-			alt="left_company_logo"
-			src={abc_company_logo}
-			className="hover:shadow-md h-12"
-		/>
-		<img
-			alt="left_company_logo"
-			src={highradius_logo}
-			className="hover:shadow-md h-12"
-		/>
+function Header() {
+  return (
+    <div className="flex  justify-between px-5 py-3 ">
+      <img
+        alt="left_company_logo"
+        src={AbcLogo}
+        className="hover:shadow-md h-12"
+      />
+      <img
+        alt="left_company_logo"
+        src={HighradiusLogo}
+        className="hover:shadow-md h-12"
+      />
 
-		<div>2</div>
-	</div>
-);
+      <div>2</div>
+    </div>
+  );
+}
 export default Header;
