@@ -16,7 +16,7 @@ function Header() {
         className="hover:shadow-md h-8 md:h-10 lg:h-12"
       />
 
-      <div className="invisible lg:visible">2</div>
+      <div className="invisible lg:visible" />
     </div>
   );
 }
