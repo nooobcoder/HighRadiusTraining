@@ -1,5 +1,6 @@
 package com.nooobcoder.restdatabase;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import connection.db.DBConnection;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import pojo.WinterInternshipPOJO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,19 +17,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(
-        name = "GetRows", value = "/getrows",
+        name = "AddRow", value = "/addRow",
         initParams = {
                 @WebInitParam(name = "CONN_URL", value = "jdbc:mysql://192.168.0.118:3306/", description = "This is the connection url to connect to the database"),
                 @WebInitParam(name = "DB_NAME", value = "grey_goose"),
-                @WebInitParam(name = "DB_ARGS", value = "?zeroDateTimeBehavior=convertToNull&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8&characterSetResults=UTF-8"),
+                @WebInitParam(name = "DB_ARGS", value = "?zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true&characterEncoding=UTF-8&characterSetResults=UTF-8"),
                 @WebInitParam(name = "DB_USER", value = "mysql"),
                 @WebInitParam(name = "DB_PASSWORD", value = "mysql"),
         })
-public class GetRows extends HttpServlet {
-    int startIndex = 0;
-    int limit = 10;
+public class AddRow extends HttpServlet {
     DBConnection connection;
 
     private Map<String, String> initParamsMap = new HashMap<String, String>();
@@ -81,16 +82,11 @@ public class GetRows extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- SERVICE START ---");
-        try {
-            startIndex = Integer.parseInt(req.getParameter("start"));
-            limit = Integer.parseInt(req.getParameter("limit"));
-        } catch (Exception e) {
-            startIndex = 0;
-            limit = 10; // 10 is the default value of rows
-        }
-//        System.out.println(startIndex);
-//        System.out.println(limit);
+
         System.out.println("--- SERVICE END ---");
+        if (req.getMethod().equals("GET")) {
+            doGet(req, resp);
+        }
         doPost(req, resp);
     }
 
@@ -102,25 +98,36 @@ public class GetRows extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        /*
+         * https://stackoverflow.com/questions/8100634/get-the-post-request-body-from-httpservletrequest#:~:text=test%20%3D%20request.getReader().lines().collect(Collectors.joining(System.lineSeparator()))%3B
+         * */
+        String requestPayload = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        Map<String, Object> payloadMap = new HashMap<>();
 
-        if (req.getMethod().equals("GET")) {
-            doGet(req, resp);
-        } else {
-            resp.addHeader("Access-Control-Allow-Origin", "*");
-            try {
-                List<Map<String, Object>> rows = DBConnection.executeQuery("SELECT * FROM winter_internship LIMIT ?,?;", startIndex, limit);
+        /*
+          https://www.journaldev.com/2324/jackson-json-java-parser-api-example-tutorial#:~:text=ObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AmyMap%20%3D%20objectMapper.readValue(mapData%2C%20HashMap.class)%3B
+        * */
+        ObjectMapper objectMapper = new ObjectMapper();
+        payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
+//        System.out.println("Map is: " + payloadMap);
 
-                /*
-                 * https://stackoverflow.com/questions/50814792/java-query-resultset-to-json#:~:text=response.setContentType(%22application/json%22)%3B%0Aresponse.setCharacterEncoding(%22UTF%2D8%22)%3B%0AObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AobjectMapper.writeValue(response.getOutputStream()%2C%20rows)%3B
-                 * */
-                resp.setContentType("application/json");
-                resp.setCharacterEncoding("utf-8");
+        /*https://cassiomolin.com/2016/09/17/converting-pojo-map-vice-versa-with-jackson/#:~:text=Foo%20anotherFoo%20%3D%20mapper.convertValue(map%2C%20Foo.class)%3B*/
+        WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.writeValue(resp.getOutputStream(), rows);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            List<Map<String, Object>> rows = connection.executeQuery("INSERT INTO winter_internship\n" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );", pojo);
+
+            /*
+             * https://stackoverflow.com/questions/50814792/java-query-resultset-to-json#:~:text=response.setContentType(%22application/json%22)%3B%0Aresponse.setCharacterEncoding(%22UTF%2D8%22)%3B%0AObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AobjectMapper.writeValue(response.getOutputStream()%2C%20rows)%3B
+             */
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("utf-8");
+
+            objectMapper.writeValue(resp.getOutputStream(), rows);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         System.out.println("--- SERVICE END ---");
     }

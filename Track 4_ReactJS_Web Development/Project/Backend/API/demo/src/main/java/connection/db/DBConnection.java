@@ -1,5 +1,7 @@
 package connection.db;
 
+import pojo.WinterInternshipPOJO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class DBConnection {
-    String connectionURL, username, password, dbName, dbArgs;
+    String connectionURL;
+
+
+    String username;
+    String password;
+    String dbName;
+    String dbArgs;
+    private static List<Map<String, Object>> tableMetaData;
     private static Connection conn;
 
     public DBConnection(String connectionURL, String username, String password, String dbName, String dbArgs) {
@@ -16,7 +25,9 @@ public class DBConnection {
         this.password = password;
         this.dbName = dbName;
         this.dbArgs = dbArgs;
+        tableMetaData = new ArrayList<Map<String, Object>>();
     }
+
 
     private static DBConnection connectionobj = null;
 
@@ -32,7 +43,28 @@ public class DBConnection {
                 e.printStackTrace();
             }
         }
+
+        setTableMetaData();
         return connectionobj;
+    }
+
+
+    public static List<Map<String, Object>> getTableMetaData() {
+        return tableMetaData;
+    }
+
+    public static void setTableMetaData() {
+        System.out.println(" ------ TABLE METADATA ------");
+        try {
+            tableMetaData.clear();
+            tableMetaData = executeQuery("SELECT COUNT(*) 'rows' FROM winter_internship");
+            for (Map<String, Object> m : tableMetaData) {
+                System.out.println(m);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        System.out.println(" ------ TABLE METADATA ------");
     }
 
     @Override
@@ -67,10 +99,24 @@ public class DBConnection {
                 '}';
     }
 
+    // This function is smart enough to calculate the id for new insertion in the database 🧠🤯
+    private static long calculateNewSerialNo() {
+        try {
+            long rows = (Long) tableMetaData.get(0).get("rows") + 1;
+            System.out.println(rows);
+            return rows;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
 
-    public List<Map<String, Object>> executeQuery(String query, Object... params) throws SQLException {
-        System.out.println("Params Length: " + params.length);
+    public static List<Map<String, Object>> executeQuery(String query, Object... params) throws SQLException {
+//        System.out.println("Params Length: " + params.length);
         PreparedStatement statement = conn.prepareStatement(query);
+        String mode = "fetch";
+
+
 //        SELECT ? FROM ? LIMIT ?,?;
 //        1st Parameter -> Column Names or use * for all columns
 //        2nd Parameter -> Table Name
@@ -78,12 +124,43 @@ public class DBConnection {
 //        4th Parameter -> Limiting count
 //        Example: SELECT * FROM winter_internship LIMIT 10,5; // This gets 5 rows from the 11th row (top)
 
+
         int index = 1; // Prepared Statements are 1 index based
         for (Object param : params) {
-            if (param instanceof Long) {
+            if (param instanceof WinterInternshipPOJO) {
+                setTableMetaData();
+                mode = "update";
+
+                long sl_no = calculateNewSerialNo();
+                statement.setLong(index++, sl_no != -1 ? sl_no : ((WinterInternshipPOJO) param).getSl_no());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
+                statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getClear_date());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getBuisness_year());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getDoc_id());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getPosting_date());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date1());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getDue_in_date());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getInvoice_currency());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_type());
+                statement.setInt(index++, ((WinterInternshipPOJO) param).getPosting_id());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getArea_business());
+                statement.setFloat(index++, ((WinterInternshipPOJO) param).getTotal_open_amount());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getBaseline_create_date());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getCust_payment_terms());
+                statement.setInt(index++, ((WinterInternshipPOJO) param).getInvoice_id());
+                statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIsOpen());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getAging_bucket());
+                statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIs_deleted());
+            } else if (param instanceof Long) {
                 statement.setLong(index++, (Long) param);
             } else if (param instanceof Integer) {
                 statement.setInt(index++, (Integer) param);
+            } else if (param instanceof Float) {
+                statement.setFloat(index++, (Float) param);
+            } else if (param instanceof Boolean) {
+                statement.setBoolean(index++, (Boolean) param);
             } else if (param instanceof Date) {
                 statement.setTimestamp(index++, new Timestamp(((Date) param).getTime()));
             } else {
@@ -94,26 +171,42 @@ public class DBConnection {
 
         System.out.println();
 
-        System.out.println("EXECUTING QUERY: " + statement);
-        ResultSet resultSet = statement.executeQuery();
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int colCount = rsmd.getColumnCount();
-
+        System.out.println("EXECUTING QUERY: " + statement.toString());
         List<Map<String, Object>> rows = new ArrayList<>();
+        Map<String, Object> row = new HashMap<>();
 
-        // https://stackoverflow.com/questions/50814792/java-query-resultset-to-json (ORM mapping to JSON)
-        while (resultSet.next()) {
-            Map<String, Object> row = new HashMap<>();
-            // Index is 1-based
-            for (int i = 1; i <= colCount; ++i) {
-                String colName = rsmd.getColumnName(i);
-                Object colVal = resultSet.getObject(i);
+        if (mode.equals("fetch")) {
+            ResultSet resultSet = statement.executeQuery();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int colCount = rsmd.getColumnCount();
 
-                row.put(colName, colVal);
+
+            // https://stackoverflow.com/questions/50814792/java-query-resultset-to-json (ORM mapping to JSON)
+            while (resultSet.next()) {
+                // Index is 1-based
+                for (int i = 1; i <= colCount; ++i) {
+                    String colName = rsmd.getColumnName(i);
+                    Object colVal = resultSet.getObject(i);
+
+                    row.put(colName, colVal);
+                }
+                rows.add(row);
             }
-            rows.add(row);
+        } else {
+            try {
+                int rowsAffected = statement.executeUpdate();
+                row.put("rowsAffected", rowsAffected);
+                rows.add(row);
+                setTableMetaData(); // Update the table metadata after the insertion
+            } catch (SQLException e) {
+                row.put("error", e.getMessage());
+            }
         }
-
+        try {
+            rows.add(tableMetaData.get(0));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return rows;
     }
 
