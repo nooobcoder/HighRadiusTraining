@@ -10,7 +10,7 @@ function App() {
   const actionDispatch = useDispatch();
 
   useEffect(() => {
-    actionDispatch(getTableRows({ start: 0, limit: 10 }));
+    actionDispatch(getTableRows({ start: 0, limit: 50 }));
   }, []);
 
   return (

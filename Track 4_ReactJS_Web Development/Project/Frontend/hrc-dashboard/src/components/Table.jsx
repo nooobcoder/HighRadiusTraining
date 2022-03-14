@@ -59,24 +59,93 @@ function TableScrollArea() {
   const shouldButtonBeEnabled = () => {
     // eslint-disable-next-line no-unused-vars
     const { rows: R, limit: L, start: S } = state.meta[0];
-    console.log(state.meta[0]);
     if (S === 0) {
-      setButtonState((prevState) => ({
-        ...prevState,
+      setButtonState(() => ({
+        next: true,
+        last: true,
         start: false,
         previous: false,
+      }));
+    } else if (S + L === R) {
+      setButtonState(() => ({
+        start: true,
+        previous: true,
+        next: false,
+        last: false,
       }));
     } else {
       setButtonState(() => ({ start: true, previous: true, next: true, last: true }));
     }
-    console.log(buttonState);
   };
 
   useEffect(() => shouldButtonBeEnabled(), [state.meta]);
 
-  const getNextRows = () => {
-    const { start: S, limit: L } = state.meta[0];
-    actionDispatch(getTableRows({ start: S + L, limit: L }));
+  const getRows = ({ operation = 'next' }) => {
+    const { start: S, limit: L, rows: R } = state.meta[0];
+    switch (operation) {
+      case 'start':
+        actionDispatch(getTableRows({ start: 0, limit: L }));
+        break;
+      case 'next':
+        actionDispatch(getTableRows({ start: S + L, limit: L }));
+        break;
+      case 'previous':
+        actionDispatch(getTableRows({ start: S - L, limit: L }));
+        break;
+      case 'last':
+        actionDispatch(getTableRows({ start: R - L, limit: L }));
+        break;
+      default:
+        console.log('An operation type was expected but not provided');
+    }
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const displayTableFooter = () => {
+    const { start, limit } = state.meta[0];
+    const end = start + limit;
+
+    return (
+      <Mantine.Center>
+        <Mantine.Group>
+          <Mantine.Group>
+            <Mantine.Button
+              disabled={!buttonState.start}
+              onClick={() => getRows({ operation: 'start' })}
+              className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer "
+            >
+              Start
+            </Mantine.Button>
+            <Mantine.Button
+              disabled={!buttonState.previous}
+              onClick={() => getRows({ operation: 'previous' })}
+              className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
+            >
+              Previous
+            </Mantine.Button>
+          </Mantine.Group>
+          <Mantine.Center>
+            <div>{`Displaying ${start}-${end} of ${state?.meta[0]?.rows} items`}</div>
+          </Mantine.Center>
+          <Mantine.Group>
+            <Mantine.Button
+              onClick={() => getRows({ operation: 'next' })}
+              disabled={!buttonState.next}
+              className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
+            >
+              Next
+            </Mantine.Button>
+            <Mantine.Button
+              disabled={!buttonState.last}
+              onClick={() => getRows({ operation: 'last' })}
+              className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
+            >
+              Last
+            </Mantine.Button>
+          </Mantine.Group>
+        </Mantine.Group>
+      </Mantine.Center>
+    );
   };
 
   return (
@@ -100,32 +169,7 @@ function TableScrollArea() {
           <tbody>{rows}</tbody>
         </Mantine.Table>
       </Mantine.ScrollArea>
-      <Mantine.Center>
-        <Mantine.Group>
-          <Mantine.Button
-            disabled={!buttonState.start}
-            className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer "
-          >
-            Start
-          </Mantine.Button>
-          <Mantine.Button
-            disabled={!buttonState.previous}
-            className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
-          >
-            Previous
-          </Mantine.Button>
-          <Mantine.Center>
-            <div>{`Displaying ${state.meta[0].start}-10 of ${state?.meta[0]?.rows} items`}</div>
-          </Mantine.Center>
-          <Mantine.Button
-            onClick={() => getNextRows()}
-            className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
-          >
-            Next
-          </Mantine.Button>
-          <Mantine.Button className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer">Last</Mantine.Button>
-        </Mantine.Group>
-      </Mantine.Center>
+      {displayTableFooter()}
     </>
   );
 }
