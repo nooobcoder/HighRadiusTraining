@@ -1,7 +1,7 @@
 import * as Mantine from '@mantine/core';
 import { createStyles } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTableRows } from '../app/redux/actions/actions';
 import { generateColumnNames } from '../utils/table/generateStructure';
 
@@ -48,7 +48,13 @@ function TableScrollArea() {
   }, [state]);
 
   const rows = state.rows.map((row, index) => (
-    <tr key={row.id} className={`${index % 2 === 0 ? 'bg-white' : 'bg-indigo-300'}`}>
+    <tr
+      key={row.id}
+      className={`${index % 2 === 0 ? 'bg-white' : 'bg-indigo-300'} text-center  border-2 border-collapse border-black`}
+    >
+      <Mantine.Center className="px-1 py-2">
+        <Mantine.Checkbox value={row.sl_no} color="orange" />
+      </Mantine.Center>
       {columnNames.map((col) => (
         <td className="text-center  border-2 border-collapse border-black">{row[col]}</td>
       ))}
@@ -125,7 +131,9 @@ function TableScrollArea() {
             </Mantine.Button>
           </Mantine.Group>
           <Mantine.Center>
-            <div>{`Displaying ${start}-${end} of ${state?.meta[0]?.rows} items`}</div>
+            <Mantine.Mark className="px-3 rounded-lg bg-[#5DAAE0]  lg:visible">
+              <Mantine.Text className="text-black sm:text-sm">{`Displaying ${start}-${end} of ${state?.meta[0]?.rows} items`}</Mantine.Text>
+            </Mantine.Mark>
           </Mantine.Center>
           <Mantine.Group>
             <Mantine.Button
@@ -161,6 +169,9 @@ function TableScrollArea() {
         <Mantine.Table sx={{ minWidth: 700 }} className="bg-orange-500" highlightOnHover>
           <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
             <tr className="bg-lime-100">
+              <Mantine.Center className="px-1 py-2">
+                <Mantine.Checkbox value="all" />
+              </Mantine.Center>
               {columnNames.map((columnName) => (
                 <th>{columnName}</th>
               ))}

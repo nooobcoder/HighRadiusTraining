@@ -5,6 +5,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@mantine/core": "^4.0.0",
+    "@mantine/hooks": "^4.0.4",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
