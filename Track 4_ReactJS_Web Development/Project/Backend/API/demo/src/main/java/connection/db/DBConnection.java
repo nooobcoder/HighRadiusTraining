@@ -183,15 +183,16 @@ public class DBConnection {
 
             // https://stackoverflow.com/questions/50814792/java-query-resultset-to-json (ORM mapping to JSON)
             while (resultSet.next()) {
+                row = new HashMap<>();
                 // Index is 1-based
                 for (int i = 1; i <= colCount; ++i) {
                     String colName = rsmd.getColumnName(i);
                     Object colVal = resultSet.getObject(i);
-
                     row.put(colName, colVal);
                 }
                 rows.add(row);
             }
+
         } else {
             try {
                 int rowsAffected = statement.executeUpdate();
@@ -207,6 +208,12 @@ public class DBConnection {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
+        /*
+        // Printing the result set being returned
+        for (Map<String, Object> o : rows) {
+            System.out.println(o);
+        }*/
         return rows;
     }
 
