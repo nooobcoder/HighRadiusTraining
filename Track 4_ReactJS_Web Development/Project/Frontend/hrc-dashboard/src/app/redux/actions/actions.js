@@ -2,7 +2,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import getRows from '../../../utils/api/getRows';
 
-const getTableRows = createAsyncThunk('post/getRows', async () => getRows());
+const getTableRows = createAsyncThunk('post/getRows', async (params) => getRows(params));
 
 // SAMPLE CODE FOR non-async actions
 /* export const GetUsers = (data) => (dispatch) => {

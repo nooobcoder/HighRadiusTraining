@@ -19,9 +19,13 @@ import { getTableRows as GetTableRows } from '../actions/actions';
 
 const GetRowsReducer = {
   [GetTableRows.fulfilled]: (state, action) => {
-    // console.log(action.payload);
+    const obj = { rows: [{}], meta: {} };
+    obj.rows = action.payload.slice(0, -1);
+    obj.meta = action.payload.slice(-1);
+
     // eslint-disable-next-line no-param-reassign
-    state.rows = action.payload;
+    state.table = obj;
+    // state.rows = action.payload;
   },
   [GetTableRows.rejected]: (state) => {
     // eslint-disable-next-line no-param-reassign

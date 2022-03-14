@@ -31,7 +31,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { GetRowsReducer } from '../reducers/reducers';
 
 const initialState = {
-  rows: [{}],
+  table: {
+    rows: [{}],
+    meta: [{}],
+  },
+  loading: false,
 };
 
 const apiSlice = createSlice({
@@ -43,5 +47,5 @@ const apiSlice = createSlice({
   extraReducers: GetRowsReducer,
 });
 
-// export const {} = apiSlice.actions;
+// export const {  } = apiSlice.actions;
 export default apiSlice.reducer;
