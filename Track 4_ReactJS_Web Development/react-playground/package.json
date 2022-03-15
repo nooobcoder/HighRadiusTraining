@@ -1,0 +1,43 @@
+{
+  "name": "esbuild-react-app-js-template",
+  "version": "1.0.0",
+  "main": "builder.js",
+  "author": "awran5",
+  "license": "MIT",
+  "scripts": {
+    "pre-commit": "lint-staged",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --max-warnings=0",
+    "start": "node builder.js --port 4848 --host 0.0.0.0",
+    "build": "NODE_ENV=production node builder.js"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "chokidar": "^3.5.2",
+    "esbuild": "^0.12.26",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "live-server": "^1.2.1",
+    "prettier": "^2.4.0"
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": "eslint --fix",
+    "*.+(json|css|md)": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
