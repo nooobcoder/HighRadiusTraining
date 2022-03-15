@@ -1,0 +1,13 @@
+{
+	"name": "webdevhtmlcss",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite --host 0.0.0.0 --port 4848",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"vite": "^2.8.0"
+	}
+}

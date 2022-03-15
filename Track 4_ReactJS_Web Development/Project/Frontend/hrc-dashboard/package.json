@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@heroicons/react": "^1.0.6",
     "@mantine/core": "^4.0.0",
     "@mantine/hooks": "^4.0.4",
     "@reduxjs/toolkit": "^1.8.0",

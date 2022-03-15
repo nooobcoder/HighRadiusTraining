@@ -169,8 +169,8 @@ function TableScrollArea() {
         <Mantine.Table sx={{ minWidth: 700 }} className="bg-orange-500" highlightOnHover>
           <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
             <tr className="bg-lime-100">
-              <Mantine.Center className="px-1 py-2">
-                <Mantine.Checkbox value="all" />
+              <Mantine.Center className="px-1 py-2 font-semibold text-sm">
+                <Mantine.Checkbox value="all" label="All" />
               </Mantine.Center>
               {columnNames.map((columnName) => (
                 <th>{columnName}</th>
