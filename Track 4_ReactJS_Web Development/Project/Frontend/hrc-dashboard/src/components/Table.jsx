@@ -160,7 +160,9 @@ function TableScrollArea() {
           </Mantine.Group>
           <Mantine.Center>
             <Mantine.Mark className="px-3 rounded-lg bg-[#5DAAE0]  lg:visible">
-              <Mantine.Text className="text-black sm:text-sm">{`Displaying ${start}-${end} of ${state?.meta[0]?.rows} items`}</Mantine.Text>
+              <Mantine.Text className="text-black sm:text-sm">
+                {`Displaying ${start + 1}-${end} of ${state?.meta[0]?.rows} items`}
+              </Mantine.Text>
             </Mantine.Mark>
           </Mantine.Center>
           <Mantine.Group>
