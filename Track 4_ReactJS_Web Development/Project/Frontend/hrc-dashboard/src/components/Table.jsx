@@ -195,7 +195,7 @@ function TableScrollArea() {
         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <Mantine.Table sx={{ minWidth: 700 }} className="bg-orange-500" highlightOnHover>
-          <thead key={`${id}thead`} className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+          <thead key={`${id}thead`} className={`z-10 ${cx(classes.header, { [classes.scrolled]: scrolled })}`}>
             <tr className="bg-lime-100">
               <td key="table-header">
                 <Mantine.Center className="px-1 py-2 font-semibold text-sm">
