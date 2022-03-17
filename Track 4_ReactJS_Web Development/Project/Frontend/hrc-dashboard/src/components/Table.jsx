@@ -1,6 +1,6 @@
 import * as Mantine from '@mantine/core';
 import { createStyles } from '@mantine/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedRows } from '../app/redux/slices/apiSlice';
 import { getTableRows } from '../app/redux/actions/actions';
@@ -46,18 +46,15 @@ function TableScrollArea() {
     last: true,
   });
 
-  useEffect(() => {
-    setColumnNames(generateColumnNames(state.rows[0]));
-  }, [state]);
-
   const rowsSelector = (payload) => actionDispatch(setSelectedRows(payload));
+  const id = useId();
 
   const rows = state.rows.map((row, index) => (
     <tr
-      key={row.id}
+      key={`row${id}${row?.sl_no}}`}
       className={`${index % 2 === 0 ? 'bg-white' : 'bg-indigo-300'} text-center  border-2 border-collapse border-black`}
     >
-      <td>
+      <td key={`data:${id}${row?.sl_no}}`}>
         <Mantine.Center className="px-1 py-1">
           <Mantine.Checkbox
             value={row.sl_no}
@@ -75,7 +72,9 @@ function TableScrollArea() {
         </Mantine.Center>
       </td>
       {columnNames.map((col) => (
-        <td className="text-center  border-2 border-collapse border-black">{row[col]}</td>
+        <td key={`${col}${id}${row[col]}`} className="text-center  border-2 border-collapse border-black">
+          {row[col]}
+        </td>
       ))}
     </tr>
   ));
@@ -103,7 +102,16 @@ function TableScrollArea() {
     }
   };
 
-  useEffect(() => shouldButtonBeEnabled(), [state.meta]);
+  // useEffect(() => shouldButtonBeEnabled(), [state.meta]);
+
+  useEffect(() => {
+    setColumnNames(generateColumnNames(state.rows[0]));
+    shouldButtonBeEnabled();
+  }, [state]);
+
+  useEffect(() => {
+    console.log('[Table.jsx rendered]');
+  });
 
   const getRows = ({ operation = 'next' }) => {
     const { start: S, limit: L, rows: R } = state.meta[0];
@@ -187,9 +195,9 @@ function TableScrollArea() {
         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <Mantine.Table sx={{ minWidth: 700 }} className="bg-orange-500" highlightOnHover>
-          <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+          <thead key={`${id}thead`} className={cx(classes.header, { [classes.scrolled]: scrolled })}>
             <tr className="bg-lime-100">
-              <td>
+              <td key="table-header">
                 <Mantine.Center className="px-1 py-2 font-semibold text-sm">
                   <Mantine.Checkbox
                     value="all"
@@ -206,7 +214,7 @@ function TableScrollArea() {
                 </Mantine.Center>
               </td>
               {columnNames.map((columnName) => (
-                <th>{columnName}</th>
+                <th key={`${id}${columnName}`}>{columnName}</th>
               ))}
             </tr>
           </thead>

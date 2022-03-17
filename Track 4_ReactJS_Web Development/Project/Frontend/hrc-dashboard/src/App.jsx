@@ -10,8 +10,12 @@ function App() {
   const actionDispatch = useDispatch();
 
   useEffect(() => {
-    actionDispatch(getTableRows({ start: 0, limit: 50 }));
+    actionDispatch(getTableRows({ start: 0, limit: 30 }));
   }, []);
+
+  useEffect(() => {
+    console.log('[App.jsx rendered]');
+  });
 
   return (
     <div className="">

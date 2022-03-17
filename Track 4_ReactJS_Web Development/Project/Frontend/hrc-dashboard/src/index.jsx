@@ -5,8 +5,16 @@ import App from './App';
 import store from './app/redux/store';
 import './index.css';
 
-// Using the new React 18 Root API (https://github.com/reactwg/react-18/discussions/5)
+// Disabling all console.* in production
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {};
+  console.info = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+  console.debug = () => {};
+}
 
+// Using the new React 18 Root API (https://github.com/reactwg/react-18/discussions/5)
 const container = document.getElementById('root');
 createRoot(container).render(
   <Provider store={store}>
