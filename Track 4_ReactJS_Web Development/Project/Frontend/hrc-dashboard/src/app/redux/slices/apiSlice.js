@@ -34,6 +34,7 @@ const initialState = {
   table: {
     rows: [{}],
     meta: [{}],
+    selectedIndices: [],
   },
   loading: false,
 };
@@ -42,10 +43,13 @@ const apiSlice = createSlice({
   name: 'getRows',
   initialState,
   // Add non-async reducers here
-  reducers: {},
+  reducers: {
+    // eslint-disable-next-line max-len
+    setSelectedRows: (state, action) => ({ ...state, table: { ...state.table, selectedIndices: action.payload } }),
+  },
   // Add async reducers here
   extraReducers: GetRowsReducer,
 });
 
-// export const {  } = apiSlice.actions;
+export const { setSelectedRows } = apiSlice.actions;
 export default apiSlice.reducer;

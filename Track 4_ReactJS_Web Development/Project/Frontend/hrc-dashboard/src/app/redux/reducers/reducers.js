@@ -19,7 +19,7 @@ import { getTableRows as GetTableRows } from '../actions/actions';
 
 const GetRowsReducer = {
   [GetTableRows.fulfilled]: (state, action) => {
-    const obj = { rows: [{}], meta: {} };
+    const obj = { ...state.table, rows: [{}], meta: {} };
     obj.rows = action.payload.slice(0, -1);
     obj.meta = action.payload.slice(-1);
 
