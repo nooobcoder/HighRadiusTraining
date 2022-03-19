@@ -1,10 +1,12 @@
 import * as Mantine from '@mantine/core';
 import { createStyles } from '@mantine/core';
-import React, { useEffect, useState, useId } from 'react';
+import { useFullscreen } from '@mantine/hooks';
+import React, { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedRows } from '../app/redux/slices/apiSlice';
 import { getTableRows } from '../app/redux/actions/actions';
+import { setSelectedRows } from '../app/redux/slices/apiSlice';
 import { generateColumnNames } from '../utils/table/generateStructure';
+import { ExitFullScreen, FullScreen } from '../assets/svg';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -185,12 +187,13 @@ function TableScrollArea() {
       </Mantine.Center>
     );
   };
+  const { toggle, fullscreen } = useFullscreen();
 
   return (
     <>
       <Mantine.ScrollArea
         className="h-80 shadow-md mx-8 my-2 lg:mx-20 lg:my-8 rounded-lg hover:shadow-2xl transition ease-in-out
-      hover:-translate-y-1 hover:scale-110 duration-300 delay-150  motion-reduce:transition-none motion-reduce:hover:transform-none "
+      hover:-translate-y-1 hover:scale-110 duration-200 delay-150  motion-reduce:transition-none motion-reduce:hover:transform-none "
         scrollbarSize={10}
         type="always"
         scrollHideDelay={700}
@@ -224,6 +227,15 @@ function TableScrollArea() {
         </Mantine.Table>
       </Mantine.ScrollArea>
       {displayTableFooter()}
+      <Mantine.Center>
+        <Mantine.Button
+          onClick={toggle}
+          color={fullscreen ? 'red' : 'blue'}
+          className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
+        >
+          {fullscreen ? <ExitFullScreen /> : <FullScreen />}
+        </Mantine.Button>
+      </Mantine.Center>
     </>
   );
 }
