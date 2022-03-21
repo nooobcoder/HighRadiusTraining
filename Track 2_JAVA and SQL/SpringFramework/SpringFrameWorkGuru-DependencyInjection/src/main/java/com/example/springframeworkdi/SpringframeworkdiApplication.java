@@ -1,6 +1,10 @@
 package com.example.springframeworkdi;
 
-import com.example.springframeworkdi.controllers.*;
+import com.example.springframeworkdi.controllers.ConstructorInjectedController;
+import com.example.springframeworkdi.controllers.I18nController;
+import com.example.springframeworkdi.controllers.MyController;
+import com.example.springframeworkdi.controllers.PropertyInjectedController;
+import com.example.springframeworkdi.controllers.SetterInjectedController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
