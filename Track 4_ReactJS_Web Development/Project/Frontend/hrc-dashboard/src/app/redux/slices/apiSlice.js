@@ -37,19 +37,32 @@ const initialState = {
     selectedIndices: [],
   },
   loading: false,
+  error: {
+    hasError: false,
+    message: '',
+  },
+};
+
+const reducers = {
+  // eslint-disable-next-line max-len
+  setSelectedRows: (state, action) => ({
+    ...state,
+    table: { ...state.table, selectedIndices: action.payload },
+  }),
+  setError: (state, action) => ({
+    ...state,
+    error: { ...state.error, hasError: action.payload.hasError, message: action.payload.message },
+  }),
 };
 
 const apiSlice = createSlice({
   name: 'getRows',
   initialState,
   // Add non-async reducers here
-  reducers: {
-    // eslint-disable-next-line max-len
-    setSelectedRows: (state, action) => ({ ...state, table: { ...state.table, selectedIndices: action.payload } }),
-  },
+  reducers,
   // Add async reducers here
   extraReducers: GetRowsReducer,
 });
 
-export const { setSelectedRows } = apiSlice.actions;
+export const { setSelectedRows, setError } = apiSlice.actions;
 export default apiSlice.reducer;

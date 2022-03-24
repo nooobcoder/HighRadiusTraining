@@ -12,6 +12,7 @@ const doPost = async ({ start = 0, limit = 10 }) => {
     }
   } catch (e) {
     console.error(e.message);
+    throw new Error(e);
   }
   return [{}];
 };

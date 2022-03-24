@@ -27,10 +27,11 @@ const GetRowsReducer = {
     state.table = obj;
     // state.rows = action.payload;
   },
-  [GetTableRows.rejected]: (state) => {
-    // eslint-disable-next-line no-param-reassign
-    state.api.rows = [{}];
-  },
+  [GetTableRows.rejected]: (state, action) => ({
+    ...state,
+    rows: [{}],
+    error: { hasError: true, message: action.error.message },
+  }),
 };
 
 // eslint-disable-next-line import/prefer-default-export
