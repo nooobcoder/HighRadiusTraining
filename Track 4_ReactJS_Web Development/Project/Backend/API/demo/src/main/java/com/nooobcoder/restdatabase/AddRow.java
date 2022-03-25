@@ -116,7 +116,7 @@ public class AddRow extends HttpServlet {
         WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
 
         try {
-            List<Map<String, Object>> rows = connection.executeQuery("INSERT INTO winter_internship\n" +
+            List<Map<String, Object>> rows = DBConnection.executeQuery("INSERT INTO winter_internship\n" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? );", pojo);
 
             /*
