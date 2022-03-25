@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { getTableRows } from './app/redux/actions/actions';
 import { Header, NavBar } from './components';
+import Table from './components/Table';
 
 function App() {
   // api is the name of the reducer in the store
   const actionDispatch = useDispatch();
-  const Table = React.lazy(() => import('./components/Table'));
+  // const Table = React.lazy(() => import('./components/Table'));
 
   // Use redux store
   const { error } = useSelector((state) => state.api);

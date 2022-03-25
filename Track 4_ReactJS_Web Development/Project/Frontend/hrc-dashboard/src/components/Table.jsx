@@ -21,7 +21,9 @@ const useStyles = createStyles((theme) => ({
       left: 0,
       right: 0,
       bottom: 0,
-      borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[2]}`,
+      borderBottom: `1px solid ${
+        theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[2]
+      }`,
     },
   },
 
@@ -54,7 +56,9 @@ function TableScrollArea() {
   const rows = state.rows.map((row, index) => (
     <tr
       key={`row${id}${row?.sl_no}}`}
-      className={`${index % 2 === 0 ? 'bg-white' : 'bg-indigo-300'} text-center  border-2 border-collapse border-black`}
+      className={`${
+        index % 2 === 0 ? 'bg-white' : 'bg-[#5DAAE0]'
+      } text-center  border-2 border-collapse border-black`}
     >
       <td key={`data:${id}${row?.sl_no}}`}>
         <Mantine.Center className="px-1 py-1">
@@ -74,7 +78,10 @@ function TableScrollArea() {
         </Mantine.Center>
       </td>
       {columnNames.map((col) => (
-        <td key={`${col}${id}${row[col]}`} className="text-center  border-2 border-collapse border-black">
+        <td
+          key={`${col}${id}${row[col]}`}
+          className="text-center  border-2 border-collapse border-black"
+        >
           {row[col]}
         </td>
       ))}
@@ -200,7 +207,10 @@ function TableScrollArea() {
         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <Mantine.Table sx={{ minWidth: 700 }} className="bg-orange-500" highlightOnHover>
-          <thead key={`${id}thead`} className={`z-10 ${cx(classes.header, { [classes.scrolled]: scrolled })}`}>
+          <thead
+            key={`${id}thead`}
+            className={`z-10 ${cx(classes.header, { [classes.scrolled]: scrolled })}`}
+          >
             <tr className="bg-lime-100">
               <td key="table-header">
                 <Mantine.Center className="px-1 py-2 font-semibold text-sm">

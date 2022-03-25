@@ -7,14 +7,14 @@ function EditButton() {
 
   return (
     <>
-      <CustomDrawer opened={opened} setOpened={setOpened} title="Edit - Drawer">
+      <CustomDrawer opened={opened} setOpened={setOpened} title="✏️ Edit Record - Drawer">
         <Mantine.Title order={2}>Edit</Mantine.Title>
       </CustomDrawer>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
         onClick={() => setOpened(true)}
       >
-        Edit
+        Edit ✏️
       </Mantine.Button>
     </>
   );

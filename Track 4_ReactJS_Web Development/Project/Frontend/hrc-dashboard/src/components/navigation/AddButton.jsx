@@ -8,14 +8,14 @@ function AddButton() {
 
   return (
     <>
-      <CustomDrawer opened={opened} setOpened={setOpened} title="Add - Drawer">
+      <CustomDrawer opened={opened} setOpened={setOpened} title="➕ Add Record - Drawer">
         <AddForm />
       </CustomDrawer>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
         onClick={() => setOpened(true)}
       >
-        Add
+        Add ➕
       </Mantine.Button>
     </>
   );

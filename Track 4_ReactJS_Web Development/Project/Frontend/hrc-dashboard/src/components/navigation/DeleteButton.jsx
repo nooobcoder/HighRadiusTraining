@@ -7,14 +7,14 @@ function DeleteButton() {
 
   return (
     <>
-      <CustomDrawer opened={opened} setOpened={setOpened} title="Delete - Drawer">
+      <CustomDrawer opened={opened} setOpened={setOpened} title="🗑️ Delete Record - Drawer">
         <Mantine.Title order={2}>Delete</Mantine.Title>
       </CustomDrawer>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
         onClick={() => setOpened(true)}
       >
-        Delete
+        Delete 🗑️
       </Mantine.Button>
     </>
   );
