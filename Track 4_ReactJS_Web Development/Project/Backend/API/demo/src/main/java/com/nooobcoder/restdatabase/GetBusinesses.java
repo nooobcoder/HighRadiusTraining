@@ -18,7 +18,7 @@ import java.util.Map;
 
 
 @WebServlet(
-        name = "GetRows", value = "/getBusinesses",
+        name = "GetRows", value = "/getbusinesses",
         initParams = {
                 @WebInitParam(name = "CONN_URL", value = "jdbc:mysql://192.168.0.118:3306/", description = "This is the connection url to connect to the database"),
                 @WebInitParam(name = "DB_NAME", value = "grey_goose"),
