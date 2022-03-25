@@ -7,14 +7,13 @@
   "scripts": {
     "pre-commit": "lint-staged",
     "lint": "eslint \"src/**/*.{js,jsx}\" --max-warnings=0",
-    "start": "node builder.js --port 4848 --host 0.0.0.0",
+    "start": "node builder.js",
     "build": "NODE_ENV=production node builder.js"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
-    "prop-types": "^15.8.1",
-    "react": "^18.0.0-rc.2",
-    "react-dom": "^18.0.0-rc.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "chokidar": "^3.5.2",
