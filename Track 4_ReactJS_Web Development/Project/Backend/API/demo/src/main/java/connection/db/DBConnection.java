@@ -57,7 +57,7 @@ public class DBConnection {
         System.out.println(" ------ TABLE METADATA ------");
         try {
             tableMetaData.clear();
-            tableMetaData = executeQuery("SELECT COUNT(*) 'rows' FROM winter_internship");
+            tableMetaData = executeQuery("SELECT COUNT(*) 'rows' FROM winter_internship UNION SELECT COUNT(*) 'rows' FROM business UNION SELECT COUNT(*) 'rows' FROM customer;");
             for (Map<String, Object> m : tableMetaData) {
                 System.out.println(m);
             }
@@ -163,7 +163,7 @@ public class DBConnection {
                 statement.setBoolean(index++, (Boolean) param);
             } else if (param instanceof Date) {
                 statement.setTimestamp(index++, new Timestamp(((Date) param).getTime()));
-            } else {
+            } else if (param instanceof String) {
                 statement.setString(index++, (String) param);
             }
         }
@@ -204,7 +204,7 @@ public class DBConnection {
             }
         }
         try {
-            rows.add(tableMetaData.get(0));
+            rows.addAll(tableMetaData);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
