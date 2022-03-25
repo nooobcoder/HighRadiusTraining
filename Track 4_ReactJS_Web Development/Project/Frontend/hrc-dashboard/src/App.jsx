@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { getTableRows } from './app/redux/actions/actions';
 import { Header, NavBar } from './components';
-import Fallback from './components/Fallback';
 
 function App() {
   // api is the name of the reducer in the store
@@ -29,9 +28,7 @@ function App() {
       <Header />
       <NavBar />
       {!hasError ? (
-        <React.Suspense fallback={<Fallback />}>
-          <Table />
-        </React.Suspense>
+        <Table />
       ) : (
         <Mantine.Center>
           <Mantine.Text>{message}</Mantine.Text>
