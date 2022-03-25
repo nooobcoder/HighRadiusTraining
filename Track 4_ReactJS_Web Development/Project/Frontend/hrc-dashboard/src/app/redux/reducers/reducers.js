@@ -20,8 +20,8 @@ import { getTableRows as GetTableRows } from '../actions/actions';
 const GetRowsReducer = {
   [GetTableRows.fulfilled]: (state, action) => {
     const obj = { ...state.table, rows: [{}], meta: {} };
-    obj.rows = action.payload.slice(0, -1);
-    obj.meta = action.payload.slice(-1);
+    obj.rows = action.payload.slice(0, -3);
+    obj.meta = action.payload.slice(-3);
 
     // eslint-disable-next-line no-param-reassign
     state.table = obj;

@@ -6,8 +6,9 @@ const doPost = async ({ start = 0, limit = 10 }) => {
       `http://192.168.0.134:280/RESTDatabase_war_exploded/getrows?start=${start}&limit=${limit}`,
     );
     if (status === 200) {
-      data[data.length - 1] = { ...data[data.length - 1], start, limit };
+      data[data.length - 3] = { ...data[data.length - 3], start, limit };
       console.log('[API] Response: 200 ');
+      console.log(data);
       return data;
     }
   } catch (e) {

@@ -24,7 +24,7 @@ export default function AddForm() {
   });
 
   const { rows } = useSelector(({ api }) => api.table.meta[0]);
-  console.log(rows + 1);
+  console.log(rows);
   // eslint-disable-next-line no-unused-vars
   // console.log(form.getInputProps());
 
