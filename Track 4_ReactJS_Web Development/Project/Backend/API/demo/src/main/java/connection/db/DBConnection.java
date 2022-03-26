@@ -2,22 +2,29 @@ package connection.db;
 
 import pojo.WinterInternshipPOJO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DBConnection {
+    private static List<Map<String, Object>> tableMetaData;
+    private static Connection conn;
+    private static DBConnection connectionobj = null;
     String connectionURL;
-
-
     String username;
     String password;
     String dbName;
     String dbArgs;
-    private static List<Map<String, Object>> tableMetaData;
-    private static Connection conn;
+
 
     public DBConnection(String connectionURL, String username, String password, String dbName, String dbArgs) {
         this.connectionURL = connectionURL;
@@ -27,9 +34,6 @@ public class DBConnection {
         this.dbArgs = dbArgs;
         tableMetaData = new ArrayList<Map<String, Object>>();
     }
-
-
-    private static DBConnection connectionobj = null;
 
     public static DBConnection getInstance(String connectionURL, String username, String password, String dbName, String dbArgs) {
         if (connectionobj == null) {
@@ -65,38 +69,6 @@ public class DBConnection {
             System.err.println(e.getMessage());
         }
         System.out.println(" ------ TABLE METADATA ------");
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DBConnection that = (DBConnection) o;
-
-        if (connectionURL != null ? !connectionURL.equals(that.connectionURL) : that.connectionURL != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        return dbName != null ? dbName.equals(that.dbName) : that.dbName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = connectionURL != null ? connectionURL.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (dbName != null ? dbName.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "DBConnection{" +
-                "connectionURL='" + connectionURL + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", dbName='" + dbName + '\'' +
-                '}';
     }
 
     // This function is smart enough to calculate the id for new insertion in the database 🧠🤯
@@ -169,7 +141,7 @@ public class DBConnection {
         }
 
 
-        System.out.println();
+        System.out.println(">>>>>>>>>>>>> MODE: " + mode);
 
         System.out.println("EXECUTING QUERY: " + statement.toString());
         List<Map<String, Object>> rows = new ArrayList<>();
@@ -192,7 +164,6 @@ public class DBConnection {
                 }
                 rows.add(row);
             }
-
         } else {
             try {
                 int rowsAffected = statement.executeUpdate();
@@ -215,6 +186,38 @@ public class DBConnection {
             System.out.println(o);
         }*/
         return rows;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DBConnection that = (DBConnection) o;
+
+        if (connectionURL != null ? !connectionURL.equals(that.connectionURL) : that.connectionURL != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        return dbName != null ? dbName.equals(that.dbName) : that.dbName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = connectionURL != null ? connectionURL.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (dbName != null ? dbName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "DBConnection{" +
+                "connectionURL='" + connectionURL + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", dbName='" + dbName + '\'' +
+                '}';
     }
 
     @Override
