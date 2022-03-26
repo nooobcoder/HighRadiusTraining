@@ -2,7 +2,7 @@ import * as Mantine from '@mantine/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
-import { getTableRows } from './app/redux/actions/actions';
+import { getTableRows, getBusinessRows } from './app/redux/actions/actions';
 import { Header, NavBar } from './components';
 import Table from './components/Table';
 
@@ -17,6 +17,7 @@ function App() {
 
   useEffect(() => {
     actionDispatch(getTableRows({ start: 0, limit: 30 }));
+    actionDispatch(getBusinessRows());
   }, []);
 
   useEffect(() => {

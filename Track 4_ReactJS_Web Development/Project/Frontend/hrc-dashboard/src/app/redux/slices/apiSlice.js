@@ -34,6 +34,7 @@ const initialState = {
   table: {
     rows: [{}],
     meta: [{}],
+    businesses: [{}],
     selectedIndices: [],
   },
   loading: false,

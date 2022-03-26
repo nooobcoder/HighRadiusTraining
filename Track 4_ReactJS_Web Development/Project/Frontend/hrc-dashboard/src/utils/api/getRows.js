@@ -7,7 +7,7 @@ const doPost = async ({ start = 0, limit = 10 }) => {
     );
     if (status === 200) {
       data[data.length - 3] = { ...data[data.length - 3], start, limit };
-      console.log('[API] Response: 200 ');
+      console.log('[API /getRows] Response: 200 ');
       return data;
     }
   } catch (e) {

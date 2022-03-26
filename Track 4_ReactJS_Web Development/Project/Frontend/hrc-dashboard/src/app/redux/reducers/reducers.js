@@ -15,7 +15,12 @@ const UserReducer = (state = initialState, { payload }) => {
 };
 */
 
-import { getTableRows as GetTableRows } from '../actions/actions';
+// eslint-disable-next-line object-curly-newline
+import {
+  getBusinessRows as GetBusinessRows,
+  getTableRows as GetTableRows,
+  // eslint-disable-next-line object-curly-newline
+} from '../actions/actions';
 
 const GetRowsReducer = {
   [GetTableRows.fulfilled]: (state, action) => {
@@ -30,6 +35,19 @@ const GetRowsReducer = {
   [GetTableRows.rejected]: (state, action) => ({
     ...state,
     rows: [{}],
+    error: { hasError: true, message: action.error.message },
+  }),
+  [GetBusinessRows.fulfilled]: (state, action) => {
+    const obj = { ...state.table };
+    obj.businesses = action.payload;
+
+    // eslint-disable-next-line no-param-reassign
+    state.table = obj;
+    // state.rows = action.payload;
+  },
+  [GetBusinessRows.rejected]: (state, action) => ({
+    ...state,
+    businesses: [{}],
     error: { hasError: true, message: action.error.message },
   }),
 };
