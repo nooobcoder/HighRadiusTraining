@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb'],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -15,14 +15,6 @@ module.exports = {
   rules: {
     'no-tabs': ['error', { allowIndentationTabs: true }],
     'no-console': 'off',
-    'object-curly-newline': [
-      'error',
-      {
-        ObjectExpression: { consistent: true, multiline: true },
-        ObjectPattern: { consistent: true, multiline: true },
-        ImportDeclaration: 'never',
-        ExportDeclaration: { multiline: true, minProperties: 3 },
-      },
-    ],
+    'object-curly-newline': 'off',
   },
 };
