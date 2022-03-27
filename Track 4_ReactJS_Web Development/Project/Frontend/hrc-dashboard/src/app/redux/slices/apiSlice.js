@@ -33,8 +33,9 @@ import { GetRowsReducer } from '../reducers/reducers';
 const initialState = {
   table: {
     rows: [{}],
-    meta: [{}],
     businesses: [{}],
+    customers: [{}],
+    meta: [{}],
     selectedIndices: [],
   },
   loading: false,
