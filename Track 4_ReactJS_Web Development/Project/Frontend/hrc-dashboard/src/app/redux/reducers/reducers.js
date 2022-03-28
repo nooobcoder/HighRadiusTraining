@@ -15,12 +15,10 @@ const UserReducer = (state = initialState, { payload }) => {
 };
 */
 
-// eslint-disable-next-line object-curly-newline
 import {
   getBusinessRows as GetBusinessRows,
   getTableRows as GetTableRows,
   getCustomersRows as GetCustomersRows,
-  // eslint-disable-next-line object-curly-newline
 } from '../actions/actions';
 
 const GetRowsReducer = {

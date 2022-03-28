@@ -16,5 +16,4 @@ const getCustomersRows = createAsyncThunk('get/getCustomers', async () => getCus
 }; */
 
 // eslint-disable-next-line import/prefer-default-export
-// eslint-disable-next-line object-curly-newline
 export { getTableRows, getBusinessRows, getCustomersRows };

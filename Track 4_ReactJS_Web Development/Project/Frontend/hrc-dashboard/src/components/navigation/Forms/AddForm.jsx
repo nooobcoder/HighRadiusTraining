@@ -8,6 +8,11 @@ import { useSelector } from 'react-redux';
 import convertDateToDBFormat from '../../../utils/datefns/convertDate';
 import * as addFormSchema from '../../../utils/schema/addFormSchema';
 
+import {
+  transformBusinessForSelect,
+  transformCustomerForSelect,
+} from '../../../utils/transformers';
+
 /* Example: https://mantine.dev/form/use-form/ */
 export default function AddForm() {
   const yearRegex = /^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$/;
@@ -24,12 +29,10 @@ export default function AddForm() {
   });
 
   const { rows } = useSelector(({ api }) => api.table.meta[0]);
-  console.log(rows);
   // eslint-disable-next-line no-unused-vars
   // console.log(form.getInputProps());
 
   const handleFormSubmission = (values) => {
-    console.log(values);
     // Loop through formDateFields
     addFormSchema.defaultTableSchema.sl_no = rows + 1;
     addFormSchema.formDateFields.forEach((field) => {
@@ -39,11 +42,19 @@ export default function AddForm() {
         );
       }
     });
+    // Loop through formInputFields
+    addFormSchema.formInputFields.forEach((field) => {
+      console.log('here');
+      addFormSchema.defaultTableSchema[field.htmlFor] = form.getInputProps(field.htmlFor)?.value;
+    });
 
     console.log(addFormSchema.defaultTableSchema);
   };
 
   const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
+
+  const businesses = transformBusinessForSelect();
+  const customers = transformCustomerForSelect();
 
   return (
     <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">
@@ -59,6 +70,18 @@ export default function AddForm() {
                     {...form.getInputProps(field.htmlFor)}
                     radius="md"
                     required={false}
+                  />
+                );
+              case 'select':
+                return (
+                  <Mantine.Select
+                    key={field.htmlFor}
+                    searchable={false}
+                    clearable
+                    {...field}
+                    {...form.getInputProps(field.htmlFor)}
+                    maxDropdownHeight={230}
+                    data={field.htmlFor === 'cust_number' ? customers : businesses}
                   />
                 );
               default:
@@ -80,10 +103,10 @@ export default function AddForm() {
             <DatePicker
               key={field.htmlFor}
               placeholder="Pick date"
+              required={false}
               {...field}
               {...form.getInputProps(field.htmlFor)}
               allowLevelChange
-              required={false}
               firstDayOfWeek="sunday"
             />
           ))}
