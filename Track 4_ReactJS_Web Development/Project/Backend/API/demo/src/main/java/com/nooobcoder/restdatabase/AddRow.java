@@ -13,6 +13,8 @@ import pojo.WinterInternshipPOJO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -33,6 +35,39 @@ public class AddRow extends HttpServlet {
 
     private Map<String, String> initParamsMap = new HashMap<String, String>();
 
+    public static String getBody(HttpServletRequest request) throws IOException {
+
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+
+        body = stringBuilder.toString();
+        return body;
+    }
 
     @Override
     public void init() throws ServletException {
@@ -98,31 +133,21 @@ public class AddRow extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
-        System.out.println("Hi");
         resp.addHeader("Access-Control-Allow-Origin", "*");
 
-        StringBuilder sb = new StringBuilder();
-
-        try (BufferedReader reader = req.getReader()) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-                System.out.println(line);
-            }
-        }
         /*
          * https://stackoverflow.com/questions/8100634/get-the-post-request-body-from-httpservletrequest#:~:text=test%20%3D%20request.getReader().lines().collect(Collectors.joining(System.lineSeparator()))%3B
          * */
-        String requestPayload = sb.toString();
+        String requestPayload = getBody(req);
         Map<String, Object> payloadMap = new HashMap<>();
 
         /*
           https://www.journaldev.com/2324/jackson-json-java-parser-api-example-tutorial#:~:text=ObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AmyMap%20%3D%20objectMapper.readValue(mapData%2C%20HashMap.class)%3B
         * */
-        System.out.println(requestPayload);
+        System.out.println("Request Payload: " + requestPayload);
         ObjectMapper objectMapper = new ObjectMapper();
         payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
-//        System.out.println("Map is: " + payloadMap);
+        System.out.println("Map is: " + payloadMap);
 
         /*https://cassiomolin.com/2016/09/17/converting-pojo-map-vice-versa-with-jackson/#:~:text=Foo%20anotherFoo%20%3D%20mapper.convertValue(map%2C%20Foo.class)%3B*/
         WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
