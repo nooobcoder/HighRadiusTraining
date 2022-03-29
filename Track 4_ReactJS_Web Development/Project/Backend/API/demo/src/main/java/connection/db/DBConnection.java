@@ -59,8 +59,8 @@ public class DBConnection {
 
     public static void setTableMetaData() {
         System.out.println(" ------ TABLE METADATA ------");
+        tableMetaData.clear();
         try {
-            tableMetaData.clear();
             tableMetaData = executeQuery("SELECT COUNT(*) 'rows' FROM winter_internship UNION SELECT COUNT(*) 'rows' FROM business UNION SELECT COUNT(*) 'rows' FROM customer;");
             for (Map<String, Object> m : tableMetaData) {
                 System.out.println(m);
