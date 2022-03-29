@@ -7,6 +7,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import convertDateToDBFormat from '../../../utils/datefns/convertDate';
 import * as addFormSchema from '../../../utils/schema/addFormSchema';
+import handleSubmitToDatabase from '../../../utils/api/handleAddForm';
 
 import {
   transformBusinessForSelect,
@@ -44,11 +45,16 @@ export default function AddForm() {
     });
     // Loop through formInputFields
     addFormSchema.formInputFields.forEach((field) => {
-      console.log('here');
-      addFormSchema.defaultTableSchema[field.htmlFor] = form.getInputProps(field.htmlFor)?.value;
+      const fieldValue = form.getInputProps(field.htmlFor)?.value || '';
+      // If fieldValue is null or undefined, store null
+      addFormSchema.defaultTableSchema[field.htmlFor] = fieldValue;
     });
-
-    console.log(addFormSchema.defaultTableSchema);
+    try {
+      // Submit addFormSchema.defaultTableSchema to the database
+      handleSubmitToDatabase(addFormSchema.defaultTableSchema);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
