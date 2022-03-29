@@ -108,7 +108,7 @@ public class DBConnection {
                 statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
                 statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
                 statement.setString(index++, ((WinterInternshipPOJO) param).getClear_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getBuisness_year());
+                statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_year());
                 statement.setString(index++, ((WinterInternshipPOJO) param).getDoc_id());
                 statement.setString(index++, ((WinterInternshipPOJO) param).getPosting_date());
                 statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date());

@@ -5,7 +5,7 @@ public class WinterInternshipPOJO {
     String business_code;
     int cust_number;
     String clear_date;
-    String buisness_year;
+    String business_year;
     String doc_id;
     String posting_date;
     String document_create_date;
@@ -55,12 +55,12 @@ public class WinterInternshipPOJO {
         this.clear_date = clear_date;
     }
 
-    public String getBuisness_year() {
-        return buisness_year;
+    public String getBusiness_year() {
+        return business_year;
     }
 
-    public void setBuisness_year(String buisness_year) {
-        this.buisness_year = buisness_year;
+    public void setBusiness_year(String buisness_year) {
+        this.business_year = buisness_year;
     }
 
     public String getDoc_id() {
@@ -198,7 +198,7 @@ public class WinterInternshipPOJO {
                 ", business_code='" + business_code + '\'' +
                 ", cust_number=" + cust_number +
                 ", clear_date='" + clear_date + '\'' +
-                ", buisness_year='" + buisness_year + '\'' +
+                ", business_year='" + business_year + '\'' +
                 ", doc_id='" + doc_id + '\'' +
                 ", posting_date='" + posting_date + '\'' +
                 ", document_create_date='" + document_create_date + '\'' +

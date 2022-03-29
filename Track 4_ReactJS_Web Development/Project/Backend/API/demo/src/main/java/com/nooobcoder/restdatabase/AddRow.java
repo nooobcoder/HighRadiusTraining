@@ -11,13 +11,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import pojo.WinterInternshipPOJO;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet(
         name = "AddRow", value = "/addRow",
@@ -98,16 +98,28 @@ public class AddRow extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
+        System.out.println("Hi");
         resp.addHeader("Access-Control-Allow-Origin", "*");
+
+        StringBuilder sb = new StringBuilder();
+
+        try (BufferedReader reader = req.getReader()) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+                System.out.println(line);
+            }
+        }
         /*
          * https://stackoverflow.com/questions/8100634/get-the-post-request-body-from-httpservletrequest#:~:text=test%20%3D%20request.getReader().lines().collect(Collectors.joining(System.lineSeparator()))%3B
          * */
-        String requestPayload = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        String requestPayload = sb.toString();
         Map<String, Object> payloadMap = new HashMap<>();
 
         /*
           https://www.journaldev.com/2324/jackson-json-java-parser-api-example-tutorial#:~:text=ObjectMapper%20objectMapper%20%3D%20new%20ObjectMapper()%3B%0AmyMap%20%3D%20objectMapper.readValue(mapData%2C%20HashMap.class)%3B
         * */
+        System.out.println(requestPayload);
         ObjectMapper objectMapper = new ObjectMapper();
         payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
 //        System.out.println("Map is: " + payloadMap);
