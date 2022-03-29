@@ -51,7 +51,16 @@ export default function AddForm() {
     });
     try {
       // Submit addFormSchema.defaultTableSchema to the database
-      handleSubmitToDatabase(addFormSchema.defaultTableSchema);
+      /*
+        Successful data submission example
+        0: {rowsAffected: 1}
+        1: {rows: 48583}
+        2: {rows: 6}
+        3: {rows: 1084}
+      */
+      const respData = handleSubmitToDatabase(addFormSchema.defaultTableSchema);
+      // TODO: Implement better logic for handling the submission of the form
+      console.log(respData);
     } catch (e) {
       console.error(e);
     }
