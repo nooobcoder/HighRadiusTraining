@@ -3,6 +3,8 @@ import { createStyles } from '@mantine/core';
 import { useFullscreen } from '@mantine/hooks';
 import React, { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Check } from 'tabler-icons-react';
+import { showNotification } from '@mantine/notifications';
 import { getTableRows } from '../app/redux/actions/actions';
 import { setSelectedRows } from '../app/redux/slices/apiSlice';
 import { generateColumnNames } from '../utils/table/generateStructure';
@@ -88,9 +90,8 @@ function TableScrollArea() {
     </tr>
   ));
 
-  // eslint-disable-next-line no-unused-vars
+  
   const shouldButtonBeEnabled = () => {
-    // eslint-disable-next-line no-unused-vars
     const { rows: R, limit: L, start: S } = state.meta[0];
     if (S === 0) {
       setButtonState(() => ({
@@ -111,8 +112,6 @@ function TableScrollArea() {
     }
   };
 
-  // useEffect(() => shouldButtonBeEnabled(), [state.meta]);
-
   useEffect(() => {
     setColumnNames(generateColumnNames(state.rows[0]));
     shouldButtonBeEnabled();
@@ -128,6 +127,13 @@ function TableScrollArea() {
     switch (operation) {
       case 'start':
         actionDispatch(getTableRows({ start: 0, limit: L }));
+        showNotification({
+          title: 'Alert!',
+          message: 'You have reached the beginning of this table.',
+          color: 'teal',
+          disallowClose: false,
+          icon: <Check size={20} />,
+        });
         break;
       case 'next':
         actionDispatch(getTableRows({ start: S + L, limit: L }));
@@ -137,6 +143,13 @@ function TableScrollArea() {
         break;
       case 'last':
         actionDispatch(getTableRows({ start: R - L, limit: L }));
+        showNotification({
+          title: 'Alert!',
+          message: 'You have reached the end of this table.',
+          color: 'teal',
+          disallowClose: false,
+          icon: <Check size={20} />,
+        });
         break;
       default:
         console.log('An operation type was expected but not provided');

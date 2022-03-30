@@ -14,7 +14,7 @@ function AddButton() {
         title="➕ Add Record - Drawer"
         closeOnClickOutside={false}
       >
-        <AddForm />
+        <AddForm setOpened={setOpened} />
       </CustomDrawer>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"

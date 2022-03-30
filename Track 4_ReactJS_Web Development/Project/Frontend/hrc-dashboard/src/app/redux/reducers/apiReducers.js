@@ -34,7 +34,7 @@ const GetRowsReducer = {
   [GetTableRows.rejected]: (state, action) => ({
     ...state,
     rows: [{}],
-    error: { hasError: true, message: action.error.message },
+    error: { hasError: true, errorMessage: action.error.message },
   }),
   [GetBusinessRows.fulfilled]: (state, action) => {
     const obj = { ...state.table };
@@ -70,7 +70,11 @@ const reducers = {
   }),
   setError: (state, action) => ({
     ...state,
-    error: { ...state.error, hasError: action.payload.hasError, message: action.payload.message },
+    error: {
+      ...state.error,
+      hasError: action.payload.hasError,
+      errorMessage: action.payload.message,
+    },
   }),
 };
 

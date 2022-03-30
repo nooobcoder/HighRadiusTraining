@@ -4,7 +4,12 @@ import * as Mantine from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/hooks';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Check, X } from 'tabler-icons-react';
+import { showNotification } from '@mantine/notifications';
+import PropTypes from 'prop-types';
+import { getTableRows } from '../../../app/redux/actions/actions';
+
 import convertDateToDBFormat from '../../../utils/datefns/convertDate';
 import * as addFormSchema from '../../../utils/schema/addFormSchema';
 import handleSubmitToDatabase from '../../../utils/api/handleAddForm';
@@ -15,7 +20,7 @@ import {
 } from '../../../utils/transformers';
 
 /* Example: https://mantine.dev/form/use-form/ */
-export default function AddForm() {
+export default function AddForm({ setOpened }) {
   const yearRegex = /^(181[2-9]|18[2-9]\d|19\d\d|2\d{3}|30[0-3]\d|304[0-8])$/;
   const form = useForm({
     initialValues: {
@@ -30,8 +35,7 @@ export default function AddForm() {
   });
 
   const { rows } = useSelector(({ api }) => api.table.meta[0]);
-  // eslint-disable-next-line no-unused-vars
-  // console.log(form.getInputProps());
+  const actionDispatcher = useDispatch();
 
   const handleFormSubmission = async (values) => {
     // Loop through formDateFields
@@ -59,12 +63,30 @@ export default function AddForm() {
         3: {rows: 1084}
       */
       const respData = await handleSubmitToDatabase(addFormSchema.defaultTableSchema);
-      // TODO: Implement better logic for handling the submission of the form
       console.log(respData);
       if (respData[0].rowsAffected === 1) {
-        // Pass
+        showNotification({
+          title: 'Alert!',
+          message: 'The form data has been submitted',
+          color: 'teal',
+          autoClose: 10000,
+          disallowClose: false,
+          icon: <Check size={18} />,
+        });
+
+        // Close the drawer
+        setOpened(false);
+
+        // Refresh the rows state after the submission, for the new data to be reflected
+        actionDispatcher(getTableRows({ start: 0, limit: 30 }));
       } else {
-        // Pass
+        showNotification({
+          title: 'Alert!',
+          message: 'The form could not be submitted due to some error.',
+          color: 'red',
+          disallowClose: false,
+          icon: <X size={18} />,
+        });
       }
     } catch (e) {
       console.error(e);
@@ -154,3 +176,8 @@ export default function AddForm() {
     </Mantine.Box>
   );
 }
+
+// Props validation
+AddForm.propTypes = {
+  setOpened: PropTypes.func.isRequired,
+};

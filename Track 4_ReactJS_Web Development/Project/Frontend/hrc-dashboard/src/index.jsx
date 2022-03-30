@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 const container = document.getElementById('root');
 createRoot(container).render(
   <Provider store={store}>
-    <NotificationsProvider autoClose={4000} position="top-left">
+    <NotificationsProvider autoClose={4000} position="bottom-right">
       <App />
     </NotificationsProvider>
   </Provider>,

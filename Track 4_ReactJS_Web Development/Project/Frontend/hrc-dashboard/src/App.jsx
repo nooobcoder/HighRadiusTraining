@@ -24,7 +24,6 @@ function App() {
       visible: true,
   */
   const notification = useSelector((state) => state.notification);
-  const { visible } = notification;
 
   useEffect(() => {
     actionDispatch(getTableRows({ start: 0, limit: 30 }));
@@ -55,18 +54,16 @@ function App() {
           loading: false,
         });
     */
-    if (visible) {
-      if (hasError) {
-        showNotification({
-          title: 'Error',
-          message: errorMessage,
-          disallowClose: true,
-          type: 'danger',
-          icon: <X size={18} />,
-        });
-      }
+    if (hasError) {
+      showNotification({
+        title: 'Error',
+        message: errorMessage,
+        disallowClose: true,
+        type: 'danger',
+        icon: <X size={18} />,
+      });
     }
-  }, [notification]);
+  }, [error, notification]);
 
   return (
     <div className="">

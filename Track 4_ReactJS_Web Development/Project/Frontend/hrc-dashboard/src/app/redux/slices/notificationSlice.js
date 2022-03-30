@@ -8,8 +8,9 @@ const initialState = {
   hasError: false,
   message: 'Hi!',
   title: 'This is a test success message!',
-  visible: true,
 };
+
+// !WARN: This slice is deprecated and might be removed in future releases. Please refer to Notifications system docs @https://mantine.dev/others/notifications/
 
 const slice = createSlice({
   name: 'notificationSlice',
