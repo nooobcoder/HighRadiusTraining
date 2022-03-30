@@ -34,7 +34,7 @@ const formInputFields = [
     label: 'Invoice Currency',
     placeholder: 'INR',
     type: 'number',
-    required: true,
+    required: false,
   },
   {
     htmlFor: 'document_type',
@@ -53,7 +53,7 @@ const formInputFields = [
     label: 'Total Open Amount',
     placeholder: '0',
     type: 'number',
-    required: true,
+    required: false,
   },
   {
     htmlFor: 'cust_payment_terms',
