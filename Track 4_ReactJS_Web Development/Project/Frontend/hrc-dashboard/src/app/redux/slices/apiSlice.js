@@ -28,7 +28,7 @@ export default userSlice.reducer;
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import { GetRowsReducer } from '../reducers/reducers';
+import { GetRowsReducer, reducers } from '../reducers/apiReducers';
 
 const initialState = {
   table: {
@@ -41,20 +41,8 @@ const initialState = {
   loading: false,
   error: {
     hasError: false,
-    message: '',
+    errorMessage: '',
   },
-};
-
-const reducers = {
-  // eslint-disable-next-line max-len
-  setSelectedRows: (state, action) => ({
-    ...state,
-    table: { ...state.table, selectedIndices: action.payload },
-  }),
-  setError: (state, action) => ({
-    ...state,
-    error: { ...state.error, hasError: action.payload.hasError, message: action.payload.message },
-  }),
 };
 
 const apiSlice = createSlice({

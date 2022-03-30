@@ -1,3 +1,4 @@
+import { NotificationsProvider } from '@mantine/notifications';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -18,6 +19,8 @@ if (process.env.NODE_ENV === 'production') {
 const container = document.getElementById('root');
 createRoot(container).render(
   <Provider store={store}>
-    <App />
+    <NotificationsProvider autoClose={4000} position="top-left">
+      <App />
+    </NotificationsProvider>
   </Provider>,
 );

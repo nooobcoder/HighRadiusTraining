@@ -62,5 +62,16 @@ const GetRowsReducer = {
   }),
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { GetRowsReducer };
+const reducers = {
+  // eslint-disable-next-line max-len
+  setSelectedRows: (state, action) => ({
+    ...state,
+    table: { ...state.table, selectedIndices: action.payload },
+  }),
+  setError: (state, action) => ({
+    ...state,
+    error: { ...state.error, hasError: action.payload.hasError, message: action.payload.message },
+  }),
+};
+
+export { GetRowsReducer, reducers };

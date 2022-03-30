@@ -8,7 +8,14 @@ export default configureStore({
 });
  */
 
-import { configureStore } from '@reduxjs/toolkit';
-import apiSlice from './slices/apiSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import apiReducer from './slices/apiSlice';
+import notificationReducer from './slices/notificationSlice';
 
-export default configureStore({ reducer: { api: apiSlice }, devTools: true });
+// Combine apiReducer and notificationReducer
+const combinedReducer = combineReducers({ api: apiReducer, notification: notificationReducer });
+
+export default configureStore({
+  reducer: combinedReducer,
+  devTools: true,
+});
