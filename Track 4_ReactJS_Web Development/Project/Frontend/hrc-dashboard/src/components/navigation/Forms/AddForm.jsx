@@ -33,7 +33,7 @@ export default function AddForm() {
   // eslint-disable-next-line no-unused-vars
   // console.log(form.getInputProps());
 
-  const handleFormSubmission = (values) => {
+  const handleFormSubmission = async (values) => {
     // Loop through formDateFields
     addFormSchema.defaultTableSchema.sl_no = rows + 1;
     addFormSchema.formDateFields.forEach((field) => {
@@ -58,9 +58,14 @@ export default function AddForm() {
         2: {rows: 6}
         3: {rows: 1084}
       */
-      const respData = handleSubmitToDatabase(addFormSchema.defaultTableSchema);
+      const respData = await handleSubmitToDatabase(addFormSchema.defaultTableSchema);
       // TODO: Implement better logic for handling the submission of the form
       console.log(respData);
+      if (respData[0].rowsAffected === 1) {
+        // Pass
+      } else {
+        // Pass
+      }
     } catch (e) {
       console.error(e);
     }
@@ -81,10 +86,10 @@ export default function AddForm() {
                 return (
                   <Mantine.NumberInput
                     key={field.htmlFor}
+                    required={false}
                     {...field}
                     {...form.getInputProps(field.htmlFor)}
                     radius="md"
-                    required={false}
                   />
                 );
               case 'select':
