@@ -60,7 +60,7 @@ function TableScrollArea() {
       key={`row${id}${row?.sl_no}}`}
       className={`${
         index % 2 === 0 ? 'bg-white' : 'bg-[#5DAAE0]'
-      } text-center  border-2 border-collapse border-black`}
+      } text-center  border-2 border-collapse border-black w-fit`}
     >
       <td key={`data:${id}${row?.sl_no}}`}>
         <Mantine.Center className="px-1 py-1">
@@ -82,7 +82,7 @@ function TableScrollArea() {
       {columnNames.map((col) => (
         <td
           key={`${col}${id}${row[col]}`}
-          className="text-center  border-2 border-collapse border-black"
+          className="text-center  border-2 border-collapse border-black w-fit"
         >
           {row[col]}
         </td>
@@ -90,7 +90,6 @@ function TableScrollArea() {
     </tr>
   ));
 
-  
   const shouldButtonBeEnabled = () => {
     const { rows: R, limit: L, start: S } = state.meta[0];
     if (S === 0) {
