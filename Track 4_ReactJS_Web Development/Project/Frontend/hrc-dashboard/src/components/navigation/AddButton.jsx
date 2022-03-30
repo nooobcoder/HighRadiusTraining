@@ -8,7 +8,12 @@ function AddButton() {
 
   return (
     <>
-      <CustomDrawer opened={opened} setOpened={setOpened} title="➕ Add Record - Drawer">
+      <CustomDrawer
+        opened={opened}
+        setOpened={setOpened}
+        title="➕ Add Record - Drawer"
+        closeOnClickOutside={false}
+      >
         <AddForm />
       </CustomDrawer>
       <Mantine.Button
