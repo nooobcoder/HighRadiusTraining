@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -160,6 +162,10 @@ public class DBConnection {
                 for (int i = 1; i <= colCount; ++i) {
                     String colName = rsmd.getColumnName(i);
                     Object colVal = resultSet.getObject(i);
+                    if (colVal instanceof java.sql.Date) {
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        colVal = dateFormat.format(colVal);
+                    }
                     row.put(colName, colVal);
                 }
                 rows.add(row);
