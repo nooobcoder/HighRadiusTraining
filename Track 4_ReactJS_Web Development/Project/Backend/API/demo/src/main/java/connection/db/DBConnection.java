@@ -94,7 +94,6 @@ public class DBConnection {
         int index = 1; // Prepared Statements are 1 index based
         for (Object param : params) {
             if (param instanceof WinterInternshipPOJO) {
-                System.out.println("SHOOOOUTTTTT");
                 if (params[1].equals("edit")) {
                     mode = "edit";
 
