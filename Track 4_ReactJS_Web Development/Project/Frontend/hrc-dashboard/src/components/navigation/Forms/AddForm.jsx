@@ -90,6 +90,13 @@ export default function AddForm({ setOpened }) {
       }
     } catch (e) {
       console.error(e);
+      showNotification({
+        title: 'Alert!',
+        message: e.message,
+        color: 'red',
+        disallowClose: false,
+        icon: <X size={18} />,
+      });
     }
   };
 

@@ -24,12 +24,14 @@ function EditButton() {
   return (
     <>
       <CustomDrawer opened={opened} setOpened={setOpened} title="✏️ Edit Record - Drawer">
-        <EditForm
-          setOpened={setOpened}
-          sl_no={sl_no || -1}
-          invoice_currency={invoice_currency || ''}
-          cust_payment_terms={cust_payment_terms || ''}
-        />
+        {selectedIndices > 0 && (
+          <EditForm
+            setOpened={setOpened}
+            sl_no={sl_no || -1}
+            invoice_currency={invoice_currency || ''}
+            cust_payment_terms={cust_payment_terms || ''}
+          />
+        )}
       </CustomDrawer>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"

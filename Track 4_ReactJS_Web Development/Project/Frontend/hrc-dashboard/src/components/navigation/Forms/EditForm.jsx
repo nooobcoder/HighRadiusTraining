@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Check, X } from 'tabler-icons-react';
 import { defaultTableSchema, formInputFields } from '../../../utils/schema/editFormSchema';
-import handleSubmitToDatabase from '../../../utils/api/handleAddForm';
+import handleSubmitToDatabase from '../../../utils/api/handleEditForm';
 
 function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
   const form = useForm({
@@ -27,9 +27,8 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
       defaultTableSchema[field.htmlFor] = fieldValue;
     });
 
-    // TODO: Implement edit form data submission through axios
     try {
-      // Submit addFormSchema.defaultTableSchema to the database
+      // Submit defaultTableSchema to the database
       /*
         Successful data submission example
         0: {rowsAffected: 1}
@@ -37,30 +36,40 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
         2: {rows: 6}
         3: {rows: 1084}
       */
-      // const respData = await handleSubmitToDatabase(defaultTableSchema);
-      // console.log(respData);
-      // if (respData[0].rowsAffected === 1) {
-      //   showNotification({
-      //     title: 'Alert!',
-      //     message: 'The form data has been submitted',
-      //     color: 'teal',
-      //     autoClose: 10000,
-      //     disallowClose: false,
-      //     icon: <Check size={18} />,
-      //   });
-      //   // Close the drawer
-      //   setOpened(false);
-      // } else {
-      //   showNotification({
-      //     title: 'Alert!',
-      //     message: 'The form could not be submitted due to some error.',
-      //     color: 'red',
-      //     disallowClose: false,
-      //     icon: <X size={18} />,
-      //   });
-      // }
+      const respData = await handleSubmitToDatabase(
+        { serialNumber: sl_no, tableName: 'winter_internship' },
+        defaultTableSchema,
+      );
+
+      if (respData[0].rowsAffected === 1) {
+        showNotification({
+          title: 'Alert!',
+          message: `The form data with sl_no: ${sl_no} has been edited successfully!`,
+          color: 'teal',
+          autoClose: 10000,
+          disallowClose: false,
+          icon: <Check size={18} />,
+        });
+        // Close the drawer
+        setOpened(false);
+      } else {
+        showNotification({
+          title: 'Alert!',
+          message: 'The form could not be submitted due to some error.',
+          color: 'red',
+          disallowClose: false,
+          icon: <X size={18} />,
+        });
+      }
     } catch (e) {
       console.error(e);
+      showNotification({
+        title: 'Alert!',
+        message: e.message,
+        color: 'red',
+        disallowClose: false,
+        icon: <X size={18} />,
+      });
     }
   };
   const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
