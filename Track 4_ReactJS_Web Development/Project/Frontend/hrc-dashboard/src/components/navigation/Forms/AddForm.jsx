@@ -130,10 +130,10 @@ export default function AddForm({ setOpened }) {
                 return (
                   <Mantine.TextInput
                     key={field.htmlFor}
+                    required={false}
                     {...field}
                     {...form.getInputProps(field.htmlFor)}
                     radius="md"
-                    required={false}
                   />
                 );
             }

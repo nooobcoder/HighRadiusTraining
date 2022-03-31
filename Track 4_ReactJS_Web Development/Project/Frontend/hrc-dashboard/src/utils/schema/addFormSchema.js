@@ -33,7 +33,7 @@ const formInputFields = [
     htmlFor: 'invoice_currency',
     label: 'Invoice Currency',
     placeholder: 'Invoice Currency (₹)',
-    type: 'number',
+    type: 'text',
     required: false,
   },
   {

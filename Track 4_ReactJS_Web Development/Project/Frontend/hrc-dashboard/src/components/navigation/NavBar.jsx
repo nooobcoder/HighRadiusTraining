@@ -7,6 +7,7 @@ function NavBar() {
   const EditButton = React.lazy(() => import('./EditButton'));
   const DeleteButton = React.lazy(() => import('./DeleteButton'));
   const PredictButton = React.lazy(() => import('./PredictButton'));
+
   return (
     <Mantine.SimpleGrid cols={4} className="mx-8 my-2 lg:mx-20 lg:my-8 ">
       <React.Suspense fallback={<Fallback />}>
