@@ -45,12 +45,13 @@ public class DBConnection {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(connectionURL + dbName + dbArgs, username, password);
                 System.out.println("Connected to database successfully!");
+
+                setTableMetaData();
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }
 
-        setTableMetaData();
         return connectionobj;
     }
 
@@ -86,47 +87,47 @@ public class DBConnection {
     }
 
     public static List<Map<String, Object>> executeQuery(String query, Object... params) throws SQLException {
-//        System.out.println("Params Length: " + params.length);
         PreparedStatement statement = conn.prepareStatement(query);
         String mode = "fetch";
-
-
-//        SELECT ? FROM ? LIMIT ?,?;
-//        1st Parameter -> Column Names or use * for all columns
-//        2nd Parameter -> Table Name
-//        3rd Parameter -> Start Row Index
-//        4th Parameter -> Limiting count
-//        Example: SELECT * FROM winter_internship LIMIT 10,5; // This gets 5 rows from the 11th row (top)
 
 
         int index = 1; // Prepared Statements are 1 index based
         for (Object param : params) {
             if (param instanceof WinterInternshipPOJO) {
-                setTableMetaData();
-                mode = "update";
+                System.out.println("SHOOOOUTTTTT");
+                if (params[1].equals("edit")) {
+                    mode = "edit";
 
-                long sl_no = calculateNewSerialNo();
-                statement.setLong(index++, sl_no != -1 ? sl_no : ((WinterInternshipPOJO) param).getSl_no());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
-                statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getClear_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_year());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getDoc_id());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getPosting_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date1());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getDue_in_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getInvoice_currency());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_type());
-                statement.setInt(index++, ((WinterInternshipPOJO) param).getPosting_id());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getArea_business());
-                statement.setFloat(index++, ((WinterInternshipPOJO) param).getTotal_open_amount());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getBaseline_create_date());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getCust_payment_terms());
-                statement.setInt(index++, ((WinterInternshipPOJO) param).getInvoice_id());
-                statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIsOpen());
-                statement.setString(index++, ((WinterInternshipPOJO) param).getAging_bucket());
-                statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIs_deleted());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getInvoice_currency());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getCust_payment_terms());
+                    statement.setInt(index++, ((WinterInternshipPOJO) param).getSl_no());
+                    break;
+                } else {
+                    mode = "update";
+
+                    long sl_no = calculateNewSerialNo();
+                    statement.setLong(index++, sl_no != -1 ? sl_no : ((WinterInternshipPOJO) param).getSl_no());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
+                    statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getClear_date());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_year());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getDoc_id());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getPosting_date());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_create_date1());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getDue_in_date());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getInvoice_currency());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getDocument_type());
+                    statement.setInt(index++, ((WinterInternshipPOJO) param).getPosting_id());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getArea_business());
+                    statement.setFloat(index++, ((WinterInternshipPOJO) param).getTotal_open_amount());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getBaseline_create_date());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getCust_payment_terms());
+                    statement.setInt(index++, ((WinterInternshipPOJO) param).getInvoice_id());
+                    statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIsOpen());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getAging_bucket());
+                    statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIs_deleted());
+                }
             } else if (param instanceof Long) {
                 statement.setLong(index++, (Long) param);
             } else if (param instanceof Integer) {
