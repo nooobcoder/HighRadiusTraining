@@ -6,12 +6,12 @@ const doSubmit = async (params, body) => {
   const URL = `http://${REACT_APP_API_SERVER || '192.168.0.134'}:${
     REACT_APP_API_SERVER_PORT || '280'
   }/RESTDatabase_war_exploded/editRow`;
-
+  console.log(JSON.stringify(body));
   try {
     // Post data to the server with params
-    const { status, data } = await post(URL, JSON.stringify(body), {
-      params,
-    });
+    // Set Cors to *
+    const { status, data } = await post(URL, JSON.stringify(body), { params });
+
     if (status === 200) {
       console.log('[API /editRow] Response: 200 ', data);
       return data;

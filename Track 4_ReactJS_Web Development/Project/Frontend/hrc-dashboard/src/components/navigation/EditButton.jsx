@@ -19,8 +19,6 @@ function EditButton() {
   invoice_currency = row?.invoice_currency || '';
   cust_payment_terms = row?.cust_payment_terms || '';
 
-  console.log(row);
-  console.log(selectedIndices);
   return (
     <>
       <CustomDrawer opened={opened} setOpened={setOpened} title="✏️ Edit Record - Drawer">
