@@ -161,6 +161,7 @@ public class EditRow extends HttpServlet {
 
                 PrintWriter out = resp.getWriter();
                 out.write(json);
+                out.flush();
             } catch (Exception e) {
                 e.printStackTrace();
             }
