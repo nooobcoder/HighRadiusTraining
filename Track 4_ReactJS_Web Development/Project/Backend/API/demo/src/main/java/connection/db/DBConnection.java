@@ -75,9 +75,12 @@ public class DBConnection {
     }
 
     // This function is smart enough to calculate the id for new insertion in the database 🧠🤯
-    private static long calculateNewSerialNo() {
+    private static int calculateNewSerialNo() {
         try {
-            long rows = (Long) tableMetaData.get(0).get("rows") + 1;
+//            SELECT sl_no FROM winter_internship ORDER BY sl_no DESC LIMIT 1;
+            Map<String, Object> lastSerial = executeQuery("SELECT sl_no FROM winter_internship ORDER BY sl_no DESC LIMIT 1;").get(0);
+            int rows = (Integer) lastSerial.get("sl_no") + 1;
+            System.out.println("LATEST SERIAL: " + rows);
             System.out.println(rows);
             return rows;
         } catch (Exception e) {
@@ -104,7 +107,7 @@ public class DBConnection {
                 } else {
                     mode = "update";
 
-                    long sl_no = calculateNewSerialNo();
+                    int sl_no = calculateNewSerialNo();
                     statement.setLong(index++, sl_no != -1 ? sl_no : ((WinterInternshipPOJO) param).getSl_no());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
                     statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
@@ -218,12 +221,7 @@ public class DBConnection {
 
     @Override
     public String toString() {
-        return "DBConnection{" +
-                "connectionURL='" + connectionURL + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", dbName='" + dbName + '\'' +
-                '}';
+        return "DBConnection{" + "connectionURL='" + connectionURL + '\'' + ", username='" + username + '\'' + ", password='" + password + '\'' + ", dbName='" + dbName + '\'' + '}';
     }
 
     @Override
