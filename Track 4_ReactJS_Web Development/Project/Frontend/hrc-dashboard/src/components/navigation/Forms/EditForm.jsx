@@ -6,9 +6,11 @@ import { useForm } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Check, X } from 'tabler-icons-react';
-import { defaultTableSchema, formInputFields } from '../../../utils/schema/editFormSchema';
+import { getTableRows } from '../../../app/redux/actions/actions';
 import handleSubmitToDatabase from '../../../utils/api/handleEditForm';
+import { defaultTableSchema, formInputFields } from '../../../utils/schema/editFormSchema';
 
 function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
   const form = useForm({
@@ -18,6 +20,8 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
     },
     validate: {},
   });
+
+  const actionDispatcher = useDispatch();
 
   const handleFormSubmission = async (values) => {
     // Loop through formInputFields
@@ -50,6 +54,9 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
           disallowClose: false,
           icon: <Check size={18} />,
         });
+
+        // Refresh the rows state after the submission, for the new data to be reflected
+        actionDispatcher(getTableRows({ start: 0, limit: 30 }));
         // Close the drawer
         setOpened(false);
       } else {
