@@ -1,14 +1,14 @@
 import * as Mantine from '@mantine/core';
 import { createStyles } from '@mantine/core';
 import { useFullscreen } from '@mantine/hooks';
+import { showNotification } from '@mantine/notifications';
 import React, { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Check } from 'tabler-icons-react';
-import { showNotification } from '@mantine/notifications';
 import { getTableRows } from '../app/redux/actions/actions';
 import { setSelectedRows } from '../app/redux/slices/apiSlice';
-import { generateColumnNames } from '../utils/table/generateStructure';
 import { ExitFullScreen, FullScreen } from '../assets/svg';
+import { generateColumnNames } from '../utils/table/generateStructure';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -223,7 +223,7 @@ function TableScrollArea() {
             key={`${id}thead`}
             className={`z-10 ${cx(classes.header, { [classes.scrolled]: scrolled })}`}
           >
-            <tr className="bg-lime-100">
+            <tr className="bg-lime-300">
               <td key="table-header">
                 <Mantine.Center className="px-1 py-2 font-semibold text-sm">
                   <Mantine.Checkbox
@@ -241,7 +241,9 @@ function TableScrollArea() {
                 </Mantine.Center>
               </td>
               {columnNames.map((columnName) => (
-                <th key={`${id}${columnName}`}>{columnName}</th>
+                <th key={`${id}${columnName}`} className="hover:cursor-pointer">
+                  {columnName}
+                </th>
               ))}
             </tr>
           </thead>
