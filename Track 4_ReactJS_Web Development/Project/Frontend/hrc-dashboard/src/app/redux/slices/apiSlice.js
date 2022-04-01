@@ -33,6 +33,7 @@ import { GetRowsReducer, reducers } from '../reducers/apiReducers';
 const initialState = {
   table: {
     rows: [{}],
+    filteredRows: [],
     businesses: [{}],
     customers: [{}],
     meta: [{}],
@@ -54,5 +55,5 @@ const apiSlice = createSlice({
   extraReducers: GetRowsReducer,
 });
 
-export const { setSelectedRows, setError } = apiSlice.actions;
+export const { setSelectedRows, setError,setFilteredRows } = apiSlice.actions;
 export default apiSlice.reducer;

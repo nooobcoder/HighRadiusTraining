@@ -26,10 +26,8 @@ const GetRowsReducer = {
     const obj = { ...state.table, rows: [{}], meta: {} };
     obj.rows = action.payload.slice(0, -3);
     obj.meta = action.payload.slice(-3);
-
-    // eslint-disable-next-line no-param-reassign
-    state.table = obj;
-    // state.rows = action.payload;
+    obj.filteredRows = [];
+    return { ...state, table: obj };
   },
   [GetTableRows.rejected]: (state, action) => ({
     ...state,
@@ -76,6 +74,14 @@ const reducers = {
       errorMessage: action.payload.message,
     },
   }),
+  setFilteredRows: (state, { payload }) => {
+    // action has a cust_number payload.
+    // Filter state.table.rows by cust_number
+    const filteredRows = state.table.rows.filter((row) =>
+      row.cust_number.toString().includes(payload),
+    );
+    return { ...state, table: { ...state.table, filteredRows } };
+  },
 };
 
 export { GetRowsReducer, reducers };

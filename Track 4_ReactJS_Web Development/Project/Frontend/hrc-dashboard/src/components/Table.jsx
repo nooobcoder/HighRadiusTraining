@@ -38,13 +38,13 @@ function TableScrollArea() {
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
   const [columnNames, setColumnNames] = useState([]);
-  // const [checkedItems, setCheckedItems] = useState([3]);
+  const { toggle, fullscreen } = useFullscreen();
 
   const state = useSelector((s) => s.api.table);
+  const { filteredRows } = state;
   const { selectedIndices: checkedItems } = state;
   const actionDispatch = useDispatch();
 
-  // eslint-disable-next-line no-unused-vars
   const [buttonState, setButtonState] = useState({
     start: true,
     previous: true,
@@ -52,10 +52,15 @@ function TableScrollArea() {
     last: true,
   });
 
+  useEffect(() => {
+    console.log('[Table.jsx rendered]');
+  });
+
   const rowsSelector = (payload) => actionDispatch(setSelectedRows(payload));
   const id = useId();
 
-  const rows = state.rows.map((row, index) => (
+  // ?WARN: Legacy code
+  /* let rows = state.rows.map((row, index) => (
     <tr
       key={`row${id}${row?.sl_no}}`}
       className={`${
@@ -88,7 +93,51 @@ function TableScrollArea() {
         </td>
       ))}
     </tr>
-  ));
+  )); */
+
+  // This function returns the original rows if 'filteredRows' is an empty array (in the case where the user is not searching anything)
+  // TODO: WIP 🏗️
+  const buildRows = () => {
+    const buildWith = filteredRows.length === 0 ? state.rows : filteredRows;
+    return buildWith.map((row, index) => (
+      <tr
+        key={`row${id}${row?.sl_no}}`}
+        className={`${
+          index % 2 === 0 ? 'bg-white' : 'bg-[#5DAAE0]'
+        } text-center  border-2 border-collapse border-black w-fit`}
+      >
+        <td key={`data:${id}${row?.sl_no}}`}>
+          <Mantine.Center className="px-1 py-1">
+            <Mantine.Checkbox
+              value={row.sl_no}
+              color="orange"
+              checked={checkedItems.includes(row.sl_no)}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  rowsSelector([...checkedItems, row.sl_no]);
+                } else {
+                  // Remove the serial number from the state array
+                  rowsSelector(checkedItems.filter((item) => item !== row.sl_no));
+                }
+              }}
+            />
+          </Mantine.Center>
+        </td>
+        {columnNames.map((col) => (
+          <td
+            key={`${col}${id}${row[col]}`}
+            className="text-center  border-2 border-collapse border-black w-fit"
+          >
+            {row[col]}
+          </td>
+        ))}
+      </tr>
+    ));
+  };
+
+  useEffect(() => {
+    buildRows();
+  }, [filteredRows, state.meta]);
 
   const shouldButtonBeEnabled = () => {
     const { rows: R, limit: L, start: S } = state.meta[0];
@@ -115,10 +164,6 @@ function TableScrollArea() {
     setColumnNames(generateColumnNames(state.rows[0]));
     shouldButtonBeEnabled();
   }, [state]);
-
-  useEffect(() => {
-    console.log('[Table.jsx rendered]');
-  });
 
   const getRows = ({ operation = 'next' }) => {
     const { start: S, limit: L, rows: R } = state.meta[0];
@@ -206,7 +251,6 @@ function TableScrollArea() {
       </Mantine.Center>
     );
   };
-  const { toggle, fullscreen } = useFullscreen();
 
   return (
     <>
@@ -247,7 +291,7 @@ function TableScrollArea() {
               ))}
             </tr>
           </thead>
-          <tbody>{rows}</tbody>
+          <tbody>{buildRows()}</tbody>
         </Mantine.Table>
       </Mantine.ScrollArea>
       {displayTableFooter()}
