@@ -121,10 +121,7 @@ public class EditRow extends HttpServlet {
         }
     }
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("--- SERVICE START ---");
-
+    public void readURLParameters(HttpServletRequest req, HttpServletResponse resp) {
         try {
             // The parameter names should be serialNumber and tableName. If you wish to change this in future
             // please update the code accordingly
@@ -166,6 +163,11 @@ public class EditRow extends HttpServlet {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("--- SERVICE START ---");
 
         System.out.println("--- SERVICE END ---");
         if (req.getMethod().equals("GET")) {
@@ -192,6 +194,10 @@ public class EditRow extends HttpServlet {
 
         payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
         System.out.println("Map is: " + payloadMap);
+
+        // Parsing the url parameters is done after parsing the JSON body because it was creating a specific issue in the frontend.
+        // Although this issue did not exist when requests were sent through REST clients.
+        readURLParameters(req, resp);
 
         WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
         pojo.setSl_no(serialNumber); // Setting the serial_no parsed from the request parameters
