@@ -1,12 +1,19 @@
 import * as Mantine from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Check, X } from 'tabler-icons-react';
+import { getTableRows } from '../../app/redux/actions/actions';
+import deleteRows from '../../utils/api/handleDeleteRows';
 
 function DeleteButton() {
   const [opened, setOpened] = useState(false);
-  const selectedIndices = useSelector(({ api }) => api.table?.selectedIndices)?.length;
+  const selectedIndicesCount = useSelector(({ api }) => api.table?.selectedIndices)?.length;
+  const { selectedIndices } = useSelector(({ api }) => api?.table);
   const [deleteConsent, setDeleteConsent] = React.useState(false);
-  const [inputValue, setInputValue] = React.useState(undefined);
+  const [inputValue, setInputValue] = React.useState('no');
+
+  const actionDispatcher = useDispatch();
 
   const checkDeleteConsent = () => {
     // Check if inputValue is 'yes' ignoring the case
@@ -18,6 +25,37 @@ function DeleteButton() {
   React.useEffect(() => {
     checkDeleteConsent();
   }, [inputValue]);
+
+  const handleDelete = async () => {
+    console.log('You are here!');
+    if (selectedIndices?.length > 0) {
+      const respData = await deleteRows(selectedIndices);
+      console.log(respData);
+      if (respData[0].rowsAffected > 0) {
+        showNotification({
+          title: 'Alert!',
+          message: `The selected rows have been deleted!`,
+          color: 'teal',
+          autoClose: 10000,
+          disallowClose: false,
+          icon: <Check size={18} />,
+        });
+
+        // Refresh the rows state after the submission, for the new data to be reflected
+        actionDispatcher(getTableRows({ start: 0, limit: 30 }));
+        // Close the drawer
+        setOpened(false);
+      } else {
+        showNotification({
+          title: 'Alert!',
+          message: 'The form could not be submitted due to some error.',
+          color: 'red',
+          disallowClose: false,
+          icon: <X size={18} />,
+        });
+      }
+    }
+  };
 
   return (
     <>
@@ -38,22 +76,33 @@ function DeleteButton() {
           </Mantine.Text>
         </Mantine.Group>
 
-        <Mantine.Group align="flex-end">
-          <Mantine.TextInput
-            placeholder="Yes / No"
-            style={{ flex: 1 }}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.currentTarget.value)}
-          />
-          <Mantine.Button className="bg-orange-400" disabled={!deleteConsent}>
-            Delete
-          </Mantine.Button>
-        </Mantine.Group>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleDelete();
+          }}
+        >
+          <Mantine.Group align="flex-end">
+            <Mantine.TextInput
+              placeholder="Yes / No"
+              style={{ flex: 1 }}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.currentTarget.value)}
+            />
+            <Mantine.Button
+              className="bg-orange-400"
+              disabled={!deleteConsent}
+              onClick={handleDelete}
+            >
+              Delete
+            </Mantine.Button>
+          </Mantine.Group>
+        </form>
       </Mantine.Dialog>
       <Mantine.Button
         className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
         onClick={() => setOpened(true)}
-        disabled={!selectedIndices > 0}
+        disabled={!selectedIndicesCount > 0}
       >
         Delete 🗑️
       </Mantine.Button>
