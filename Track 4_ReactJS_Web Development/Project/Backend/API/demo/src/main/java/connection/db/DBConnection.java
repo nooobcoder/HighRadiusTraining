@@ -130,6 +130,14 @@ public class DBConnection {
                     statement.setString(index++, ((WinterInternshipPOJO) param).getAging_bucket());
                     statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIs_deleted());
                 }
+            } else if (params[params.length - 1].equals("delete") && param instanceof List) {
+                // The url parameters would be encoded in a List of Strings
+                // Set mode to "delete"
+                mode = "delete";
+                for (int i = 0; i < ((List<?>) param).size(); ++i) {
+                    statement.setString(index++, (String) ((List<?>) param).get(i));
+                }
+                break;
             } else if (param instanceof Long) {
                 statement.setLong(index++, (Long) param);
             } else if (param instanceof Integer) {
