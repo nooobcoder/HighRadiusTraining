@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "9bf771bd-5e17-403a-9fa2-701e0291adf5",
+		"name": "HighradiusWinterInternship",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetRows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getrows?start=10&limit=2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getrows"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "10"
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddRows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sl_no\":48558,\r\n    \"business_code\": null,\r\n    \"cust_number\": \"200020431\",\r\n    \"clear_date\": \"2022-3-1\",\r\n    \"business_year\": null,\r\n    \"doc_id\": null,\r\n    \"posting_date\": \"2022-3-1\",\r\n    \"document_create_date\": \"2022-3-2\",\r\n    \"document_create_date1\": null,\r\n    \"due_in_date\": \"2022-3-19\",\r\n    \"invoice_currency\": null,\r\n    \"document_type\": null,\r\n    \"posting_id\": null,\r\n    \"area_business\": null,\r\n    \"total_open_amount\": null,\r\n    \"baseline_create_date\": \"2022-3-15\",\r\n    \"cust_payment_terms\": null,\r\n    \"invoice_id\": null,\r\n    \"isOpen\": null,\r\n    \"aging_bucket\": null,\r\n    \"is_deleted\": null\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/addRow",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"addRow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Businesses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getbusinesses",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getbusinesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getcustomers",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getcustomers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Rows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"invoice_currency\": \"USD\",\r\n    \"cust_payment_terms\": \"NAA8\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/editRow?serialNumber=2&tableName=winter_internship",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"editRow"
+					],
+					"query": [
+						{
+							"key": "serialNumber",
+							"value": "2"
+						},
+						{
+							"key": "tableName",
+							"value": "winter_internship"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rows",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/deleteRow?sl_no=35,",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"deleteRow"
+					],
+					"query": [
+						{
+							"key": "sl_no",
+							"value": "35,",
+							"description": "Comma seprated string or a single serial_no"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

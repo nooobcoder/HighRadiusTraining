@@ -27,7 +27,6 @@ function DeleteButton() {
   }, [inputValue]);
 
   const handleDelete = async () => {
-    console.log('You are here!');
     if (selectedIndices?.length > 0) {
       const respData = await deleteRows(selectedIndices);
       console.log(respData);
@@ -79,6 +78,7 @@ function DeleteButton() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            setOpened(false);
             handleDelete();
           }}
         >
@@ -92,7 +92,10 @@ function DeleteButton() {
             <Mantine.Button
               className="bg-orange-400"
               disabled={!deleteConsent}
-              onClick={handleDelete}
+              onClick={() => {
+                handleDelete();
+                setOpened(false);
+              }}
             >
               Delete
             </Mantine.Button>
