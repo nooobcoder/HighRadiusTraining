@@ -78,6 +78,12 @@ function App() {
           <Mantine.Text>{errorMessage}</Mantine.Text>
         </Mantine.Center>
       )}
+      {/* // TODO: Implement PieChart that supports React v18. ⚛️ */}
+      {/* PieChart implementation is kind of postponed now as this project uses React18.
+          The library devs currently do not support React 18 as a peer dependency.
+
+          Work Start Time: Unknown
+      */}
       <div style={{ height: '500px' }}>
         <PieChart />
       </div>
