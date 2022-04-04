@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: pink;
-  font-family: -apple-system, 'MonoLisa', BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+@layer base {
+  @font-face {
+    font-family: MonoLisa;
+    font-weight: 400;
+    src: url('/src/assets/fonts/MonoLisa-Regular.ttf') format('truetype');
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background-color: pink;
+  font-family: -apple-system, 'MonoLisa', BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }

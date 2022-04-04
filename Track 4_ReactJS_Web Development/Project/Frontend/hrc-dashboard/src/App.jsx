@@ -7,7 +7,8 @@ import './App.css';
 import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/actions/actions';
 import { Header, NavBar } from './components';
 import Table from './components/Table';
-import PieChart from './components/analytics/PieChart';
+import Footer from './components/Footer';
+// import PieChart from './components/analytics/PieChart';
 
 function App() {
   // api is the name of the reducer in the store
@@ -67,7 +68,7 @@ function App() {
   }, [error, notification]);
 
   return (
-    <div className="">
+    <div className="font-sans">
       {/* Header Component */}
       <Header />
       <NavBar />
@@ -84,9 +85,10 @@ function App() {
 
           Work Start Time: Unknown
       */}
-      <div style={{ height: '500px' }}>
+      {/* <div style={{ height: '500px' }}>
         <PieChart />
-      </div>
+      </div> */}
+      <Footer />
     </div>
   );
 }
