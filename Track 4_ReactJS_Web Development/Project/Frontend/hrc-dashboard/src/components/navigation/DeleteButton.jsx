@@ -59,7 +59,7 @@ function DeleteButton() {
   return (
     <>
       <Mantine.Dialog
-        className="drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] hover:drop-shadow-md bg-orange-200"
+        className="bg-orange-200 drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] hover:drop-shadow-md"
         opened={opened}
         withCloseButton
         onClose={() => setOpened(false)}
@@ -103,7 +103,7 @@ function DeleteButton() {
         </form>
       </Mantine.Dialog>
       <Mantine.Button
-        className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
+        className="w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
         onClick={() => setOpened(true)}
         disabled={!selectedIndicesCount > 0}
       >

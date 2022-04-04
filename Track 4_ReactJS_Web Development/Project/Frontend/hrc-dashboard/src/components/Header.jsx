@@ -14,7 +14,7 @@ function Header() {
       />
 
       {/* <div className="invisible lg:visible" /> */}
-      <Mantine.Badge className="bg-opacity-50">BETA</Mantine.Badge>
+      <Mantine.Badge className="bg-white/50">BETA</Mantine.Badge>
     </div>
   );
 }
