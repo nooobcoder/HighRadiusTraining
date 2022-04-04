@@ -32,7 +32,7 @@ function EditButton() {
         )}
       </CustomDrawer>
       <Mantine.Button
-        className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
+        className="w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
         onClick={() => setOpened(true)}
         disabled={selectedIndices !== 1}
       >

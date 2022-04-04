@@ -107,7 +107,7 @@ function TableScrollArea() {
         } text-center  border-2 border-collapse border-black w-fit`}
       >
         <td key={`data:${id}${row?.sl_no}}`}>
-          <Mantine.Center className="px-1 py-1">
+          <Mantine.Center className="p-1">
             <Mantine.Checkbox
               value={row.sl_no}
               color="orange"
@@ -126,7 +126,7 @@ function TableScrollArea() {
         {columnNames.map((col) => (
           <td
             key={`${col}${id}${row[col]}`}
-            className="text-center  border-2 border-collapse border-black w-fit"
+            className="w-fit  text-center border-2 border-black border-collapse"
           >
             {row[col]}
           </td>
@@ -225,7 +225,7 @@ function TableScrollArea() {
             </Mantine.Button>
           </Mantine.Group>
           <Mantine.Center>
-            <Mantine.Mark className="px-3 rounded-lg bg-[#5DAAE0]  lg:visible">
+            <Mantine.Mark className="px-3 bg-[#5DAAE0] rounded-lg  lg:visible">
               <Mantine.Text className="text-black sm:text-sm">
                 {`Displaying ${start + 1}-${end} of ${state?.meta[0]?.rows} items`}
               </Mantine.Text>
@@ -255,8 +255,8 @@ function TableScrollArea() {
   return (
     <>
       <Mantine.ScrollArea
-        className="h-80 shadow-md mx-8 my-2 lg:mx-20 lg:my-8 rounded-lg hover:shadow-2xl transition ease-in-out
-      hover:-translate-y-1 hover:scale-110 duration-200 delay-150  motion-reduce:transition-none motion-reduce:hover:transform-none "
+        className="my-2 mx-8 h-80 rounded-lg shadow-md hover:shadow-2xl transition motion-reduce:transition-none duration-200 ease-in-out
+      delay-150 motion-reduce:hover:transform-none hover:scale-110 hover:-translate-y-1  lg:my-8 lg:mx-20 "
         scrollbarSize={10}
         type="always"
         scrollHideDelay={700}
@@ -269,7 +269,7 @@ function TableScrollArea() {
           >
             <tr className="bg-lime-300">
               <td key="table-header">
-                <Mantine.Center className="px-1 py-2 font-semibold text-sm">
+                <Mantine.Center className="py-2 px-1 text-sm font-semibold">
                   <Mantine.Checkbox
                     value="all"
                     label="All"
@@ -299,7 +299,7 @@ function TableScrollArea() {
         <Mantine.Button
           onClick={toggle}
           color={fullscreen ? 'red' : 'blue'}
-          className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer w-auto"
+          className="w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
         >
           {fullscreen ? <ExitFullScreen /> : <FullScreen />}
         </Mantine.Button>

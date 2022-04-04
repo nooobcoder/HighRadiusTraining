@@ -24,7 +24,7 @@ function NavBar() {
   }, [searchValue]);
 
   return (
-    <Mantine.SimpleGrid cols={5} className="mx-8 my-2 lg:mx-20 lg:my-8 ">
+    <Mantine.SimpleGrid cols={5} className="my-2 mx-8 lg:my-8 lg:mx-20 ">
       <PredictButton />
       <AddButton />
       <Mantine.NumberInput
