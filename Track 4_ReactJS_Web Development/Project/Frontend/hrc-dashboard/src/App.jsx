@@ -7,6 +7,7 @@ import './App.css';
 import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/actions/actions';
 import { Header, NavBar } from './components';
 import Table from './components/Table';
+import PieChart from './components/analytics/PieChart';
 
 function App() {
   // api is the name of the reducer in the store
@@ -77,6 +78,9 @@ function App() {
           <Mantine.Text>{errorMessage}</Mantine.Text>
         </Mantine.Center>
       )}
+      <div style={{ height: '500px' }}>
+        <PieChart />
+      </div>
     </div>
   );
 }
