@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="p-3 mt-10 bg-white dark:bg-gray-800 rounded-t-lg shadow md:flex md:justify-between md:items-center md:p-6">
+    <footer className="bottom-0 p-3 mt-10  h-10  bg-white dark:bg-gray-800 rounded-t-lg shadow md:flex md:justify-between md:items-center md:p-6">
       <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
         © 2022{' '}
         <a href="https://highradius.com" className="hover:underline">

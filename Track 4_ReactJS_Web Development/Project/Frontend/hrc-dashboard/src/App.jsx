@@ -68,7 +68,7 @@ function App() {
   }, [error, notification]);
 
   return (
-    <div className="font-sans">
+    <div className="flex flex-col justify-between h-screen font-sans">
       {/* Header Component */}
       <Header />
       <NavBar />

@@ -256,7 +256,7 @@ function TableScrollArea() {
     <>
       <Mantine.ScrollArea
         className="my-2 mx-8 h-80 rounded-lg shadow-md hover:shadow-2xl transition motion-reduce:transition-none duration-200 ease-in-out
-      delay-150 motion-reduce:hover:transform-none hover:scale-110 hover:-translate-y-1  lg:my-8 lg:mx-20 "
+      delay-150 motion-reduce:hover:transform-none hover:scale-110 hover:-translate-y-1  lg:my-3 lg:mx-20 "
         scrollbarSize={10}
         type="always"
         scrollHideDelay={700}
