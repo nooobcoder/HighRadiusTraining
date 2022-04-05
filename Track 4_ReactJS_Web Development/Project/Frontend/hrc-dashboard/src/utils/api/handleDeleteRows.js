@@ -16,11 +16,11 @@ const doDelete = async (selectedIndices) => {
     const { status, data } = await axios.delete(URL, { params });
 
     if (status === 200) {
-      console.log('[API /addRow] Response: 200 ', data);
+      console.log('[API /deleteRow] Response: 200 ', data);
       return data;
     }
 
-    console.log('[API /addRow] Response: ', status);
+    console.log('[API /deleteRow] Response: ', status, data);
     return {};
   } catch (e) {
     console.error(e.message);
