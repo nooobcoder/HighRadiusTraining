@@ -119,9 +119,6 @@ public class DeleteRow extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        System.out.println("--- POSTING START ---");
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-
         readURLParameters(req, resp);
         System.out.println("Request Payload: " + serial_nos);
 
