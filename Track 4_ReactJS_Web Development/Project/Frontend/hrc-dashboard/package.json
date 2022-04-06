@@ -7,6 +7,7 @@
     "@mantine/dates": "^4.0.8",
     "@mantine/hooks": "^4.0.4",
     "@mantine/notifications": "^4.1.0",
+    "@mui/material": "^5.6.0",
     "@nivo/core": "^0.79.0",
     "@nivo/pie": "^0.79.1",
     "@reduxjs/toolkit": "^1.8.0",
@@ -16,9 +17,11 @@
     "axios": "^0.26.0",
     "dayjs": "^1.11.0",
     "eslint-plugin-tailwindcss": "^3.5.0",
+    "postcss-cli": "^9.1.0",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-is": "^18.0.0",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
     "serve": "^13.0.2",
@@ -27,7 +30,8 @@
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run watch:css && react-scripts build",
+    "watch:css": "postcss src/index.css -o src/assets/main.css",
     "test": "react-scripts test",
     "serve": "serve -p 4848 -s build",
     "eject": "react-scripts eject",
@@ -61,7 +65,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "postcss": "^8.4.8",
+    "postcss": "^8.4.12",
     "tailwindcss": "^3.0.23"
   }
 }
