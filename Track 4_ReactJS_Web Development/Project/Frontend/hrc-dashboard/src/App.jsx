@@ -8,8 +8,8 @@ import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/act
 import { Header, NavBar } from './components';
 import Table from './components/Table';
 import Footer from './components/Footer';
-import PieChart from './components/analytics/PieChart';
-import PieChartData from './utils/analytics/skeletondata';
+// import PieChart from './components/analytics/PieChart';
+// import PieChartData from './utils/analytics/skeletondata';
 
 function App() {
   // api is the name of the reducer in the store
