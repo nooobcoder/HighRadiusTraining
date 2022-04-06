@@ -3,11 +3,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Search } from 'tabler-icons-react';
 import { setFilteredRows } from '../../app/redux/slices/apiSlice';
+import AdvancedSearchButton from '../AdvancedSearchButton';
 import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import PredictButton from './PredictButton';
-import AdvancedSearchButton from '../AdvancedSearchButton';
 
 function NavBar() {
   const [searchValue, setSearchValue] = React.useState(null);

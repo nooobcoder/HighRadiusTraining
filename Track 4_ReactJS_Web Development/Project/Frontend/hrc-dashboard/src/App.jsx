@@ -8,7 +8,8 @@ import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/act
 import { Header, NavBar } from './components';
 import Table from './components/Table';
 import Footer from './components/Footer';
-// import PieChart from './components/analytics/PieChart';
+import PieChart from './components/analytics/PieChart';
+import PieChartData from './utils/analytics/skeletondata';
 
 function App() {
   // api is the name of the reducer in the store
@@ -79,15 +80,12 @@ function App() {
           <Mantine.Text>{errorMessage}</Mantine.Text>
         </Mantine.Center>
       )}
-      {/* // TODO: Implement PieChart that supports React v18. ⚛️ */}
-      {/* PieChart implementation is kind of postponed now as this project uses React18.
-          The library devs currently do not support React 18 as a peer dependency.
-
-          Work Start Time: Unknown
+      {/*
+          // TODO: Implement PieChart that supports React v18. ⚛️ 
       */}
-      {/* <div style={{ height: '500px' }}>
-        <PieChart />
-      </div> */}
+      {/* <Mantine.Paper className="h-64">
+        <PieChart data={PieChartData} />
+      </Mantine.Paper> */}
       <Footer />
     </div>
   );
