@@ -10,7 +10,9 @@ function PredictButton() {
   useEffect(() => setDisabled(!selection?.length > 0), [selection]);
   return (
     <Mantine.Button
-      className="w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
+      className={`w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer transition ease-in-out duration-75 ${
+        disabled && 'blur-sm'
+      }`}
       disabled={disabled}
     >
       Predict

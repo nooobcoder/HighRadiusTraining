@@ -90,7 +90,7 @@ function DeleteButton() {
               onChange={(e) => setInputValue(e.currentTarget.value)}
             />
             <Mantine.Button
-              className="bg-orange-400"
+              className={`bg-orange-400 `}
               disabled={!deleteConsent}
               onClick={() => {
                 handleDelete();
@@ -103,7 +103,9 @@ function DeleteButton() {
         </form>
       </Mantine.Dialog>
       <Mantine.Button
-        className="w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
+        className={`w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer transition ease-in-out duration-300 ${
+          !selectedIndicesCount > 0 && 'blur-sm'
+        }`}
         onClick={() => setOpened(true)}
         disabled={!selectedIndicesCount > 0}
       >
