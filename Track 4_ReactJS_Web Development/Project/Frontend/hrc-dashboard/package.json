@@ -31,7 +31,7 @@
   "scripts": {
     "start": "BROWSER=none react-scripts start",
     "build": "npm run watch:css && react-scripts build",
-    "watch:css": "postcss src/index.css -o src/assets/main.css",
+    "watch:css": "postcss src/index.css -o src/build/static/css/main.css",
     "test": "react-scripts test",
     "serve": "serve -p 4848 -s build",
     "eject": "react-scripts eject",
