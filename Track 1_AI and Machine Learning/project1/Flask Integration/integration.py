@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, redirect, url_for, render_template, request, jsonify, make_response
 import New_Bucket
 import pandas as pd
@@ -11,18 +13,17 @@ CORS(app)
 @app.route("/", methods=["POST", "GET"])
 def home():
     if request.method == "POST":
-        print(request.json)
-        business_code = request.json["business_code"]
-        cust_number = request.json['cust_number']
-        name_customer = request.json['name_customer']
-        clear_date = request.json['clear_date']
-        buisness_year = int(request.json['buisness_year'])
-        doc_id = int(request.json['doc_id'])
-        posting_date = request.json['posting_date']
-        due_in_date = request.json['due_in_date']
-        baseline_create_date = request.json['baseline_create_date']
-        cust_payment_terms = request.json['cust_payment_terms']
-        converted_usd = float(request.json['converted_usd'])
+        business_code = request.form["business_code"]
+        cust_number = request.form['cust_number']
+        name_customer = request.form['name_customer']
+        clear_date = request.form['clear_date']
+        buisness_year = int(request.form['buisness_year'])
+        doc_id = int(request.form['doc_id'])
+        posting_date = request.form['posting_date']
+        due_in_date = request.form['due_in_date']
+        baseline_create_date = request.form['baseline_create_date']
+        cust_payment_terms = request.form['cust_payment_terms']
+        converted_usd = float(request.form['converted_usd'])
 
         data['business_code'] = [business_code]
         data['cust_number'] = [cust_number]
@@ -36,7 +37,6 @@ def home():
         data['cust_payment_terms'] = [cust_payment_terms]
         data['converted_usd'] = [converted_usd]
 
-        print(request.json)
 
         response = make_response(jsonify(New_Bucket.predict(data)), 200)
         response.headers["Content-Type"] = "application/json"
@@ -48,7 +48,7 @@ def home():
 @app.route("/get_prediction", methods=["GET", 'POST'])
 def get_prediction():
     if request.method == "POST":
-        doc_id_list = list(request.json["data"])
+        doc_id_list = list(request.get_json(force=True)["data"])
         print(doc_id_list)
         response = make_response(jsonify(New_Bucket.doc_id_bucket(doc_id_list)), 200)
         response.headers["Access-Control-Allow-Origin"] = "*"

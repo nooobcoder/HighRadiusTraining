@@ -24,8 +24,8 @@ class EncoderExt(object):
 
 def predict(nulldata):
     print(" Predict")
-
-    # nulldata = pd.read_csv("data.csv", index_col=0)
+    nulldata.set
+    # nulldata = pd.read_csv("data.csv")
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
@@ -117,6 +117,7 @@ def doc_id_bucket(doc_list):
     print(" Predict")
 
     nulldata = pd.read_csv("nulldata.csv", index_col=0)
+    # nulldata = pd.read_csv("nulldata.csv")
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
@@ -209,6 +210,7 @@ def alll():
     print(" Predict")
 
     nulldata = pd.read_csv("nulldata.csv", index_col=0)
+    # nulldata = pd.read_csv("nulldata.csv")
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
