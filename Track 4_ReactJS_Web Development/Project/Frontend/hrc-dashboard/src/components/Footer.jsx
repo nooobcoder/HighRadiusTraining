@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bottom-0 p-3 mt-10 bg-gray-800 rounded-t-lg shadow sm:text-xs md:flex md:justify-between md:items-center md:p-5">
+    <footer className="fixed bottom-0 p-3 mt-10 w-full bg-gray-800 rounded-t-lg shadow sm:text-xs md:flex md:justify-between md:items-center md:p-5">
       <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
         © 2022{' '}
         <a
