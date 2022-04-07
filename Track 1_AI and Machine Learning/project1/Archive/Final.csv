@@ -1,0 +1,2 @@
+,cust_number,buisness_year,doc_id,converted_usd,business_code_enc,day_of_postingdate,month_of_postingdate,year_of_postingdate,day_of_due,month_of_due,year_of_due,day_of_createdate,month_of_createdate,year_of_createdate,cust_payment_terms_enc,name_customer_enc,business_code,name_customer,clear_date,posting_date,due_in_date,baseline_create_date,cust_payment_terms,Aging Bucket
+0,200721222,2019,1930022117,19581.57,0,15,4,2019,30,4,2019,15,4,2019,1,1,U001,highradius,2019-10-23 09:34:07.062500,2019-10-17 00:00:00.000000,2019-11-01 00:00:00.000000,2019-10-17 00:00:00.000000,NAA8,
