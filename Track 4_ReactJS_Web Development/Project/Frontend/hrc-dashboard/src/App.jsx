@@ -8,7 +8,6 @@ import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/act
 import { Header, NavBar } from './components';
 import Table from './components/Table';
 import Footer from './components/Footer';
-import AdvancedSearch from './utils/api/advancedSearch';
 // import PieChart from './components/analytics/PieChart';
 // import PieChartData from './utils/analytics/skeletondata';
 
@@ -18,22 +17,21 @@ function App() {
   // const Table = React.lazy(() => import('./components/Table'));
 
   // Use redux store
-  const { error } = useSelector((state) => state.api);
+  const { error } = useSelector((state) => state?.api);
   const { hasError, errorMessage } = error;
 
   /* Initial State
-                hasError: false,
-                message: 'Hi!',
-                title: 'This is a test success message!',
-                visible: true,
-            */
-  const notification = useSelector((state) => state.notification);
+                  hasError: false,
+                  message: 'Hi!',
+                  title: 'This is a test success message!',
+                  visible: true,
+              */
+  const notification = useSelector((state) => state?.notification);
 
   useEffect(() => {
     actionDispatch(getTableRows({ start: 0, limit: 30 }));
     actionDispatch(getBusinessRows());
     actionDispatch(getCustomersRows());
-    AdvancedSearch();
   }, []);
 
   useEffect(() => {
@@ -42,23 +40,23 @@ function App() {
 
   useEffect(() => {
     /* 
-                          Most used notification props
-                            showNotification({
-                              id: 'hello-there',
-                              disallowClose: true,
-                              onClose: () => console.log('unmounted'),
-                              onOpen: () => console.log('mounted'),
-                              autoClose: 5000,
-                              title: "You've been compromised",
-                              message: 'Leave the building immediately',
-                              color: 'red',
-                              icon: <Cross1Icon />,
-                              className: 'my-notification-class',
-                              style: { backgroundColor: 'red' },
-                              sx: { backgroundColor: 'red' },
-                              loading: false,
-                            });
-                        */
+                              Most used notification props
+                                showNotification({
+                                  id: 'hello-there',
+                                  disallowClose: true,
+                                  onClose: () => console.log('unmounted'),
+                                  onOpen: () => console.log('mounted'),
+                                  autoClose: 5000,
+                                  title: "You've been compromised",
+                                  message: 'Leave the building immediately',
+                                  color: 'red',
+                                  icon: <Cross1Icon />,
+                                  className: 'my-notification-class',
+                                  style: { backgroundColor: 'red' },
+                                  sx: { backgroundColor: 'red' },
+                                  loading: false,
+                                });
+                            */
     if (hasError) {
       showNotification({
         title: 'Error',
@@ -71,7 +69,7 @@ function App() {
   }, [error, notification]);
 
   return (
-    <div className="flex overflow-y-auto flex-col justify-between h-auto w-screen font-sans">
+    <div className="flex overflow-y-auto flex-col justify-between w-screen h-auto font-sans">
       {/* Header Component */}
       <Header />
       <NavBar />

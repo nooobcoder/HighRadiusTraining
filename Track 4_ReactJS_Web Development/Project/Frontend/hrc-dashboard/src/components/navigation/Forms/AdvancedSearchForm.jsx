@@ -1,54 +1,53 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable camelcase */
 import * as Mantine from '@mantine/core';
 import { useForm } from '@mantine/hooks';
-import { showNotification } from '@mantine/notifications';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { showNotification } from '@mantine/notifications';
 import { Check, X } from 'tabler-icons-react';
+import {
+  defaultTableSchema,
+  formInputFields,
+} from '../../../utils/schema/advancedSearchFormSchema';
+import advancedSearch from '../../../utils/api/advancedSearch';
 import { getTableRows } from '../../../app/redux/actions/actions';
-import handleSubmitToDatabase from '../../../utils/api/handleEditForm';
-import { defaultTableSchema, formInputFields } from '../../../utils/schema/editFormSchema';
 
-function AdvancedSearch({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
+function AdvancedSearchForm({ setOpened }) {
   const form = useForm({
     initialValues: {
-      invoice_currency,
-      cust_payment_terms,
+      ...defaultTableSchema,
     },
     validate: {},
   });
 
   const actionDispatcher = useDispatch();
 
-  const handleFormSubmission = async (values) => {
+  const handleFormSubmission = async () => {
     // Loop through formInputFields
     formInputFields.forEach((field) => {
-      const fieldValue = form.getInputProps(field.htmlFor)?.value || '';
-      // If fieldValue is null or undefined, store null
-      defaultTableSchema[field.htmlFor] = fieldValue;
+      defaultTableSchema[field.htmlFor] = form.getInputProps(field.htmlFor)?.value || '';
     });
 
     try {
-      // Submit defaultTableSchema to the database
       /*
-              Successful data submission example
-              0: {rowsAffected: 1}
-              1: {rows: 48583}
-              2: {rows: 6}
-              3: {rows: 1084}
-            */
-      const respData = await handleSubmitToDatabase(
-        { serialNumber: sl_no, tableName: 'winter_internship' },
-        defaultTableSchema,
-      );
+                          Successful data submission example
+                          0: {rowsAffected: 1}
+                          1: {rows: 48583}
+                          2: {rows: 6}
+                          3: {rows: 1084}
+                        */
 
-      if (respData[0].rowsAffected === 1) {
+      formInputFields.forEach((field) => {
+        defaultTableSchema[field.htmlFor] = form.getInputProps(field.htmlFor)?.value || '';
+      });
+      const respData = await advancedSearch(defaultTableSchema);
+
+      if (respData[0].sl_no) {
         showNotification({
           title: 'Alert!',
-          message: `The form data with sl_no: ${sl_no} has been edited successfully!`,
+          message: `The advanced search was successful!`,
           color: 'teal',
           autoClose: 10000,
           disallowClose: false,
@@ -62,9 +61,9 @@ function AdvancedSearch({ setOpened, sl_no, invoice_currency, cust_payment_terms
       } else {
         showNotification({
           title: 'Alert!',
-          message: 'The form could not be submitted due to some error.',
+          message: 'The query did not return any data.',
           color: 'red',
-          disallowClose: false,
+          disallowClose: true,
           icon: <X size={18} />,
         });
       }
@@ -83,8 +82,13 @@ function AdvancedSearch({ setOpened, sl_no, invoice_currency, cust_payment_terms
 
   return (
     <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={form.onSubmit((values) => handleFormSubmission(values))}>
-        <Mantine.Divider my="sm" variant="dashed" label="Edit Fields" labelPosition="center" />
+      <form onSubmit={form.onSubmit(() => handleFormSubmission())}>
+        <Mantine.Divider
+          my="sm"
+          variant="dashed"
+          label="Advanced Seach Query"
+          labelPosition="center"
+        />
 
         <Mantine.ScrollArea style={{ height: 550 }} className="px-5">
           {formInputFields.map((field) => {
@@ -138,11 +142,8 @@ function AdvancedSearch({ setOpened, sl_no, invoice_currency, cust_payment_terms
 }
 
 // Props Validation
-AdvancedSearch.propTypes = {
+AdvancedSearchForm.propTypes = {
   setOpened: PropTypes.func.isRequired,
-  sl_no: PropTypes.number.isRequired,
-  invoice_currency: PropTypes.string.isRequired,
-  cust_payment_terms: PropTypes.string.isRequired,
 };
 
-export default AdvancedSearch;
+export default AdvancedSearchForm;

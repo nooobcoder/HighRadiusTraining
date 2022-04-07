@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/pie
 import { ResponsivePie } from '@nivo/pie';
 import React from 'react';
 

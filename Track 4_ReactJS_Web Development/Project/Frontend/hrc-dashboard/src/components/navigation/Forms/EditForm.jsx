@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable camelcase */
 import * as Mantine from '@mantine/core';
@@ -23,7 +22,7 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
 
   const actionDispatcher = useDispatch();
 
-  const handleFormSubmission = async (values) => {
+  const handleFormSubmission = async () => {
     // Loop through formInputFields
     formInputFields.forEach((field) => {
       const fieldValue = form.getInputProps(field.htmlFor)?.value || '';
@@ -34,12 +33,12 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
     try {
       // Submit defaultTableSchema to the database
       /*
-              Successful data submission example
-              0: {rowsAffected: 1}
-              1: {rows: 48583}
-              2: {rows: 6}
-              3: {rows: 1084}
-            */
+                    Successful data submission example
+                    0: {rowsAffected: 1}
+                    1: {rows: 48583}
+                    2: {rows: 6}
+                    3: {rows: 1084}
+                  */
       const respData = await handleSubmitToDatabase(
         { serialNumber: sl_no, tableName: 'winter_internship' },
         defaultTableSchema,
@@ -83,7 +82,7 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
 
   return (
     <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={form.onSubmit((values) => handleFormSubmission(values))}>
+      <form onSubmit={form.onSubmit(() => handleFormSubmission())}>
         <Mantine.Divider my="sm" variant="dashed" label="Edit Fields" labelPosition="center" />
 
         <Mantine.ScrollArea style={{ height: 550 }} className="px-5">

@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Search } from 'tabler-icons-react';
 import { setFilteredRows } from '../../app/redux/slices/apiSlice';
-import AdvancedSearchButton from '../AdvancedSearchButton';
+import AdvancedSearchButton from './AdvancedSearchButton';
 import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
@@ -26,8 +26,6 @@ function NavBar() {
 
   return (
     <Mantine.SimpleGrid cols={6} className="my-2 mx-8 lg:my-6 lg:mx-20 ">
-      <PredictButton />
-      <AddButton />
       <Mantine.NumberInput
         value={searchValue}
         onChange={(val) => setSearchValue(val || null)}
@@ -37,6 +35,8 @@ function NavBar() {
         icon={<Search size={18} />}
       />
       <AdvancedSearchButton />
+      <PredictButton />
+      <AddButton />
       <EditButton />
       <DeleteButton />
     </Mantine.SimpleGrid>
