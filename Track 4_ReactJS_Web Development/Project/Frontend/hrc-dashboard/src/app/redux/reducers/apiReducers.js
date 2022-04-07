@@ -61,10 +61,13 @@ const GetRowsReducer = {
 };
 
 const reducers = {
-  // eslint-disable-next-line max-len
   setSelectedRows: (state, action) => ({
     ...state,
     table: { ...state.table, selectedIndices: action.payload },
+  }),
+  setTableRows: (state, action) => ({
+    ...state,
+    table: { ...state.table, rows: action.payload },
   }),
   setError: (state, action) => ({
     ...state,

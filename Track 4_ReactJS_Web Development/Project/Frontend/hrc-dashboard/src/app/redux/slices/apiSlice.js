@@ -55,5 +55,5 @@ const apiSlice = createSlice({
   extraReducers: GetRowsReducer,
 });
 
-export const { setSelectedRows, setError, setFilteredRows } = apiSlice.actions;
+export const { setSelectedRows, setError, setFilteredRows, setTableRows, getTableRows } = apiSlice.actions;
 export default apiSlice.reducer;

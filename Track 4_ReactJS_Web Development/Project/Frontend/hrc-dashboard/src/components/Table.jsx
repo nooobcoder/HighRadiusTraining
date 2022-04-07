@@ -34,7 +34,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function TableScrollArea() {
+function Table() {
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
   const [columnNames, setColumnNames] = useState([]);
@@ -308,6 +308,6 @@ function TableScrollArea() {
   );
 }
 
-export default TableScrollArea;
+export default Table;
 
-TableScrollArea.propTypes = {};
+Table.propTypes = {};

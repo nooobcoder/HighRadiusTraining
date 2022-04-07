@@ -12,7 +12,7 @@ import {
   formInputFields,
 } from '../../../utils/schema/advancedSearchFormSchema';
 import advancedSearch from '../../../utils/api/advancedSearch';
-import { getTableRows } from '../../../app/redux/actions/actions';
+import { setTableRows } from '../../../app/redux/slices/apiSlice';
 
 function AdvancedSearchForm({ setOpened }) {
   const form = useForm({
@@ -55,7 +55,7 @@ function AdvancedSearchForm({ setOpened }) {
         });
 
         // Refresh the rows state after the submission, for the new data to be reflected
-        actionDispatcher(getTableRows({ start: 0, limit: 30 }));
+        actionDispatcher(setTableRows([respData[0]]));
         // Close the drawer
         setOpened(false);
       } else {
