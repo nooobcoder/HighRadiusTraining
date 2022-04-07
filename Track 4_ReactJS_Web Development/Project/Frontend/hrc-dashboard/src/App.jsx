@@ -10,6 +10,7 @@ import Table from './components/Table';
 import Footer from './components/Footer';
 // import PieChart from './components/analytics/PieChart';
 // import PieChartData from './utils/analytics/skeletondata';
+import AdvancedSearch from './utils/api/advancedSearch';
 
 function App() {
   // api is the name of the reducer in the store
@@ -36,6 +37,8 @@ function App() {
 
   useEffect(() => {
     console.log('[App.jsx rendered]');
+    const temp = async () => AdvancedSearch();
+    temp();
   });
 
   useEffect(() => {
