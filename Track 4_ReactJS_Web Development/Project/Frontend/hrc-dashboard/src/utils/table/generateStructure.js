@@ -5,4 +5,4 @@
 const generateColumnNames = (row) => row && Object.keys(row);
 
 // eslint-disable-next-line import/prefer-default-export
-export { generateColumnNames };
+export {generateColumnNames};

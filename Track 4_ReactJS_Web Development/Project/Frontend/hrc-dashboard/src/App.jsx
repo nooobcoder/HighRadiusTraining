@@ -8,9 +8,9 @@ import { getBusinessRows, getCustomersRows, getTableRows } from './app/redux/act
 import { Header, NavBar } from './components';
 import Table from './components/Table';
 import Footer from './components/Footer';
+import AdvancedSearch from './utils/api/advancedSearch';
 // import PieChart from './components/analytics/PieChart';
 // import PieChartData from './utils/analytics/skeletondata';
-import AdvancedSearch from './utils/api/advancedSearch';
 
 function App() {
   // api is the name of the reducer in the store
@@ -22,44 +22,43 @@ function App() {
   const { hasError, errorMessage } = error;
 
   /* Initial State
-      hasError: false,
-      message: 'Hi!',
-      title: 'This is a test success message!',
-      visible: true,
-  */
+                hasError: false,
+                message: 'Hi!',
+                title: 'This is a test success message!',
+                visible: true,
+            */
   const notification = useSelector((state) => state.notification);
 
   useEffect(() => {
     actionDispatch(getTableRows({ start: 0, limit: 30 }));
     actionDispatch(getBusinessRows());
     actionDispatch(getCustomersRows());
+    AdvancedSearch();
   }, []);
 
   useEffect(() => {
     console.log('[App.jsx rendered]');
-    const temp = async () => AdvancedSearch();
-    temp();
   });
 
   useEffect(() => {
     /* 
-      Most used notification props
-        showNotification({
-          id: 'hello-there',
-          disallowClose: true,
-          onClose: () => console.log('unmounted'),
-          onOpen: () => console.log('mounted'),
-          autoClose: 5000,
-          title: "You've been compromised",
-          message: 'Leave the building immediately',
-          color: 'red',
-          icon: <Cross1Icon />,
-          className: 'my-notification-class',
-          style: { backgroundColor: 'red' },
-          sx: { backgroundColor: 'red' },
-          loading: false,
-        });
-    */
+                          Most used notification props
+                            showNotification({
+                              id: 'hello-there',
+                              disallowClose: true,
+                              onClose: () => console.log('unmounted'),
+                              onOpen: () => console.log('mounted'),
+                              autoClose: 5000,
+                              title: "You've been compromised",
+                              message: 'Leave the building immediately',
+                              color: 'red',
+                              icon: <Cross1Icon />,
+                              className: 'my-notification-class',
+                              style: { backgroundColor: 'red' },
+                              sx: { backgroundColor: 'red' },
+                              loading: false,
+                            });
+                        */
     if (hasError) {
       showNotification({
         title: 'Error',

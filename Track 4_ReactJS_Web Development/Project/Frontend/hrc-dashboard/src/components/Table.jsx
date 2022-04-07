@@ -61,39 +61,39 @@ function TableScrollArea() {
 
   // ?WARN: Legacy code
   /* let rows = state.rows.map((row, index) => (
-    <tr
-      key={`row${id}${row?.sl_no}}`}
-      className={`${
-        index % 2 === 0 ? 'bg-white' : 'bg-[#5DAAE0]'
-      } text-center  border-2 border-collapse border-black w-fit`}
-    >
-      <td key={`data:${id}${row?.sl_no}}`}>
-        <Mantine.Center className="px-1 py-1">
-          <Mantine.Checkbox
-            value={row.sl_no}
-            color="orange"
-            checked={checkedItems.includes(row.sl_no)}
-            onChange={(e) => {
-              if (e.target.checked) {
-                rowsSelector([...checkedItems, row.sl_no]);
-              } else {
-                // Remove the serial number from the state array
-                rowsSelector(checkedItems.filter((item) => item !== row.sl_no));
-              }
-            }}
-          />
-        </Mantine.Center>
-      </td>
-      {columnNames.map((col) => (
-        <td
-          key={`${col}${id}${row[col]}`}
-          className="text-center  border-2 border-collapse border-black w-fit"
-        >
-          {row[col]}
+      <tr
+        key={`row${id}${row?.sl_no}}`}
+        className={`${
+          index % 2 === 0 ? 'bg-white' : 'bg-[#5DAAE0]'
+        } text-center  border-2 border-collapse border-black w-fit`}
+      >
+        <td key={`data:${id}${row?.sl_no}}`}>
+          <Mantine.Center className="px-1 py-1">
+            <Mantine.Checkbox
+              value={row.sl_no}
+              color="orange"
+              checked={checkedItems.includes(row.sl_no)}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  rowsSelector([...checkedItems, row.sl_no]);
+                } else {
+                  // Remove the serial number from the state array
+                  rowsSelector(checkedItems.filter((item) => item !== row.sl_no));
+                }
+              }}
+            />
+          </Mantine.Center>
         </td>
-      ))}
-    </tr>
-  )); */
+        {columnNames.map((col) => (
+          <td
+            key={`${col}${id}${row[col]}`}
+            className="text-center  border-2 border-collapse border-black w-fit"
+          >
+            {row[col]}
+          </td>
+        ))}
+      </tr>
+    )); */
 
   // This function returns the original rows if 'filteredRows' is an empty array (in the case where the user is not searching anything)
   // TODO: WIP 🏗️

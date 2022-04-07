@@ -34,12 +34,12 @@ function EditForm({ setOpened, sl_no, invoice_currency, cust_payment_terms }) {
     try {
       // Submit defaultTableSchema to the database
       /*
-        Successful data submission example
-        0: {rowsAffected: 1}
-        1: {rows: 48583}
-        2: {rows: 6}
-        3: {rows: 1084}
-      */
+              Successful data submission example
+              0: {rowsAffected: 1}
+              1: {rows: 48583}
+              2: {rows: 6}
+              3: {rows: 1084}
+            */
       const respData = await handleSubmitToDatabase(
         { serialNumber: sl_no, tableName: 'winter_internship' },
         defaultTableSchema,

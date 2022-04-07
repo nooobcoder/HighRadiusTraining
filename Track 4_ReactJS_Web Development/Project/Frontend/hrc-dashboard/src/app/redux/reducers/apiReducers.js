@@ -17,8 +17,8 @@ const UserReducer = (state = initialState, { payload }) => {
 
 import {
   getBusinessRows as GetBusinessRows,
-  getTableRows as GetTableRows,
   getCustomersRows as GetCustomersRows,
+  getTableRows as GetTableRows,
 } from '../actions/actions';
 
 const GetRowsReducer = {

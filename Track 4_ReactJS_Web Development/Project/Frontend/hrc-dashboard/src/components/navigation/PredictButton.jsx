@@ -1,5 +1,5 @@
 import * as Mantine from '@mantine/core';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function PredictButton() {

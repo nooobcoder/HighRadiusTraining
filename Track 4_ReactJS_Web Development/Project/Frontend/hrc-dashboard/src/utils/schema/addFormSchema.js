@@ -131,4 +131,4 @@ const defaultTableSchema = {
   is_deleted: null,
 };
 
-export { formInputFields, formDateFields, defaultTableSchema };
+export {formInputFields, formDateFields, defaultTableSchema};

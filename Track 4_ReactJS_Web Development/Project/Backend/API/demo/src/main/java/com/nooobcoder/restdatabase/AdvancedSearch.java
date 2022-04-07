@@ -117,9 +117,6 @@ public class AdvancedSearch extends HttpServlet {
         System.out.println("--- SERVICE START ---");
 
         System.out.println("--- SERVICE END ---");
-        if (req.getMethod().equals("GET")) {
-            doGet(req, resp);
-        }
         doPost(req, resp);
     }
 
@@ -131,21 +128,22 @@ public class AdvancedSearch extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+
+        if (req.getMethod().equals("GET")) {
+            doGet(req, resp);
+        } else {
+            String requestPayload = getBody(req);
+            Map<String, Object> payloadMap = new HashMap<>();
+
+            System.out.println("Request Payload: " + requestPayload);
+            ObjectMapper objectMapper = new ObjectMapper();
+            payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
+            System.out.println("Map is: " + payloadMap);
 
 
-        String requestPayload = getBody(req);
-        Map<String, Object> payloadMap = new HashMap<>();
+            WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
 
-        System.out.println("Request Payload: " + requestPayload);
-        ObjectMapper objectMapper = new ObjectMapper();
-        payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
-        System.out.println("Map is: " + payloadMap);
-
-
-        WinterInternshipPOJO pojo = objectMapper.convertValue(payloadMap, WinterInternshipPOJO.class);
-
-        try {
+            try {
             /*
             * SAMPLE QUERY
             *
@@ -156,19 +154,21 @@ public class AdvancedSearch extends HttpServlet {
                   AND cust_number = ?
                   AND buisness_year = ?;
             * */
-            List<Map<String, Object>> rows = DBConnection.executeQuery("SELECT *\n" +
-                    "FROM winter_internship\n" +
-                    "WHERE doc_id = ?\n" +
-                    "  AND invoice_id = ?\n" +
-                    "  AND cust_number = ?\n" +
-                    "  AND buisness_year = ?;", pojo.getDoc_id(), pojo.getInvoice_id(), pojo.getCust_number(), pojo.getBusiness_year());
+                List<Map<String, Object>> rows = DBConnection.executeQuery("SELECT *\n" +
+                        "FROM winter_internship\n" +
+                        "WHERE doc_id = ?\n" +
+                        "  AND invoice_id = ?\n" +
+                        "  AND cust_number = ?\n" +
+                        "  AND buisness_year = ?;", pojo.getDoc_id(), pojo.getInvoice_id(), pojo.getCust_number(), pojo.getBusiness_year());
 
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("utf-8");
+                resp.addHeader("Access-Control-Allow-Origin", "*");
+                resp.setContentType("application/json");
+                resp.setCharacterEncoding("utf-8");
 
-            objectMapper.writeValue(resp.getOutputStream(), rows);
-        } catch (SQLException e) {
-            e.printStackTrace();
+                objectMapper.writeValue(resp.getOutputStream(), rows);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         System.out.println("--- SERVICE END ---");
     }

@@ -4,7 +4,7 @@ import * as Mantine from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { useForm } from '@mantine/hooks';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Check, X } from 'tabler-icons-react';
 import { showNotification } from '@mantine/notifications';
 import PropTypes from 'prop-types';
@@ -56,12 +56,12 @@ export default function AddForm({ setOpened }) {
     try {
       // Submit addFormSchema.defaultTableSchema to the database
       /*
-        Successful data submission example
-        0: {rowsAffected: 1}
-        1: {rows: 48583}
-        2: {rows: 6}
-        3: {rows: 1084}
-      */
+              Successful data submission example
+              0: {rowsAffected: 1}
+              1: {rows: 48583}
+              2: {rows: 6}
+              3: {rows: 1084}
+            */
       const respData = await handleSubmitToDatabase(addFormSchema.defaultTableSchema);
       console.log(respData);
       if (respData[0].rowsAffected === 1) {
