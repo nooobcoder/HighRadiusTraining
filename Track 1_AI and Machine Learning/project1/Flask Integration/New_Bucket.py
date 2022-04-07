@@ -25,7 +25,7 @@ class EncoderExt(object):
 def predict(nulldata):
     print(" Predict")
 
-    # nulldata = pd.read_csv("data.csv")
+    # nulldata = pd.read_csv("data.csv", index_col=0)
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
@@ -116,7 +116,7 @@ def predict(nulldata):
 def doc_id_bucket(doc_list):
     print(" Predict")
 
-    nulldata = pd.read_csv("nulldata.csv")
+    nulldata = pd.read_csv("nulldata.csv", index_col=0)
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
@@ -208,7 +208,7 @@ def doc_id_bucket(doc_list):
 def alll():
     print(" Predict")
 
-    nulldata = pd.read_csv("nulldata.csv")
+    nulldata = pd.read_csv("nulldata.csv", index_col=0)
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
     nulldata["posting_date"] = pd.to_datetime(nulldata.posting_date)
@@ -257,9 +257,9 @@ def alll():
     nulldata['name_customer_enc'] = label_encoder.transform(nulldata['name_customer'])
 
     nulldata.drop(
-        ['business_code', "baseline_create_date", "due_in_date", "posting_date", "name_customer", "clear_date",
-         "cust_payment_terms"], axis=1, inplace=True)
-    nulldata.drop(['day_of_cleardate', "month_of_cleardate", "year_of_cleardate"], axis=1, inplace=True)
+        ["business_code", "baseline_create_date", "due_in_date", "posting_date", "name_customer", "clear_date",
+         "cust_payment_terms", 'day_of_cleardate', "month_of_cleardate", "year_of_cleardate"], axis=1,
+        inplace=True)
 
     nulldata2 = nulldata[['cust_number', 'buisness_year', 'doc_id', 'converted_usd',
                           'business_code_enc', 'name_customer_enc', 'cust_payment_terms_enc',
@@ -274,6 +274,7 @@ def alll():
     final_result = pd.Series(final_result, name='avg_delay')
 
     nulldata1.reset_index(drop=True, inplace=True)
+
     Final = nulldata1.merge(final_result, on=nulldata.index)
 
     Final['clear_date'] = pd.to_datetime(Final['due_in_date']) + pd.to_timedelta(Final['avg_delay'], unit='s')
