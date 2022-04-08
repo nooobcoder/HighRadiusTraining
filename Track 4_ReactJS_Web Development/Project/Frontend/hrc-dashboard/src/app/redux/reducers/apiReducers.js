@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable camelcase */
 // SAMPLE CODE FOR REDUCER
 /* const initialState = {
   errorMessage: '',
@@ -84,6 +86,27 @@ const reducers = {
       row.cust_number.toString().includes(payload),
     );
     return { ...state, table: { ...state.table, filteredRows } };
+  },
+  setPredictions: (state, { payload }) => {
+    // Payload Format
+    /*
+      [
+        {
+            "aging_bucket": "0-15",
+            "doc_id": "1930659387"
+        },
+      ]
+    */
+    // Merge payload into state.table.rows if payload.doc_id match
+    const rows = state.table.rows.map((row) => {
+      const match = payload.find((p) => p.doc_id === row.doc_id);
+      if (match) {
+        return { ...row, ...match };
+      }
+      return row;
+    });
+    console.log(rows);
+    return { ...state, table: { ...state.table, rows } };
   },
 };
 

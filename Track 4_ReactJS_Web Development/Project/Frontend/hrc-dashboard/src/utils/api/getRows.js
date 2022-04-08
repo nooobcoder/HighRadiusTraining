@@ -14,7 +14,7 @@ const doPost = async ({ start = 0, limit = 10 }) => {
       console.log('[API /getRows] Response: 200 ');
       return data;
     }
-    console.log('[API /addRow] Response: ', status);
+    console.log('[API /getRows] Response: ', status);
     return {};
   } catch (e) {
     console.error(e.message);

@@ -10,7 +10,7 @@ const doPost = async () => {
       // Return except the last three indices from the array
       return data.slice(0, -3);
     }
-    console.log('[API /addRow] Response: ', status);
+    console.log('[API /getBusinesses] Response: ', status);
     return {};
   } catch (e) {
     console.error(e.message);

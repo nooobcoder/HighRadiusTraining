@@ -15,5 +15,4 @@ const getCustomersRows = createAsyncThunk('get/getCustomers', async () => getCus
   });
 }; */
 
-// eslint-disable-next-line import/prefer-default-export
 export { getTableRows, getBusinessRows, getCustomersRows };
