@@ -111,6 +111,7 @@ public class DBConnection {
                     statement.setLong(index++, sl_no != -1 ? sl_no : ((WinterInternshipPOJO) param).getSl_no());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_code());
                     statement.setInt(index++, ((WinterInternshipPOJO) param).getCust_number());
+                    statement.setString(index++, ((WinterInternshipPOJO) param).getName_customer());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getClear_date());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getBusiness_year());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getDoc_id());
@@ -128,7 +129,6 @@ public class DBConnection {
                     statement.setInt(index++, ((WinterInternshipPOJO) param).getInvoice_id());
                     statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIsOpen());
                     statement.setString(index++, ((WinterInternshipPOJO) param).getAging_bucket());
-                    statement.setBoolean(index++, ((WinterInternshipPOJO) param).getIs_deleted());
                 }
             } else if (params[params.length - 1].equals("delete") && param instanceof List) {
                 // The url parameters would be encoded in a List of Strings
@@ -174,7 +174,7 @@ public class DBConnection {
                     String colName = rsmd.getColumnName(i);
                     Object colVal = resultSet.getObject(i);
                     if (colVal instanceof java.sql.Date) {
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         colVal = dateFormat.format(colVal);
                     }
                     row.put(colName, colVal);
