@@ -25,7 +25,15 @@ function NavBar() {
   }, [searchValue]);
 
   return (
-    <Mantine.SimpleGrid cols={6} className="my-2 mx-8 lg:my-6 lg:mx-20 ">
+    <Mantine.SimpleGrid
+      cols={6}
+      className="my-2 mx-8 lg:my-6 lg:mx-20 "
+      breakpoints={[
+        { maxWidth: 'md', cols: 3, spacing: 'md' },
+        { maxWidth: 'sm', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
+      ]}
+    >
       <Mantine.NumberInput
         value={searchValue}
         onChange={(val) => setSearchValue(val || null)}

@@ -33,7 +33,7 @@
     "build": "npm run watch:css && react-scripts build",
     "watch:css": "postcss src/index.css -o src/build/static/css/main.css",
     "test": "react-scripts test",
-    "serve": "serve -p 4848 -s build",
+    "serve": "serve -p 4040 -s build",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix --ext .js,.jsx ."
