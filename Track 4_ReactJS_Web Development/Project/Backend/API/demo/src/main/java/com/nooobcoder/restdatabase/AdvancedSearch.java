@@ -152,14 +152,14 @@ public class AdvancedSearch extends HttpServlet {
                 WHERE doc_id = ?
                   AND invoice_id = ?
                   AND cust_number = ?
-                  AND buisness_year = ?;
+                  AND business_year = ?;
             * */
                 List<Map<String, Object>> rows = DBConnection.executeQuery("SELECT *\n" +
                         "FROM winter_internship\n" +
                         "WHERE doc_id = ?\n" +
                         "  AND invoice_id = ?\n" +
                         "  AND cust_number = ?\n" +
-                        "  AND buisness_year = ?;", pojo.getDoc_id(), pojo.getInvoice_id(), pojo.getCust_number(), pojo.getBusiness_year());
+                        "  AND business_year = ?;", pojo.getDoc_id(), pojo.getInvoice_id(), pojo.getCust_number(), pojo.getBusiness_year());
 
                 resp.addHeader("Access-Control-Allow-Origin", "*");
                 resp.setContentType("application/json");
