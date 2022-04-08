@@ -105,7 +105,6 @@ const reducers = {
       }
       return row;
     });
-    console.log(rows);
     return { ...state, table: { ...state.table, rows } };
   },
 };
