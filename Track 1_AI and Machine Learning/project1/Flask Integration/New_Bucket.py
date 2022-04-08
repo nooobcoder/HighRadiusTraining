@@ -24,7 +24,6 @@ class EncoderExt(object):
 
 def predict(nulldata):
     print(" Predict")
-    nulldata.set
     # nulldata = pd.read_csv("data.csv")
 
     nulldata["clear_date"] = pd.to_datetime(nulldata.clear_date)
