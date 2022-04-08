@@ -111,6 +111,7 @@ const defaultTableSchema = {
   sl_no: null,
   business_code: null,
   cust_number: '200020431',
+  name_customer: null,
   clear_date: '2022-3-1',
   business_year: null,
   doc_id: null,
@@ -128,7 +129,6 @@ const defaultTableSchema = {
   invoice_id: null,
   isOpen: null,
   aging_bucket: null,
-  is_deleted: null,
 };
 
-export {formInputFields, formDateFields, defaultTableSchema};
+export { formInputFields, formDateFields, defaultTableSchema };

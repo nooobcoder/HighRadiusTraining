@@ -35,6 +35,10 @@ export default function AddForm({ setOpened }) {
   });
 
   const { rows } = useSelector(({ api }) => api.table.meta[0]);
+  const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
+
+  const businesses = transformBusinessForSelect();
+  const customers = transformCustomerForSelect();
   const actionDispatcher = useDispatch();
 
   const handleFormSubmission = async (values) => {
@@ -53,6 +57,11 @@ export default function AddForm({ setOpened }) {
       // If fieldValue is null or undefined, store null
       addFormSchema.defaultTableSchema[field.htmlFor] = fieldValue;
     });
+    // Find value values["cust_number"] in customers
+    const customer = customers.find(
+      (cust) => cust.value === form.getInputProps('cust_number')?.value.toString(),
+    );
+    addFormSchema.defaultTableSchema.name_customer = customer.name || null;
     try {
       // Submit addFormSchema.defaultTableSchema to the database
       /*
@@ -63,7 +72,6 @@ export default function AddForm({ setOpened }) {
               3: {rows: 1084}
             */
       const respData = await handleSubmitToDatabase(addFormSchema.defaultTableSchema);
-      console.log(respData);
       if (respData[0].rowsAffected === 1) {
         showNotification({
           title: 'Alert!',
@@ -99,11 +107,6 @@ export default function AddForm({ setOpened }) {
       });
     }
   };
-
-  const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
-
-  const businesses = transformBusinessForSelect();
-  const customers = transformCustomerForSelect();
 
   return (
     <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">

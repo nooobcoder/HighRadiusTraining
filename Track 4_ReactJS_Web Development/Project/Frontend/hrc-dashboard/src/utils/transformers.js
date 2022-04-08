@@ -40,6 +40,7 @@ const transformCustomerForSelect = () => {
   const customers = useSelector(({ api }) => api.table.customers);
   return customers.map((customer) => ({
     label: `${customer.name_customer} - ${customer.cust_number}`,
+    name: customer.name_customer,
     value: `${customer.cust_number}`,
   }));
 };

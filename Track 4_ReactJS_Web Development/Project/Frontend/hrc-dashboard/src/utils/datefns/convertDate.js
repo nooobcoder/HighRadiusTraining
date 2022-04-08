@@ -5,7 +5,7 @@ const convertDateToDBFormat = (dateStr) => {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dateStrDBFormat = `${year}-${month}-${day}`;
-    console.log(dateStrDBFormat);
+    // console.log(dateStrDBFormat);
     return dateStrDBFormat;
 };
 
