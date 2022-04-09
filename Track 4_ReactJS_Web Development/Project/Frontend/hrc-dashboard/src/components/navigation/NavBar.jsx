@@ -8,6 +8,7 @@ import AddButton from './AddButton';
 import DeleteButton from './DeleteButton';
 import EditButton from './EditButton';
 import PredictButton from './PredictButton';
+import AnalyticsButton from './AnalyticsButton';
 
 function NavBar() {
   const [searchValue, setSearchValue] = React.useState(null);
@@ -26,7 +27,7 @@ function NavBar() {
 
   return (
     <Mantine.SimpleGrid
-      cols={6}
+      cols={4}
       className="my-2 mx-8 lg:my-6 lg:mx-20 "
       breakpoints={[
         { maxWidth: 'md', cols: 3, spacing: 'md' },
@@ -34,6 +35,7 @@ function NavBar() {
         { maxWidth: 'xs', cols: 1, spacing: 'sm' },
       ]}
     >
+      <PredictButton />
       <Mantine.NumberInput
         value={searchValue}
         onChange={(val) => setSearchValue(val || null)}
@@ -43,7 +45,7 @@ function NavBar() {
         icon={<Search size={18} />}
       />
       <AdvancedSearchButton />
-      <PredictButton />
+      <AnalyticsButton />
       <AddButton />
       <EditButton />
       <DeleteButton />

@@ -2,7 +2,7 @@ import * as Mantine from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, X } from 'tabler-icons-react';
+import { Check, X, Trash } from 'tabler-icons-react';
 import { getTableRows } from '../../app/redux/actions/actions';
 import deleteRows from '../../utils/api/handleDeleteRows';
 
@@ -107,9 +107,10 @@ function DeleteButton() {
           !selectedIndicesCount > 0 && 'blur-sm'
         }`}
         onClick={() => setOpened(true)}
+        leftIcon={<Trash />}
         disabled={!selectedIndicesCount > 0}
       >
-        Delete 🗑️
+        Delete
       </Mantine.Button>
     </>
   );

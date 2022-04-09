@@ -1,7 +1,7 @@
-/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 import * as Mantine from '@mantine/core';
 import React, { useState } from 'react';
+import { Edit } from 'tabler-icons-react';
 import { useSelector } from 'react-redux';
 import CustomDrawer from './CustomDrawer';
 import EditForm from './Forms/EditForm';
@@ -35,10 +35,11 @@ function EditButton() {
         className={`w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer transition ease-in-out duration-75 ${
           selectedIndices !== 1 && 'blur-sm'
         }`}
+        leftIcon={<Edit />}
         onClick={() => setOpened(true)}
         disabled={selectedIndices !== 1}
       >
-        Edit ✏️
+        Edit
       </Mantine.Button>
     </>
   );
