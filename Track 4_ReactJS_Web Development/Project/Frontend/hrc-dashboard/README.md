@@ -1,70 +1,38 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h2 class="code-line" data-line-start=0 data-line-end=1 ><a id="Project_Milestone_0"></a>Project Milestone</h2>
+<p class="has-line-data" data-line-start="2" data-line-end="4">The mandatory features are compulsory tasks and the optional features are for<br>
+extra credit points, which will give you an added advantage.</p>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Mandatory Features</th>
+<th>Optional Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="checkbox" id="checkbox56" checked="true"><label for="checkbox56">1. UI Creation</label></td>
+<td><input type="checkbox" id="checkbox57" checked="true"><label for="checkbox57">1. Predict Button activation with Grid Data</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox58" checked="true"><label for="checkbox58">2. Grid Creation</label></td>
+<td><input type="checkbox" id="checkbox59" checked="true"><label for="checkbox59">2. Shortcut search button on Grid for Customer Id</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox60" checked="true"><label for="checkbox60">3. Grid Data Loading</label></td>
+<td><input type="checkbox" id="checkbox61"><label for="checkbox61">3. Sorting columns</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox62" checked="true"><label for="checkbox62">4. Crud Operation (ADD/EDIT/DEL)</label></td>
+<td><input type="checkbox" id="checkbox63"><label for="checkbox63">4. View - Analytics</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox64"><label for="checkbox64">5. Pagination</label></td>
+<td></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox65" checked="true"><label for="checkbox65">6. Advanced Search</label></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<br/>
