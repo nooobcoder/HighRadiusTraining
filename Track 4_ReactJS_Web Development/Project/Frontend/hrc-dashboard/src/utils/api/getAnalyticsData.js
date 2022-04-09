@@ -6,7 +6,7 @@ const getAnalyticsData = async (/* payload */) => {
     clear_date: ['2019-01-01', '2020-12-31'],
     due_in_date: ['2019-01-01', '2020-12-31'],
     baseline_create_date: ['2019-01-01', '2020-12-31'],
-    invoice_currency: 'INR',
+    invoice_currency: 'USD',
   };
 
   try {
