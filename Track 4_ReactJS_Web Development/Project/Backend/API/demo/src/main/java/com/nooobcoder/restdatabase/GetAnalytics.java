@@ -108,16 +108,11 @@ public class GetAnalytics extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- SERVICE START ---");
-        try {
-            startIndex = Integer.parseInt(req.getParameter("start"));
-            limit = Integer.parseInt(req.getParameter("limit"));
-        } catch (Exception e) {
-            startIndex = 0;
-            limit = 10; // 10 is the default value of rows
-        }
-//        System.out.println(startIndex);
-//        System.out.println(limit);
+
         System.out.println("--- SERVICE END ---");
+        if (req.getMethod().equals("GET")) {
+            doGet(req, resp);
+        }
         doPost(req, resp);
     }
 
@@ -129,36 +124,31 @@ public class GetAnalytics extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("--- POSTING START ---");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+
         String requestPayload = getBody(req);
         Map<String, Object> payloadMap = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
 
+        System.out.println("Request Payload: " + requestPayload);
+        payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
+        System.out.println("Map is: " + payloadMap);
 
-        if (req.getMethod().equals("GET")) {
-            doGet(req, resp);
-        } else {
-            resp.addHeader("Access-Control-Allow-Origin", "*");
+        List<Map<String, Object>> rows = null;
+        try {
+            rows = DBConnection.executeQuery("SELECT *\n" +
+                    "FROM winter_internship\n" +
+                    "WHERE clear_date BETWEEN ? AND ?\n" +
+                    "   OR due_in_date BETWEEN ? AND ?\n" +
+                    "   OR baseline_create_date BETWEEN ? AND ?\n" +
+                    "   OR invoice_currency = ?;", payloadMap, "analytics");
 
-            System.out.println("Request Payload: " + requestPayload);
-            payloadMap = objectMapper.readValue(requestPayload, HashMap.class);
-            System.out.println("Map is: " + payloadMap);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("utf-8");
 
-            List<Map<String, Object>> rows = null;
-            try {
-                rows = DBConnection.executeQuery("SELECT *\n" +
-                        "FROM winter_internship\n" +
-                        "WHERE clear_date BETWEEN ? AND ?\n" +
-                        "   OR due_in_date BETWEEN ? AND ?\n" +
-                        "   OR baseline_create_date BETWEEN ? AND ?\n" +
-                        "   OR invoice_currency = ?;", payloadMap, "analytics");
-
-                resp.setContentType("application/json");
-                resp.setCharacterEncoding("utf-8");
-
-                objectMapper.writeValue(resp.getOutputStream(), rows);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            objectMapper.writeValue(resp.getOutputStream(), rows);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         System.out.println("--- SERVICE END ---");
     }
