@@ -3,6 +3,7 @@ import { showNotification } from '@mantine/notifications';
 import React from 'react';
 import { Check, X, DeviceDesktopAnalytics } from 'tabler-icons-react';
 import getAnalyticsData from '../../utils/api/getAnalyticsData';
+import preparePieChart from '../../utils/analytics/preparePieChart';
 
 function AnalyticsButton() {
   const [disabled, setDisabled] = React.useState(false);
@@ -16,9 +17,9 @@ function AnalyticsButton() {
       disabled={disabled}
       onClick={async () => {
         setDisabled(true);
-        const predictions = await getAnalyticsData();
+        const analyticsData = await getAnalyticsData();
         setDisabled(false);
-        if (predictions.length > 0) {
+        if (analyticsData.length > 0) {
           showNotification({
             title: 'Alert!',
             message: `The predictions are ready!`,
@@ -27,6 +28,8 @@ function AnalyticsButton() {
             disallowClose: false,
             icon: <Check size={18} />,
           });
+
+          preparePieChart({ data: analyticsData });
         } else {
           showNotification({
             title: 'Alert!',
