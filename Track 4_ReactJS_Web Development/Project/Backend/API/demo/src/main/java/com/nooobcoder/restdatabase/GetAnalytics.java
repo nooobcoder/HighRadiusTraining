@@ -139,8 +139,8 @@ public class GetAnalytics extends HttpServlet {
             rows = DBConnection.executeQuery("SELECT *\n" +
                     "FROM winter_internship\n" +
                     "WHERE clear_date BETWEEN ? AND ?\n" +
-                    "   OR due_in_date BETWEEN ? AND ?\n" +
-                    "   OR baseline_create_date BETWEEN ? AND ?\n" +
+                    "   AND due_in_date BETWEEN ? AND ?\n" +
+                    "   AND baseline_create_date BETWEEN ? AND ?\n" +
                     "   OR invoice_currency = ?;", payloadMap, "analytics");
 
             resp.setContentType("application/json");

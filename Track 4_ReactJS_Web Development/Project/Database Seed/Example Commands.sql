@@ -49,7 +49,7 @@ ALTER TABLE winter_internship RENAME COLUMN buisness_code TO business_code, RENA
 
 SELECT *
 FROM winter_internship
-WHERE clear_date BETWEEN '2019-01-01' AND '2020-01-01'
-   OR due_in_date BETWEEN '2019-01-01' AND '2020-01-01'
-   OR baseline_create_date BETWEEN '2019-01-01' AND '2020-01-01'
-   OR invoice_currency = 'USD';
+WHERE clear_date BETWEEN '2019-01-01' AND '2020-12-31'
+   AND due_in_date BETWEEN '2019-01-01' AND '2020-12-31'
+   AND baseline_create_date BETWEEN '2019-01-01' AND '2020-12-31'
+   OR invoice_currency = 'INR';

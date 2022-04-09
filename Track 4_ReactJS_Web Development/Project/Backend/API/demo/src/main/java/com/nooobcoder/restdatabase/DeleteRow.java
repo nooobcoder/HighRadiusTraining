@@ -117,6 +117,9 @@ public class DeleteRow extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("--- DELETING START ---");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+
         ObjectMapper objectMapper = new ObjectMapper();
 
         readURLParameters(req, resp);
@@ -144,6 +147,6 @@ public class DeleteRow extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("--- SERVICE END ---");
+        System.out.println("--- DELETING END ---");
     }
 }
