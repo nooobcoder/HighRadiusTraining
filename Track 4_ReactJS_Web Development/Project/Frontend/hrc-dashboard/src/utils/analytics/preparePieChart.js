@@ -11,7 +11,8 @@ const preparePieChart = ({ data }) => {
     label: key,
     value: transformedData[key],
   }));
-  console.log(transformedDataArray);
+
+  return transformedDataArray;
 };
 
 export default preparePieChart;
