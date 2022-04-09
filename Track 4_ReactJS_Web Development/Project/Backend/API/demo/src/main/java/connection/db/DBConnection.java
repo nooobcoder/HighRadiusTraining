@@ -138,6 +138,43 @@ public class DBConnection {
                     statement.setString(index++, (String) ((List<?>) param).get(i));
                 }
                 break;
+            } else if (params[params.length - 1].equals("analytics") && param instanceof Map) {
+//                ((Map<?, ?>) param).forEach((k, v) -> System.out.println(k + " : " + v));
+                /*
+                * entrySet() – returns a collection-view of the map, whose elements are from the Map.Entry class. The entry.getKey() method                  returns the key, and entry.getValue() returns the corresponding value
+                  keySet() – returns all keys contained in this map as a Set
+                  values() – returns all values contained in this map as a Set
+                * */
+
+                for (Map.Entry<?, ?> entry : ((Map<?, ?>) param).entrySet()) {
+                    String key = entry.getKey().toString();
+                    switch (key) {
+                        case "clear_date":
+                            index = 1;
+                            for (String s : (ArrayList<String>) entry.getValue()) {
+                                statement.setString(index++, s);
+                            }
+                            break;
+                        case "due_in_date":
+                            index = 3;
+                            for (String s : (ArrayList<String>) entry.getValue()) {
+                                statement.setString(index++, s);
+                            }
+                            break;
+                        case "baseline_create_date":
+                            index = 5;
+                            for (String s : (ArrayList<String>) entry.getValue()) {
+                                System.out.println("STHIS: " + s);
+                                statement.setString(index++, s);
+                            }
+                            break;
+                        case "invoice_currency":
+                            index = 7;
+                            statement.setString(index++, (String) entry.getValue());
+                            break;
+                    }
+
+                }
             } else if (param instanceof Long) {
                 statement.setLong(index++, (Long) param);
             } else if (param instanceof Integer) {
