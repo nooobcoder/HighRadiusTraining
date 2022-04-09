@@ -8,6 +8,7 @@
     "@mantine/hooks": "^4.0.4",
     "@mantine/notifications": "^4.1.0",
     "@mui/material": "^5.6.0",
+    "@nivo/bar": "^0.79.1",
     "@nivo/core": "^0.79.0",
     "@nivo/pie": "^0.79.1",
     "@reduxjs/toolkit": "^1.8.0",

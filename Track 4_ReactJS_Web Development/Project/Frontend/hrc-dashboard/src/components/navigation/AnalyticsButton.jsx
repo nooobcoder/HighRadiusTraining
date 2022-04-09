@@ -1,15 +1,20 @@
 import * as Mantine from '@mantine/core';
+import { useToggle } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import React, { useState } from 'react';
-import { Check, X, DeviceDesktopAnalytics } from 'tabler-icons-react';
-import getAnalyticsData from '../../utils/api/getAnalyticsData';
+import { Check, DeviceDesktopAnalytics, X } from 'tabler-icons-react';
+import prepareBarChart from '../../utils/analytics/prepareBarChart';
 import preparePieChart from '../../utils/analytics/preparePieChart';
+import getAnalyticsData from '../../utils/api/getAnalyticsData';
+import BarChart from '../analytics/BarChart';
 import PieChart from '../analytics/PieChart';
 
 function AnalyticsButton() {
   const [disabled, setDisabled] = useState(false);
   const [modalOpened, setModalOpened] = useState(false);
   const [pieChartData, setPieChartData] = useState([{ id: '', label: 'null', value: 0 }]);
+  const [barChartData, setBarChartData] = useState([{ id: '', label: 'null', value: 0 }]);
+  const [chartToggle, setChartToggle] = useToggle('pie', ['pie', 'bar']);
 
   return (
     <>
@@ -25,6 +30,7 @@ function AnalyticsButton() {
           setDisabled(false);
           if (analyticsData.length > 0) {
             setPieChartData(preparePieChart({ data: analyticsData }));
+            setBarChartData(prepareBarChart({ data: analyticsData }));
             setModalOpened(true); // Open the modal toggling the state of it.
             console.log(pieChartData);
             showNotification({
@@ -51,11 +57,19 @@ function AnalyticsButton() {
       <Mantine.Modal
         opened={modalOpened}
         onClose={() => setModalOpened(false)}
-        title="Analytics View!"
+        title={<Mantine.Title order={2}>Analytics View</Mantine.Title>}
         size="70%"
       >
+        <Mantine.Button
+          onClick={() => setChartToggle()}
+          color="blue"
+          className=" justify-center items-center mb-8 w-1/2 text-center bg-orange-400 hover:bg-orange-300"
+        >
+          {chartToggle.toUpperCase()}
+        </Mantine.Button>
         <Mantine.Paper className="h-96 bg-lime-200">
-          <PieChart data={pieChartData} />
+          {chartToggle === 'pie' && <PieChart data={pieChartData} />}
+          {chartToggle === 'bar' && <BarChart data={barChartData} />}
         </Mantine.Paper>
       </Mantine.Modal>
     </>

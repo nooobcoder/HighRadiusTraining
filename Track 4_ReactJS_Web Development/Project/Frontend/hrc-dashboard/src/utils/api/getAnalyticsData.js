@@ -3,10 +3,10 @@ import { post } from 'axios';
 const getAnalyticsData = async (/* payload */) => {
   const { REACT_APP_API_SERVER, REACT_APP_API_SERVER_PORT } = process.env;
   const payload = {
-    clear_date: ['2019-01-01', '2020-01-01'],
-    due_in_date: ['2019-01-01', '2020-01-01'],
-    baseline_create_date: ['2019-01-01', '2020-01-01'],
-    invoice_currency: 'USD',
+    clear_date: ['2019-01-01', '2020-12-31'],
+    due_in_date: ['2019-01-01', '2020-12-31'],
+    baseline_create_date: ['2019-01-01', '2020-12-31'],
+    invoice_currency: 'INR',
   };
 
   try {
