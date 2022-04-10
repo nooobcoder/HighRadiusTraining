@@ -1,8 +1,9 @@
 name: CI (Build 🏗️ & Release 📦)
 on:
     push:
-        tags:
-            - "*"
+        branches: [master]
+    pull_request:
+        branches: [master]
 defaults:
     run:
         working-directory: ./Track\ 4_ReactJS_Web\ Development/Project/Frontend/hrc-dashboard
