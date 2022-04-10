@@ -60,5 +60,5 @@ jobs:
               uses: ncipollo/release-action@v1
               with:
                   artifacts: react-github-actions-release-build.zip
-                  body: https://react-github-actions.s3.amazonaws.com/index.html
+                  body: "Automated build with GitHub actions 📦🏗️"
                   token: ${{ secrets.RELEASE_TOKEN }}
