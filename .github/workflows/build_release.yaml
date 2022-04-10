@@ -4,6 +4,8 @@ on:
         branches: [master]
     pull_request:
         branches: [master]
+    tags:
+        - "*"
 defaults:
     run:
         working-directory: "./Track 4_ReactJS_Web Development/Project/Frontend/hrc-dashboard"
