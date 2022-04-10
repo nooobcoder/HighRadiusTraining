@@ -1,7 +1,7 @@
 name: CI (Build 🏗️ & Release 📦)
 on:
     tags:
-        - "*"
+        - "test"
 defaults:
     run:
         working-directory: "./Track 4_ReactJS_Web Development/Project/Frontend/hrc-dashboard"
