@@ -32,7 +32,6 @@ function AnalyticsButton() {
             setPieChartData(preparePieChart({ data: analyticsData }));
             setBarChartData(prepareBarChart({ data: analyticsData }));
             setModalOpened(true); // Open the modal toggling the state of it.
-            console.log(pieChartData);
             showNotification({
               title: 'Alert!',
               message: `The analytics data are ready!`,

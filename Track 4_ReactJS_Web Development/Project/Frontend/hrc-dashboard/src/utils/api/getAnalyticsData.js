@@ -18,7 +18,7 @@ const getAnalyticsData = async (/* payload */) => {
     );
 
     if (status === 200) {
-      console.log('[API /getanalytics] Response: 200 ', data);
+      console.log('[API /getanalytics] Response: 200 ');
       return data;
     }
     console.log('[API /getanalytics] Response: ', status);

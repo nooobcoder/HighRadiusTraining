@@ -35,15 +35,11 @@ const preparePieChart = ({ data }) => {
     }
 }
  */
-  const transformedDataArray = Object.keys(transformedData).map((item) => {
-    console.log(item);
-    return {
-      business: item,
-      'No. of Customers': transformedData[item].no_of_customers,
-      'Total Open Amount': transformedData[item].total_open_amount,
-    };
-  });
-  console.log(transformedDataArray);
+  const transformedDataArray = Object.keys(transformedData).map((item) => ({
+    business: item,
+    'No. of Customers': transformedData[item].no_of_customers,
+    'Total Open Amount': transformedData[item].total_open_amount,
+  }));
 
   return transformedDataArray;
 };

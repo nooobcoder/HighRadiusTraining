@@ -29,7 +29,6 @@ function DeleteButton() {
   const handleDelete = async () => {
     if (selectedIndices?.length > 0) {
       const respData = await deleteRows(selectedIndices);
-      console.log(respData);
       if (respData[0].rowsAffected > 0) {
         showNotification({
           title: 'Alert!',
