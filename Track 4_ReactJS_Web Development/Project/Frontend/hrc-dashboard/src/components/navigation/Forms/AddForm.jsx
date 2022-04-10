@@ -159,6 +159,8 @@ export default function AddForm({ setOpened }) {
               {...field}
               {...form.getInputProps(field.htmlFor)}
               allowLevelChange
+              allowFreeInput
+              dateParser={(dateString) => new Date(Date.parse(dateString))}
               firstDayOfWeek="sunday"
             />
           ))}
