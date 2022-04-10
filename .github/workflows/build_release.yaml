@@ -6,7 +6,7 @@ on:
         branches: [master]
 defaults:
     run:
-        working-directory: ./Track\ 4_ReactJS_Web\ Development/Project/Frontend/hrc-dashboard
+        working-directory: "./Track 4_ReactJS_Web Development/Project/Frontend/hrc-dashboard"
 jobs:
     build:
         runs-on: ubuntu-latest
