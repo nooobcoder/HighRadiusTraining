@@ -104,7 +104,7 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
 
   return (
     <>
-      <Mantine.Box sx={{ maxWidth: 300 }} mx="auto" oncl>
+      <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">
         <form onSubmit={form.onSubmit((values) => handleFormSubmission(values))}>
           <Mantine.Divider my="sm" variant="dashed" label="Get Insights" labelPosition="center" />
 
