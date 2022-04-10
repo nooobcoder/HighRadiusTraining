@@ -58,7 +58,6 @@ jobs:
             - name: Release
               uses: ncipollo/release-action@v1
               with:
-                  tag: "test"
                   artifacts: react-github-actions-release-build.zip
                   body: https://react-github-actions.s3.amazonaws.com/index.html
                   token: ${{ secrets.RELEASE_TOKEN }}
