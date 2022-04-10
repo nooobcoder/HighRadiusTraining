@@ -22,7 +22,7 @@ jobs:
         with:
           name: react-github-actions-build
           path: build
-  
+
   release:
     runs-on: ubuntu-latest
     # We specify that deploys needs to
@@ -53,4 +53,4 @@ jobs:
         with:
           artifacts: react-github-actions-release-build.zip
           body: https://react-github-actions.s3.amazonaws.com/index.html
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.RELEASE_TOKEN }}
