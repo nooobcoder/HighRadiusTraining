@@ -1,9 +1,5 @@
 name: CI (Build 🏗️ & Release 📦)
 on:
-    push:
-        branches: [master]
-    pull_request:
-        branches: [master]
     tags:
         - "*"
 defaults:
