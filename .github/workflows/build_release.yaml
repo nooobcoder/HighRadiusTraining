@@ -2,6 +2,10 @@ name: CI (Build 🏗️ & Release 📦)
 defaults:
     run:
         working-directory: ./Track\ 4_ReactJS_Web\ Development/Project/Frontend/hrc-dashboard
+on:
+    push:
+        tags:
+            - "*"
 jobs:
     build:
         runs-on: ubuntu-latest
