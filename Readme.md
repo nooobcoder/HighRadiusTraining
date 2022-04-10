@@ -1,3 +1,7 @@
+#### Project Status
+
+[![CI (Build 🏗️ & Release 📦)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml/badge.svg?branch=v0.0.8)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml)
+
 ## HighRadius Training Details
 
 Dear Student,
@@ -17,19 +21,19 @@ Here is the [link](https://www.youtube.com/watch?v=YU7ZGgPKSsA) to install the s
     Your Notice board link is [https://sites.google.com/view/h2htechtrackgroup6](https://sites.google.com/view/h2htechtrackgroup6).  
     The Noticeboard link has been activated. Here you will find the:
 
-- Itinerary
-- Reading content - Video materials, reference documents
-- Scoreboard and Leaderboard
-- Important communication.
+-   Itinerary
+-   Reading content - Video materials, reference documents
+-   Scoreboard and Leaderboard
+-   Important communication.
 
 3.  **Milestones and Quizzes**  
     The Quizzes will be self-proctored and hence you’ll be needing to keep your webcam on while appearing the same. You'll be receiving test invite mails for the quizzes. Apart from this, you will have to complete all the milestones within the tenure of the internship.
 
 4.  **Important Resources**
 
-- Noticeboard [https://sites.google.com/view/h2htechtrackgroup6](https://sites.google.com/view/h2htechtrackgroup6)
-- Software Installation [Link](https://www.youtube.com/watch?v=YU7ZGgPKSsA)
-- Telegram [https://t.me/+SCv_JqQqPQNiZGJl](https://t.me/+SCv_JqQqPQNiZGJl)
+-   Noticeboard [https://sites.google.com/view/h2htechtrackgroup6](https://sites.google.com/view/h2htechtrackgroup6)
+-   Software Installation [Link](https://www.youtube.com/watch?v=YU7ZGgPKSsA)
+-   Telegram [https://t.me/+SCv_JqQqPQNiZGJl](https://t.me/+SCv_JqQqPQNiZGJl)
 
 Hope you have a pleasant journey ahead!
 
