@@ -29,12 +29,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{HRC_FLASK_IP}}:{{HRC_FLASK_PORT}}/get_prediction",
-							"protocol": "http",
+							"raw": "localhost:5000/get_prediction",
 							"host": [
-								"{{HRC_FLASK_IP}}"
+								"localhost"
 							],
-							"port": "{{HRC_FLASK_PORT}}",
+							"port": "5000",
 							"path": [
 								"get_prediction"
 							]
@@ -114,12 +113,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://{{HRC_FLASK_IP}}:{{HRC_FLASK_PORT}}/",
-							"protocol": "http",
+							"raw": "localhost:5000/",
 							"host": [
-								"{{HRC_FLASK_IP}}"
+								"localhost"
 							],
-							"port": "{{HRC_FLASK_PORT}}",
+							"port": "5000",
 							"path": [
 								""
 							]
@@ -133,12 +131,11 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{HRC_FLASK_IP}}:{{HRC_FLASK_PORT}}/all",
-							"protocol": "http",
+							"raw": "localhost:5000/all",
 							"host": [
-								"{{HRC_FLASK_IP}}"
+								"localhost"
 							],
-							"port": "{{HRC_FLASK_PORT}}",
+							"port": "5000",
 							"path": [
 								"all"
 							]
@@ -160,13 +157,17 @@
 					}
 				],
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/getrows?start=0&limit=10",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getrows?start=0&limit=10",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"getrows"
 					],
 					"query": [
@@ -199,13 +200,17 @@
 					"raw": "{\r\n    \"clear_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"due_in_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"baseline_create_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"invoice_currency\": \"INR\"\r\n}"
 				},
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/getanalytics",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getanalytics",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"getanalytics"
 					]
 				}
@@ -228,13 +233,17 @@
 					"raw": "{\r\n    \"sl_no\":48558,\r\n    \"business_code\": null,\r\n    \"cust_number\": \"200020431\",\r\n    \"name_customer\":\"test company\",\r\n    \"clear_date\": \"2022-3-1\",\r\n    \"business_year\": null,\r\n    \"doc_id\": null,\r\n    \"posting_date\": \"2022-3-1\",\r\n    \"document_create_date\": \"2022-3-2\",\r\n    \"document_create_date1\": null,\r\n    \"due_in_date\": \"2022-3-19\",\r\n    \"invoice_currency\": \"\",\r\n    \"document_type\": null,\r\n    \"posting_id\": null,\r\n    \"area_business\": null,\r\n    \"total_open_amount\": null,\r\n    \"baseline_create_date\": \"2022-3-15\",\r\n    \"cust_payment_terms\": null,\r\n    \"invoice_id\": null,\r\n    \"isOpen\": null,\r\n    \"aging_bucket\": null\r\n}"
 				},
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/addRow",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/addRow",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"addRow"
 					]
 				}
@@ -257,13 +266,17 @@
 					"raw": "{\r\n    \"doc_id\": 1929873765,\r\n    \"invoice_id\": 1929873765,\r\n    \"cust_number\": 200792734,\r\n    \"business_year\": 2019\r\n}"
 				},
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/advancedSearch",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/advancedSearch",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"advancedSearch"
 					]
 				}
@@ -276,13 +289,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/getbusinesses",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getbusinesses",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"getbusinesses"
 					]
 				}
@@ -295,13 +312,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/getcustomers",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getcustomers",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"getcustomers"
 					]
 				}
@@ -324,13 +345,17 @@
 					"raw": "{\r\n    \"invoice_currency\": \"USD\",\r\n    \"cust_payment_terms\": \"NAA8\"\r\n}"
 				},
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/editRow?serialNumber=2&tableName=winter_internship",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/editRow?serialNumber=2&tableName=winter_internship",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"editRow"
 					],
 					"query": [
@@ -363,13 +388,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{HRC_SERVLET_IP}}:{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}/deleteRow?sl_no=48568,",
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/deleteRow?sl_no=48568,",
 					"protocol": "http",
 					"host": [
-						"{{HRC_SERVLET_IP}}"
+						"192",
+						"168",
+						"0",
+						"134"
 					],
-					"port": "{{HRC_SERVLET_PORT}}{{HRC_SERVLET_CONTEXT}}",
+					"port": "280",
 					"path": [
+						"RESTDatabase_war_exploded",
 						"deleteRow"
 					],
 					"query": [
