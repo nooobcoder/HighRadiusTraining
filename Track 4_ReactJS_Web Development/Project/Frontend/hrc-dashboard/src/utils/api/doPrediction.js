@@ -7,7 +7,7 @@ const doPrediction = async (payload) => {
     REACT_APP_FLASK_SERVER_PORT || '5000'
   }`;
   try {
-    const { status, data } = await post(`http://${URL}/get_prediction`, {
+    const { status, data } = await post(`${URL}/get_prediction`, {
       data: payload,
     });
 
