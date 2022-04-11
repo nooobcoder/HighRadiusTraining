@@ -1,8 +1,13 @@
 import { post } from 'axios';
 
+const { REACT_APP_FLASK_SERVER, REACT_APP_FLASK_SERVER_PORT } = process.env;
+
 const doPrediction = async (payload) => {
+  const URL = `http://${REACT_APP_FLASK_SERVER || '192.168.0.134'}:${
+    REACT_APP_FLASK_SERVER_PORT || '5000'
+  }`;
   try {
-    const { status, data } = await post('http://192.168.0.134:5000/get_prediction', {
+    const { status, data } = await post(`http://${URL}/get_prediction`, {
       data: payload,
     });
 
