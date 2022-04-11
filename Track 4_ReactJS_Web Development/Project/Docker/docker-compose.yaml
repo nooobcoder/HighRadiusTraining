@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+    highradiustraining-servlet:
+        container_name: highradiustraining-servlet
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: unless-stopped
+        ports:
+            - "280:8080"
+        image: ankurpaul19/highradiustraining-servlet
+    highradiustraining-flask:
+        container_name: highradiustraining-flask
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: unless-stopped
+        ports:
+            - "5000:5000"
+        image: ankurpaul19/highradiustraining-flask
