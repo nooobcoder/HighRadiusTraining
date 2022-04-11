@@ -26,9 +26,12 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
   });
 
   const [modalOpened, setModalOpened] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [pieChartData, setPieChartData] = useState([{ id: '', label: 'null', value: 0 }]);
   const [barChartData, setBarChartData] = useState([{ id: '', label: 'null', value: 0 }]);
   const [chartToggle, setChartToggle] = useToggle('pie', ['pie', 'bar']);
+
+  const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
 
   const handleFormSubmission = async (values) => {
     // Loop through formInputFields
@@ -64,7 +67,15 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
         ],
         invoice_currency: defaultTableSchema.invoice_currency,
       };
+
+      // Enable the submit button
+      setShouldSubmitBeDisabled(true);
+      setShouldLoad(true);
       const analyticsData = await getAnalyticsData(payload);
+      // Disable the submit button
+      setShouldSubmitBeDisabled(false);
+      setShouldLoad(false);
+
       if (analyticsData.length > 0) {
         setPieChartData(preparePieChart({ data: analyticsData }));
         setBarChartData(prepareBarChart({ data: analyticsData }));
@@ -100,11 +111,11 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
       });
     }
   };
-  const [shouldSubmitBeDisabled, setShouldSubmitBeDisabled] = React.useState(true);
 
   return (
     <>
       <Mantine.Box sx={{ maxWidth: 300 }} mx="auto">
+        <Mantine.LoadingOverlay visible={shouldLoad} />
         <form onSubmit={form.onSubmit((values) => handleFormSubmission(values))}>
           <Mantine.Divider my="sm" variant="dashed" label="Get Insights" labelPosition="center" />
 

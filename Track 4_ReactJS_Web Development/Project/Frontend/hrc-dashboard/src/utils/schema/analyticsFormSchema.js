@@ -63,7 +63,7 @@ const convertDateToObject = (date) => {
 };
 
 const defaultTableSchema = {
-  invoice_currency: 'INR',
+  invoice_currency: 'USD',
   clear_date_start: convertDateToObject('2020-06-01'),
   clear_date_end: convertDateToObject('2020-12-31'),
   due_in_date_start: convertDateToObject('2020-06-01'),
