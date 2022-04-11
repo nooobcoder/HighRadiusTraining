@@ -1,11 +1,11 @@
 import { post } from 'axios';
 
-const { REACT_APP_API_SERVER, REACT_APP_API_SERVER_PORT } = process.env;
+const { REACT_APP_API_SERVER, REACT_APP_API_SERVER_PORT, REACT_APP_API_CONTEXT } = process.env;
 
 const advancedSearch = async (payload) => {
   const URL = `http://${REACT_APP_API_SERVER || '192.168.0.134'}:${
     REACT_APP_API_SERVER_PORT || '280'
-  }/RESTDatabase_war_exploded/advancedSearch`;
+  }${REACT_APP_API_CONTEXT||'/RESTDatabase_war_exploded'}/advancedSearch`;
 
   try {
     /* const payload = {
@@ -34,7 +34,7 @@ const advancedSearch = async (payload) => {
           const { status, data } = await post(
             `http://${REACT_APP_API_SERVER || '192.168.0.134'}:${
               REACT_APP_API_SERVER_PORT || '280'
-            }/RESTDatabase_war_exploded/getrows?start=${start}&limit=${limit}`,
+            }${REACT_APP_API_CONTEXT||'/RESTDatabase_war_exploded'}/getrows?start=${start}&limit=${limit}`,
           );
           if (status === 200) {
             data[data.length - 3] = { ...data[data.length - 3], start, limit };

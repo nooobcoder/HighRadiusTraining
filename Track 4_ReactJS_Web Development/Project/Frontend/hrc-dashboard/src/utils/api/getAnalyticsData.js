@@ -1,7 +1,7 @@
 import { post } from 'axios';
 
 const getAnalyticsData = async (payload) => {
-  const { REACT_APP_API_SERVER, REACT_APP_API_SERVER_PORT } = process.env;
+  const { REACT_APP_API_SERVER, REACT_APP_API_SERVER_PORT, REACT_APP_API_CONTEXT } = process.env;
   /* const payload = {
     clear_date: ['2019-01-01', '2020-12-31'],
     due_in_date: ['2019-01-01', '2020-12-31'],
@@ -11,9 +11,9 @@ const getAnalyticsData = async (payload) => {
 
   try {
     const { status, data } = await post(
-      `http://${REACT_APP_API_SERVER || '192.168.0.134'}:${
-        REACT_APP_API_SERVER_PORT || '280'
-      }/RESTDatabase_war_exploded/getanalytics`,
+      `http://${REACT_APP_API_SERVER || '192.168.0.134'}:${REACT_APP_API_SERVER_PORT || '280'}${
+        REACT_APP_API_CONTEXT || '/RESTDatabase_war_exploded'
+      }/getanalytics`,
       JSON.stringify(payload),
     );
 
