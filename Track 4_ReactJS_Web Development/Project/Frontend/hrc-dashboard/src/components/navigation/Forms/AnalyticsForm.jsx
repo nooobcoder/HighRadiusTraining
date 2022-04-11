@@ -20,6 +20,9 @@ import preparePieChart from '../../../utils/analytics/preparePieChart';
 import getAnalyticsData from '../../../utils/api/getAnalyticsData';
 
 function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
+  // Copy defaultTableSchema to a variable
+  const tableSchema = { ...defaultTableSchema };
+
   const form = useForm({
     initialValues: { ...defaultTableSchema },
     validate: {},
@@ -38,18 +41,18 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
     formInputFields.forEach((field) => {
       const fieldValue = form.getInputProps(field.htmlFor)?.value || '';
       // If fieldValue is null or undefined, store null
-      defaultTableSchema[field.htmlFor] = fieldValue;
+      tableSchema[field.htmlFor] = fieldValue;
     });
 
     // Loop through formDateFields
     formDateFields.forEach((field) => {
       if (field.type === 'db_date') {
-        defaultTableSchema[field.htmlFor] = convertDateToDBFormat(values[field.htmlFor.toString()]);
+        tableSchema[field.htmlFor] = convertDateToDBFormat(values[field.htmlFor.toString()]);
       }
     });
 
     try {
-      // Submit defaultTableSchema to the database
+      // Submit tableSchema to the database
       /*
                     Successful data submission example
                     0: {rowsAffected: 1}
@@ -59,13 +62,13 @@ function AnalyticsForm({ setOpened, setAnalyticsButtonDisabled }) {
                   */
 
       const payload = {
-        clear_date: [defaultTableSchema.clear_date_start, defaultTableSchema.clear_date_end],
-        due_in_date: [defaultTableSchema.due_in_date_start, defaultTableSchema.due_in_date_end],
+        clear_date: [tableSchema.clear_date_start, tableSchema.clear_date_end],
+        due_in_date: [tableSchema.due_in_date_start, tableSchema.due_in_date_end],
         baseline_create_date: [
-          defaultTableSchema.baseline_create_date_start,
-          defaultTableSchema.baseline_create_date_end,
+          tableSchema.baseline_create_date_start,
+          tableSchema.baseline_create_date_end,
         ],
-        invoice_currency: defaultTableSchema.invoice_currency,
+        invoice_currency: tableSchema.invoice_currency,
       };
 
       // Enable the submit button
