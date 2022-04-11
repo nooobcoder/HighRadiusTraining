@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "9bf771bd-5e17-403a-9fa2-701e0291adf5",
+		"name": "HighradiusWinterInternship",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Flask Service",
+			"item": [
+				{
+					"name": "localhost:5000/get_prediction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": [\r\n    1929646410,\r\n    1929873765,\r\n    1930147974,\r\n    1930083373,\r\n    1930659387,\r\n    1929439637,\r\n    1928819386,\r\n    1930610806,\r\n    1928550622,\r\n    1929151655,\r\n    1930022117,\r\n    1930788296,\r\n    1930817482,\r\n    1930052739,\r\n    1930209407,\r\n    1930153511,\r\n    1930438462,\r\n    1991837617,\r\n    1929773400,\r\n    1930676042,\r\n    1929626925,\r\n    1930431304,\r\n    1928620435,\r\n    1930592246,\r\n    1929194820,\r\n    1929170780,\r\n    1929907681,\r\n    1929847863,\r\n    1929541405,\r\n    null\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/get_prediction",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"get_prediction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "home",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "business_code",
+									"value": " CA02",
+									"type": "text"
+								},
+								{
+									"key": "cust_number",
+									"value": " 140105686",
+									"type": "text"
+								},
+								{
+									"key": "name_customer",
+									"value": " SYSC llc",
+									"type": "text"
+								},
+								{
+									"key": "clear_date",
+									"value": " 07-10-2020 17:04",
+									"type": "text"
+								},
+								{
+									"key": "buisness_year",
+									"value": " 2020",
+									"type": "text"
+								},
+								{
+									"key": "doc_id",
+									"value": " 2960623488",
+									"type": "text"
+								},
+								{
+									"key": "posting_date",
+									"value": " 30-03-2020",
+									"type": "text"
+								},
+								{
+									"key": "due_in_date",
+									"value": " 04-10-2020",
+									"type": "text"
+								},
+								{
+									"key": "baseline_create_date",
+									"value": " 31-03-2020",
+									"type": "text"
+								},
+								{
+									"key": "cust_payment_terms",
+									"value": " CA10",
+									"type": "text"
+								},
+								{
+									"key": "converted_usd",
+									"value": " 2309.79",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Predict 200 Rows",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/all",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetRows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getrows?start=0&limit=10",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getrows"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnalytics",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clear_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"due_in_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"baseline_create_date\": [\r\n        \"2019-01-01\",\r\n        \"2020-12-31\"\r\n    ],\r\n    \"invoice_currency\": \"INR\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getanalytics",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getanalytics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddRows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sl_no\":48558,\r\n    \"business_code\": null,\r\n    \"cust_number\": \"200020431\",\r\n    \"name_customer\":\"test company\",\r\n    \"clear_date\": \"2022-3-1\",\r\n    \"business_year\": null,\r\n    \"doc_id\": null,\r\n    \"posting_date\": \"2022-3-1\",\r\n    \"document_create_date\": \"2022-3-2\",\r\n    \"document_create_date1\": null,\r\n    \"due_in_date\": \"2022-3-19\",\r\n    \"invoice_currency\": \"\",\r\n    \"document_type\": null,\r\n    \"posting_id\": null,\r\n    \"area_business\": null,\r\n    \"total_open_amount\": null,\r\n    \"baseline_create_date\": \"2022-3-15\",\r\n    \"cust_payment_terms\": null,\r\n    \"invoice_id\": null,\r\n    \"isOpen\": null,\r\n    \"aging_bucket\": null\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/addRow",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"addRow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Advanced Search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"doc_id\": 1929873765,\r\n    \"invoice_id\": 1929873765,\r\n    \"cust_number\": 200792734,\r\n    \"business_year\": 2019\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/advancedSearch",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"advancedSearch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Businesses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getbusinesses",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getbusinesses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/getcustomers",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"getcustomers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Rows",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"invoice_currency\": \"USD\",\r\n    \"cust_payment_terms\": \"NAA8\"\r\n}"
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/editRow?serialNumber=2&tableName=winter_internship",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"editRow"
+					],
+					"query": [
+						{
+							"key": "serialNumber",
+							"value": "2"
+						},
+						{
+							"key": "tableName",
+							"value": "winter_internship"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Rows",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.0.134:280/RESTDatabase_war_exploded/deleteRow?sl_no=48568,",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"134"
+					],
+					"port": "280",
+					"path": [
+						"RESTDatabase_war_exploded",
+						"deleteRow"
+					],
+					"query": [
+						{
+							"key": "sl_no",
+							"value": "48568,",
+							"description": "Comma seprated string or a single serial_no"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
