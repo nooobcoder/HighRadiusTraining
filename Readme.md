@@ -1,6 +1,6 @@
 #### Project Status
 
-[![CI (Build 🏗️ & Release 📦)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml/badge.svg?branch=v0.9.0)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml)
+[![CI (Build 🏗️ & Release 📦)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml/badge.svg?branch=v1.0.0)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml)
 
 ## HighRadius Training Details
 
