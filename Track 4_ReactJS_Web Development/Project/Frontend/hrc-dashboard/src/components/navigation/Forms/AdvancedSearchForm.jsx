@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable camelcase */
 import * as Mantine from '@mantine/core';
 import { useForm } from '@mantine/hooks';
 import PropTypes from 'prop-types';

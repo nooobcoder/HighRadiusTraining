@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable camelcase */
 // SAMPLE CODE FOR REDUCER
 /* const initialState = {
   errorMessage: '',

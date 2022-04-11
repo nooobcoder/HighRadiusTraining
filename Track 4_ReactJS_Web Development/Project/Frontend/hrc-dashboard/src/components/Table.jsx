@@ -4,7 +4,7 @@ import { useFullscreen } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import React, { useEffect, useId, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check } from 'tabler-icons-react';
+import { PageBreak } from 'tabler-icons-react';
 import { getTableRows } from '../app/redux/actions/actions';
 import { setSelectedRows } from '../app/redux/slices/apiSlice';
 import { ExitFullScreen, FullScreen } from '../assets/svg';
@@ -45,12 +45,13 @@ function Table() {
   const { selectedIndices: checkedItems } = state;
   const actionDispatch = useDispatch();
 
-  const [buttonState, setButtonState] = useState({
+  // ?WARN: Legacy code for older custom pagination
+  /* const [buttonState, setButtonState] = useState({
     start: true,
     previous: true,
     next: true,
     last: true,
-  });
+  }); */
 
   useEffect(() => {
     console.log('[Table.jsx rendered]');
@@ -139,7 +140,8 @@ function Table() {
     buildRows();
   }, [filteredRows, state.meta]);
 
-  const shouldButtonBeEnabled = () => {
+  // ?WARN: Legacy code for older custom pagination
+  /* const shouldButtonBeEnabled = () => {
     const { rows: R, limit: L, start: S } = state.meta[0];
     if (S === 0) {
       setButtonState(() => ({
@@ -158,97 +160,162 @@ function Table() {
     } else {
       setButtonState(() => ({ start: true, previous: true, next: true, last: true }));
     }
-  };
+  }; */
 
   useEffect(() => {
     setColumnNames(generateColumnNames(state.rows[0]));
-    shouldButtonBeEnabled();
+    // shouldButtonBeEnabled();
   }, [state]);
 
-  const getRows = ({ operation = 'next' }) => {
-    const { start: S, limit: L, rows: R } = state.meta[0];
+  // Legacy Function
+
+  // const getRows = ({ operation = 'next' }) => {
+  //   const { start: S, limit: L, rows: R } = state.meta[0];
+  //   rowsSelector([]);
+  //   switch (operation) {
+  //     case 'start':
+  //       actionDispatch(getTableRows({ start: 0, limit: L }));
+  //       showNotification({
+  //         title: 'Alert!',
+  //         message: 'You have reached the beginning of this table.',
+  //         color: 'teal',
+  //         disallowClose: false,
+  //         icon: <Check size={20} />,
+  //       });
+  //       break;
+  //     case 'next':
+  //       actionDispatch(getTableRows({ start: S + L, limit: L }));
+  //       break;
+  //     case 'previous':
+  //       actionDispatch(getTableRows({ start: S - L, limit: L }));
+  //       break;
+  //     case 'last':
+  //       actionDispatch(getTableRows({ start: R - L, limit: L }));
+  //       showNotification({
+  //         title: 'Alert!',
+  //         message: 'You have reached the end of this table.',
+  //         color: 'teal',
+  //         disallowClose: false,
+  //         icon: <Check size={20} />,
+  //       });
+  //       break;
+  //     default:
+  //       console.log('An operation type was expected but not provided');
+  //   }
+  // };
+
+  const [activePage, setPage] = useState(1);
+  const getRowsNew = () => {
+    const { limit: L } = state.meta[0];
     rowsSelector([]);
-    switch (operation) {
-      case 'start':
-        actionDispatch(getTableRows({ start: 0, limit: L }));
-        showNotification({
-          title: 'Alert!',
-          message: 'You have reached the beginning of this table.',
-          color: 'teal',
-          disallowClose: false,
-          icon: <Check size={20} />,
-        });
-        break;
-      case 'next':
-        actionDispatch(getTableRows({ start: S + L, limit: L }));
-        break;
-      case 'previous':
-        actionDispatch(getTableRows({ start: S - L, limit: L }));
-        break;
-      case 'last':
-        actionDispatch(getTableRows({ start: R - L, limit: L }));
-        showNotification({
-          title: 'Alert!',
-          message: 'You have reached the end of this table.',
-          color: 'teal',
-          disallowClose: false,
-          icon: <Check size={20} />,
-        });
-        break;
-      default:
-        console.log('An operation type was expected but not provided');
-    }
+    actionDispatch(getTableRows({ start: (activePage - 1) * L, limit: L }));
+
+    showNotification({
+      title: 'Alert!',
+      message: `You are viewing page: ${activePage}.`,
+      color: 'teal',
+      disallowClose: false,
+      icon: <PageBreak size={20} />,
+    });
+    // switch (operation) {
+    //   case 'start':
+    //     actionDispatch(getTableRows({ start: 0, limit: L }));
+    //     showNotification({
+    //       title: 'Alert!',
+    //       message: 'You have reached the beginning of this table.',
+    //       color: 'teal',
+    //       disallowClose: false,
+    //       icon: <Check size={20} />,
+    //     });
+    //     break;
+    //   case 'next':
+    //     actionDispatch(getTableRows({ start: S + L, limit: L }));
+    //     break;
+    //   case 'previous':
+    //     actionDispatch(getTableRows({ start: S - L, limit: L }));
+    //     break;
+    //   case 'last':
+    //     actionDispatch(getTableRows({ start: R - L, limit: L }));
+    //     showNotification({
+    //       title: 'Alert!',
+    //       message: 'You have reached the end of this table.',
+    //       color: 'teal',
+    //       disallowClose: false,
+    //       icon: <Check size={20} />,
+    //     });
+    //     break;
+    //   default:
+    //     console.log('An operation type was expected but not provided');
+    // }
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const displayTableFooter = () => {
-    const { start, limit } = state.meta[0];
-    const end = start + limit;
+  React.useEffect(() => getRowsNew(), [activePage]);
 
+  const displayTableFooter = () => {
+    const { start, limit, rows } = state.meta[0];
+    const end = start + limit;
     return (
-      <Mantine.Center>
-        <Mantine.Group>
-          <Mantine.Group>
-            <Mantine.Button
-              disabled={!buttonState.start}
-              onClick={() => getRows({ operation: 'start' })}
-              className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer "
-            >
-              Start
-            </Mantine.Button>
-            <Mantine.Button
-              disabled={!buttonState.previous}
-              onClick={() => getRows({ operation: 'previous' })}
-              className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
-            >
-              Previous
-            </Mantine.Button>
-          </Mantine.Group>
-          <Mantine.Center>
-            <Mantine.Mark className="px-3 bg-[#5DAAE0] rounded-lg  lg:visible">
-              <Mantine.Text className="text-black sm:text-sm">
-                {`Displaying ${start + 1}-${end} of ${state?.meta[0]?.rows} items`}
-              </Mantine.Text>
-            </Mantine.Mark>
-          </Mantine.Center>
-          <Mantine.Group>
-            <Mantine.Button
-              onClick={() => getRows({ operation: 'next' })}
-              disabled={!buttonState.next}
-              className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
-            >
-              Next
-            </Mantine.Button>
-            <Mantine.Button
-              disabled={!buttonState.last}
-              onClick={() => getRows({ operation: 'last' })}
-              className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
-            >
-              Last
-            </Mantine.Button>
-          </Mantine.Group>
-        </Mantine.Group>
-      </Mantine.Center>
+      <Mantine.Stack>
+        <Mantine.Pagination
+          color="yellow"
+          page={activePage}
+          radius="md"
+          onChange={(pageNum) => {
+            setPage(pageNum);
+          }}
+          total={Math.ceil(rows / limit)}
+          withEdges
+          siblings={2}
+          boundaries={2}
+          className="py-1 px-3 font-bold bg-orange-300 rounded-full shadow-md"
+        />
+        <Mantine.Mark className="px-3 mb-4 text-center  bg-[#5DAAE0] rounded-lg lg:visible">
+          <Mantine.Text className="text-center text-black sm:text-sm">
+            {`Displaying ${start + 1}-${end} of ${state?.meta[0]?.rows} items`}
+          </Mantine.Text>
+        </Mantine.Mark>
+      </Mantine.Stack>
+      //  <Mantine.Group>
+      //   <Mantine.Group>
+      //     <Mantine.Button
+      //       disabled={!buttonState.start}
+      //       onClick={() => getRows({ operation: 'start' })}
+      //       className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer "
+      //     >
+      //       Start
+      //     </Mantine.Button>
+      //     <Mantine.Button
+      //       disabled={!buttonState.previous}
+      //       onClick={() => getRows({ operation: 'previous' })}
+      //       className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
+      //     >
+      //       Previous
+      //     </Mantine.Button>
+      //   </Mantine.Group>
+      //   <Mantine.Center>
+      //     <Mantine.Mark className="px-3 bg-[#5DAAE0] rounded-lg  lg:visible">
+      //       <Mantine.Text className="text-black sm:text-sm">
+      //         {`Displaying ${start + 1}-${end} of ${state?.meta[0]?.rows} items`}
+      //       </Mantine.Text>
+      //     </Mantine.Mark>
+      //   </Mantine.Center>
+      //   <Mantine.Group>
+      //     <Mantine.Button
+      //       onClick={() => getRows({ operation: 'next' })}
+      //       disabled={!buttonState.next}
+      //       className="bg-orange-300 hover:bg-orange-400 hover:cursor-pointer"
+      //     >
+      //       Next
+      //     </Mantine.Button>
+      //     <Mantine.Button
+      //       disabled={!buttonState.last}
+      //       onClick={() => getRows({ operation: 'last' })}
+      //       className="bg-orange-400 hover:bg-orange-500 hover:cursor-pointer"
+      //     >
+      //       Last
+      //     </Mantine.Button>
+      //   </Mantine.Group>
+      // </Mantine.Group>
     );
   };
 
@@ -294,7 +361,7 @@ function Table() {
           <tbody>{buildRows()}</tbody>
         </Mantine.Table>
       </Mantine.ScrollArea>
-      {displayTableFooter()}
+      <Mantine.Center>{displayTableFooter()}</Mantine.Center>
       <Mantine.Center>
         <Mantine.Button
           onClick={toggle}

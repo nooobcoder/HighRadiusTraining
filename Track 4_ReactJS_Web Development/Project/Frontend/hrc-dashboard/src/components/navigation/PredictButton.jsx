@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as Mantine from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import React, { useEffect, useState } from 'react';
@@ -16,7 +15,7 @@ function PredictButton() {
   // Get matching doc_id from rows if rows.sl_no equals to the selectedIndices
   const { rows, selectedIndices } = useSelector(({ api }) => api.table);
   const docId = [];
-  selectedIndices.forEach((s, i) => {
+  selectedIndices.forEach((s) => {
     const row = rows.find((r) => r.sl_no === s);
     docId.push(Number(row.doc_id));
   });

@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import { ResponsivePie } from '@nivo/pie';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -130,3 +130,14 @@ function PieChart({ data /* see data tab */ }) {
 }
 
 export default PieChart;
+
+PieChart.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      color: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
