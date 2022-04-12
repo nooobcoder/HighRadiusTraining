@@ -23,10 +23,10 @@ extra credit points, which will give you an added advantage.</p>
 </tr>
 <tr>
 <td><input type="checkbox" id="checkbox62" checked="true"><label for="checkbox62">4. Crud Operation (ADD/EDIT/DEL)</label></td>
-<td><input type="checkbox" id="checkbox63"><label for="checkbox63">4. View - Analytics</label></td>
+<td><input type="checkbox" id="checkbox63" checked="true"><label for="checkbox63" >4. View - Analytics</label></td>
 </tr>
 <tr>
-<td><input type="checkbox" id="checkbox64"><label for="checkbox64">5. Pagination</label></td>
+<td><input type="checkbox" id="checkbox64" checked="true"><label for="checkbox64">5. Pagination</label></td>
 <td></td>
 </tr>
 <tr>

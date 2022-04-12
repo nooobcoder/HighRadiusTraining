@@ -1,6 +1,10 @@
+[![CI (Build 🏗️ & Release 📦)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml/badge.svg?branch=v1.0.0)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml)
+
+---
+
 <h1 align="center">Highradius Dashboard 🖥️</h1>
 
-*This project is built with React18 support which means it has bleeding edge support of the latest web framework. **To get started in clicks, follow the <a href="#docker-deployment">docker deployment guide</a> below.***
+*This project is built with [**React18**](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html) support which means it has bleeding edge support of the latest web framework. **To get started in clicks, follow the <a href="#docker-deployment">docker deployment guide</a> below or follow the <a href="#coders-deployment">coder's guide (advanced)</a>.***
 
 ![Dashboard Screenshot](Screenshots/Dashboard_scr_1.png)
 
@@ -8,9 +12,45 @@
 
 ---
 
-<h2>Project Status</h2>
+<h2 class="code-line" data-line-start=0 data-line-end=1 ><a id="Project_Milestone_0"></a>Project Milestone</h2>
+<p class="has-line-data" data-line-start="2" data-line-end="4">The mandatory features are compulsory tasks and the optional features are for<br>
+extra credit points, which will give you an added advantage.</p>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Mandatory Features</th>
+<th>Optional Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type="checkbox" id="checkbox56" checked="true"><label for="checkbox56">1. UI Creation</label></td>
+<td><input type="checkbox" id="checkbox57" checked="true"><label for="checkbox57">1. Predict Button activation with Grid Data</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox58" checked="true"><label for="checkbox58">2. Grid Creation</label></td>
+<td><input type="checkbox" id="checkbox59" checked="true"><label for="checkbox59">2. Shortcut search button on Grid for Customer Id</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox60" checked="true"><label for="checkbox60">3. Grid Data Loading</label></td>
+<td><input type="checkbox" id="checkbox61"><label for="checkbox61">3. Sorting columns</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox62" checked="true"><label for="checkbox62">4. Crud Operation (ADD/EDIT/DEL)</label></td>
+<td><input type="checkbox" id="checkbox63" checked="true"><label for="checkbox63" >4. View - Analytics</label></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox64" checked="true"><label for="checkbox64">5. Pagination</label></td>
+<td></td>
+</tr>
+<tr>
+<td><input type="checkbox" id="checkbox65" checked="true"><label for="checkbox65">6. Advanced Search</label></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<br/>
 
-[![CI (Build 🏗️ & Release 📦)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml/badge.svg?branch=v1.0.0)](https://github.com/nooobcoder/HighRadiusTraining/actions/workflows/build_release.yaml)
 
 ---
 
@@ -41,6 +81,15 @@
 
 - [Github Actions](https://github.com/features/actions)
 
+### 4. Development Tools
+- [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/business/) (Ultimate is necessary for JavaEE projects and tomcat servers configuration.)
+![](Screenshots/intellij_screenshot.png)
+- [Raspberry Pi](https://www.raspberrypi.org/)
+![](Screenshots/raspi.jpeg)
+- [Gitpod OpenVSCode Server](https://github.com/gitpod-io/openvscode-server) ([For air gapped development environment](https://coder.com/docs/coder/latest/setup/air-gapped).)
+![](Screenshots/openvscode_server.png)
+- [Postman for API Testing](https://www.postman.com/)
+![](Screenshots/postman.jpg)
 ---
 
 <h2> Getting Started </h2>
@@ -159,6 +208,55 @@ Once the images are built, you can **start the containers** from the docker-comp
     
     > The build time shall be around ~3 minutes ⌚ depending upon your pc specs.
 
+---
+
+<h3>  ⚠️ ADVANCED Deployment </h3>
+<h4 id="coders-deployment"> Coder's Guide  </h4>
+
+<h5> 1. Backend Setup </h5>
+
+- Open the <a href="Track%204_ReactJS_Web%20Development/Project/Backend/API/demo/" target="_blank">backend project</a> in your favorite IDE like <a href="https://www.jetbrains.com/idea/business/" target="_blank">IntelliJ IDEA</a> or <a href="https://www.eclipse.org/" target="_blank">Eclipse</a>.
+
+    You would get a similar folder structure for the <a href="Track%204_ReactJS_Web%20Development/Project/Backend/API/demo/" target="_blank">**backend project**</a>.
+    ![](Screenshots/servlet_project_structure.png)
+
+- Bootstrap/Prepare Tomcat as per your IDE.
+
+- In IntelliJ IDEA you can see the build configuration here and perform the build server setup following the images below.
+  
+  1. ![1](Screenshots/build_1.png)
+  2. ![2](Screenshots/build_2.png)
+  3. ![3](Screenshots/build_3.png)
+  4. ![4](Screenshots/build_4.png)
+  5. ![5](Screenshots/build_5.png)
+  6. ![6](Screenshots/build_6.png)
+  7. ![6](Screenshots/build_7.png)
+
+
+<h5> 2. Frontend Setup </h5>
+
+  1. Folder Structure
+  
+     ![1](Screenshots/build_8.png)
+  
+  2. Install the dependencies
+     
+     ![2](Screenshots/yarn_install_success.png)
+     
+  3. Copy the <a href="Track%204_ReactJS_Web%20Development/Project/Frontend/hrc-dashboard/.env.example" target="_blank">`.env.example`</a> -> `.env.local` and tweak the **env variables** as per your setup.
+  
+     ![3](Screenshots/build_9.png)
+     
+  4. Run <a  href="Track%204_ReactJS_Web%20Development/Project/Frontend/hrc-dashboard/package.json" target="_blank">`yarn serve`</a> in the terminal (**script source from package.json**).
+     
+     ![4](Screenshots/build_10.png)
+
+<h5> 3. Postman Setup </h5>
+
+Please [import](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/) the followings for Postman to auto import the api endpoints
+
+1. <a href="Track%204_ReactJS_Web%20Development/Project/Postman%20Collection/HighradiusWinterInternship.postman_collection.json" target="_blank">API Endpoint Folder</a>
+2. <a href="Track%204_ReactJS_Web%20Development/Project/Postman%20Collection/HighRadius%20Training.postman_environment.json" target="_blank">Environment Variables</a>
 ---
 
 ## HighRadius Training Details
