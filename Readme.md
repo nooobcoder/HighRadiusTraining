@@ -5,8 +5,6 @@
 [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/nooobcoder/HighRadiusTraining/releases)
 [![GitHub commits](https://badgen.net/github/commits/Naereen/Strapdown.js)](https://github.com/nooobcoder/HighRadiusTraining/commit)
 
-[![Sparkline](https://stars.medv.io/nooobcoder/HighRadiusTraining.svg)](https://stars.medv.io/nooobcoder/HighRadiusTraining)
-
 ---
 
 <h1 align="center">Highradius Dashboard 🖥️</h1>
