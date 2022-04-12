@@ -19,3 +19,44 @@ services:
         ports:
             - "5000:5000"
         image: ankurpaul19/highradiustraining-flask
+
+    db:
+        image: mysql:5.7
+        command: --default-authentication-plugin=mysql_native_password
+        volumes:
+            - /var/lib/mysql:/var/lib/mysql
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=mysql
+            - MYSQL_DATABASE=grey_goose
+            - MYSQL_USER=mysql
+            - MYSQL_PASSWORD=mysql
+        ports:
+            - "3306:3306"
+
+    db_seeder:
+        image: mysql:latest
+        volumes:
+            - ./Database/db.sql:/db.sql
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        entrypoint:
+            [
+                "bash",
+                "-c",
+                "sleep 10 && mysql --user=mysql --password=mysql --host=db --port=3306 grey_goose < /db.sql && exit",
+            ]
+        depends_on:
+            - db
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        restart: unless-stopped
+        ports:
+            - 8080:80
+        environment:
+            # we specify that we connect to an arbitrary server with the flag below
+            # "arbitrary" means you're able to specify which database server to use on login page of phpmyadmin
+            - PMA_ARBITRARY=1
+        depends_on:
+            - db_seeder
