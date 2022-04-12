@@ -82,6 +82,8 @@ extra credit points, which will give you an added advantage.</p>
 ![Gitea](https://img.shields.io/badge/Gitea-34495E?style=for-the-badge&logo=gitea&logoColor=5D9425)
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
+---
+
 ### 1. Backend
 
 - [MySQL](https://dev.mysql.com/doc/) (Database)
