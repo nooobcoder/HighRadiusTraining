@@ -286,6 +286,146 @@ Please [import](https://learning.postman.com/docs/getting-started/importing-and-
 
 1. <a href="Track%204_ReactJS_Web%20Development/Project/Postman%20Collection/HighradiusWinterInternship.postman_collection.json" target="_blank">API Endpoint Folder</a>
 2. <a href="Track%204_ReactJS_Web%20Development/Project/Postman%20Collection/HighRadius%20Training.postman_environment.json" target="_blank">Environment Variables</a>
+
+**API Route Table**
+
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>Service</th>
+<th>Request Name</th>
+<th>Request Type</th>
+<th>Request Endpoint</th>
+<th>URL Parameters</th>
+<th>JSON Body</th>
+<th>Description</th>
+<th>CURL Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Servlets</td>
+<td>GET ROWS</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:280/getrows">http://192.168.0.118:280/getrows</a></td>
+<td>?start=0&amp;limit=10</td>
+<td></td>
+<td>Gets the rows from start to the next limit rows</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:280//getrows?start=0&amp;limit=10">http://192.168.0.118:280//getrows?start=0&amp;limit=10</a>’ \ --header ‘Content-Type: application/json’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>GET ANALYTICS</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:280/getanalytics">http://192.168.0.118:280/getanalytics</a></td>
+<td></td>
+<td>{     “clear_date”: [         “2019-01-01”,         “2020-12-31”     ],     “due_in_date”: [         “2019-01-01”,         “2020-12-31”     ],     “baseline_create_date”: [         “2019-01-01”,         “2020-12-31”     ],     “invoice_currency”: “INR” }</td>
+<td>Returns an array with analytics data. Refer JSON body</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:280//getanalytics">http://192.168.0.118:280//getanalytics</a>’ \ --header ‘Content-Type: application/json’ \ --data-raw ‘{     “clear_date”: [         “2019-01-01”,         “2020-12-31”     ],     “due_in_date”: [         “2019-01-01”,         “2020-12-31”     ],     “baseline_create_date”: [         “2019-01-01”,         “2020-12-31”     ],     “invoice_currency”: “INR” }’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>ADD ROWS</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:280/addRow">http://192.168.0.118:280/addRow</a></td>
+<td></td>
+<td>{     “sl_no”:48558,     “business_code”: null,     “cust_number”: “200020431”,     “name_customer”:“test company”,     “clear_date”: “2022-3-1”,     “business_year”: null,     “doc_id”: null,     “posting_date”: “2022-3-1”,     “document_create_date”: “2022-3-2”,     “document_create_date1”: null,     “due_in_date”: “2022-3-19”,     “invoice_currency”: “”,     “document_type”: null,     “posting_id”: null,     “area_business”: null,     “total_open_amount”: null,     “baseline_create_date”: “2022-3-15”,     “cust_payment_terms”: null,     “invoice_id”: null,     “isOpen”: null,     “aging_bucket”: null }</td>
+<td>Adds the rows that is passed as JSON raw body</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:280//addRow">http://192.168.0.118:280//addRow</a>’ \ --header ‘Content-Type: application/json’ \ --data-raw ‘{     “sl_no”:48558,     “business_code”: null,     “cust_number”: “200020431”,     “name_customer”:“test company”,     “clear_date”: “2022-3-1”,     “business_year”: null,     “doc_id”: null,     “posting_date”: “2022-3-1”,     “document_create_date”: “2022-3-2”,     “document_create_date1”: null,     “due_in_date”: “2022-3-19”,     “invoice_currency”: “”,     “document_type”: null,     “posting_id”: null,     “area_business”: null,     “total_open_amount”: null,     “baseline_create_date”: “2022-3-15”,     “cust_payment_terms”: null,     “invoice_id”: null,     “isOpen”: null,     “aging_bucket”: null }’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>ADVANCED SEARCH</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:280/advancedSearch">http://192.168.0.118:280/advancedSearch</a></td>
+<td></td>
+<td>{     “doc_id”: 1929873765,     “invoice_id”: 1929873765,     “cust_number”: 200792734,     “business_year”: 2019 }</td>
+<td>Performs advanced search with the fields passed. Refer PRS and JSON body for example.</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:280//advancedSearch">http://192.168.0.118:280//advancedSearch</a>’ \ --header ‘Content-Type: application/json’ \ --data-raw ‘{     “doc_id”: 1929873765,     “invoice_id”: 1929873765,     “cust_number”: 200792734,     “business_year”: 2019 }’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>GET BUSINESSES</td>
+<td>GET</td>
+<td><a href="http://192.168.0.118:280/getbusinesses">http://192.168.0.118:280/getbusinesses</a></td>
+<td></td>
+<td></td>
+<td>Returns the businesses with their codes in the database.</td>
+<td>curl --location --request GET ’<a href="http://192.168.0.118:280//getbusinesses">http://192.168.0.118:280//getbusinesses</a>’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>GET CUSTOMERS</td>
+<td>GET</td>
+<td><a href="http://192.168.0.118:280/getcustomers">http://192.168.0.118:280/getcustomers</a></td>
+<td></td>
+<td></td>
+<td>Returns the customers with their codes in the database.</td>
+<td>curl --location --request GET ’<a href="http://192.168.0.118:280/getcustomers">http://192.168.0.118:280/getcustomers</a>’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>EDIT ROW</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:280/editRow">http://192.168.0.118:280/editRow</a></td>
+<td>?serialNumber=2&amp;tableName=winter_internship</td>
+<td>{     “invoice_currency”: “USD”,     “cust_payment_terms”: “NAA8” }</td>
+<td>Edits a row by sending a RAW JSON body</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:280//editRow?serialNumber=2&amp;tableName=winter_internship">http://192.168.0.118:280//editRow?serialNumber=2&amp;tableName=winter_internship</a>’ \ --header ‘Content-Type: application/json’ \ --data-raw ‘{     “invoice_currency”: “USD”,     “cust_payment_terms”: “NAA8” }’</td>
+</tr>
+<tr>
+<td>Servlets</td>
+<td>DELETE ETEROW</td>
+<td>DELETE</td>
+<td><a href="http://192.168.0.118:280/deleteRow">http://192.168.0.118:280/deleteRow</a></td>
+<td>?sl_no=48568,48569,48570</td>
+<td></td>
+<td>Deletes a row or a range of rows</td>
+<td>curl --location --request DELETE ’<a href="http://192.168.0.118:280//deleteRow?sl_no=48568,'">http://192.168.0.118:280//deleteRow?sl_no=48568,’</a> \ --header ‘Content-Type: application/json’ \ --data-raw ‘’</td>
+</tr>
+<tr>
+<td>Flask</td>
+<td>GET PREDICTION</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:5000/get_prediction">http://192.168.0.118:5000/get_prediction</a></td>
+<td></td>
+<td>{     “data”: [     1929646410,     1929873765,     1930147974,     1930083373,     1930659387,     1929439637,     1928819386,     1930610806,     1928550622,     1929151655,     1930022117,     1930788296,     1930817482,     1930052739,     1930209407,     1930153511,     1930438462,     1991837617,     1929773400,     1930676042,     1929626925,     1930431304,     1928620435,     1930592246,     1929194820,     1929170780,     1929907681,     1929847863,     1929541405,     null     ] }</td>
+<td>Does prediction on the array of doc ids passed to it.</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:5000/get_prediction">http://192.168.0.118:5000/get_prediction</a>’ \ --header ‘Content-Type: application/json’ \ --data-raw ‘{     “data”: [     1929646410,     1929873765,     1930147974,     1930083373,     1930659387,     1929439637,     1928819386,     1930610806,     1928550622,     1929151655,     1930022117,     1930788296,     1930817482,     1930052739,     1930209407,     1930153511,     1930438462,     1991837617,     1929773400,     1930676042,     1929626925,     1930431304,     1928620435,     1930592246,     1929194820,     1929170780,     1929907681,     1929847863,     1929541405,     null     ] }’</td>
+</tr>
+<tr>
+<td>Flask</td>
+<td>PREDICT 200 ROWS</td>
+<td>POST</td>
+<td><a href="http://192.168.0.118:5000/all">http://192.168.0.118:5000/all</a></td>
+<td></td>
+<td></td>
+<td>Gets prediction of first 200 rows from Final.csv. This is for debugging purpose only that the flask service works.</td>
+<td>curl --location --request POST ’<a href="http://192.168.0.118:5000/all">http://192.168.0.118:5000/all</a>’</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
 ---
 
 ## HighRadius Training Details
