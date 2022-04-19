@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 public class DBConnection {
     private static List<Map<String, Object>> tableMetaData;
@@ -232,6 +234,8 @@ public class DBConnection {
             rows.addAll(tableMetaData);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            closeAll(statement); // Close the statement object
         }
 
         /*
@@ -240,6 +244,60 @@ public class DBConnection {
             System.out.println(o);
         }*/
         return rows;
+    }
+
+    /**
+     * Close a bunch of things carefully, ignoring exceptions. The
+     * “things” supported, thus far, are:
+     * <ul>
+     * <li>JDBC ResultSet</li>
+     * <li>JDBC Statement</li>
+     * <li>JDBC Connection</li>
+     * <li>Lock:s</li>
+     * </ul>
+     * <p>
+     * This is mostly meant for “finally” clauses.
+     *
+     * @param objects A set of SQL statements, result sets, and database
+     *                connections
+     */
+    public static void closeAll(final Object... objects) {
+        for (Object object : objects) {
+            if (object != null) {
+                try {
+                    if (object instanceof ResultSet) {
+                        try {
+                            ((ResultSet) object).close();
+                        } catch (final SQLException e) {
+                            /* No Op */
+                        }
+                    }
+                    if (object instanceof Statement) {
+                        try {
+                            ((Statement) object).close();
+                        } catch (final SQLException e) {
+                            /* No Op */
+                        }
+                    }
+                    if (object instanceof Connection) {
+                        try {
+                            ((Connection) object).close();
+                        } catch (final SQLException e) {
+                            /* No Op */
+                        }
+                    }
+                    if (object instanceof Lock) {
+                        try {
+                            ((Lock) object).unlock();
+                        } catch (final IllegalMonitorStateException e) {
+                            /* No Op */
+                        }
+                    }
+                } catch (final RuntimeException e) {
+                    /* No Op */
+                }
+            }
+        }
     }
 
     @Override
