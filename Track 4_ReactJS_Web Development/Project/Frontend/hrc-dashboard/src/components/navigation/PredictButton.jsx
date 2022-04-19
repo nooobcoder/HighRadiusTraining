@@ -1,5 +1,5 @@
 import * as Mantine from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
+import { showNotification, updateNotification } from '@mantine/notifications';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Check, X } from 'tabler-icons-react';
@@ -21,35 +21,52 @@ function PredictButton() {
   });
   const actionDispatch = useDispatch();
 
+  const onButtonClick = async () => {
+    try {
+      showNotification({
+        id: 'load-prediction', // id is necessary for updating notification
+        title: 'Loading!',
+        message: `The predictions are loading!`,
+        color: 'teal',
+        autoClose: 10000,
+        disallowClose: false,
+        loading: true,
+        icon: <Check size={18} />,
+      });
+      const predictions = await doPrediction(docId);
+      actionDispatch(setPredictions(predictions));
+
+      if (predictions.length > 0) {
+        updateNotification({
+          id: 'load-prediction', // id is necessary for updating notification
+          title: 'Alert!',
+          message: `The predictions are ready!`,
+          color: 'teal',
+          autoClose: 10000,
+          disallowClose: false,
+          loading: false,
+          icon: <Check size={18} />,
+        });
+      }
+    } catch (e) {
+      showNotification({
+        title: 'Alert!',
+        message: `The server returned error while predicting. ${e?.message}`,
+        color: 'red',
+        disallowClose: false,
+        loading: false,
+        icon: <X size={18} />,
+      });
+    }
+  };
+
   return (
     <Mantine.Button
       className={`w-auto bg-orange-400 hover:bg-orange-500 hover:cursor-pointer transition ease-in-out duration-75 ${
         disabled && 'blur-sm'
       }`}
       disabled={disabled}
-      onClick={async () => {
-        const predictions = await doPrediction(docId);
-        actionDispatch(setPredictions(predictions));
-
-        if (predictions.length > 0) {
-          showNotification({
-            title: 'Alert!',
-            message: `The predictions are ready!`,
-            color: 'teal',
-            autoClose: 10000,
-            disallowClose: false,
-            icon: <Check size={18} />,
-          });
-        } else {
-          showNotification({
-            title: 'Alert!',
-            message: 'The server returned error while predicting.',
-            color: 'red',
-            disallowClose: false,
-            icon: <X size={18} />,
-          });
-        }
-      }}
+      onClick={onButtonClick}
     >
       Predict
     </Mantine.Button>
