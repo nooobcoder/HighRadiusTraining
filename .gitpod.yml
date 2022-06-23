@@ -1,5 +1,134 @@
+image:
+    file: .gitpod.Dockerfile
 tasks:
-    - before: >
+    - name: tailscaled
+      command: |
+          if [ -n "${TS_STATE_TAILSCALE_EXAMPLE}" ]; then
+            # restore the tailscale state from gitpod user's env vars
+            sudo mkdir -p /var/lib/tailscale
+            echo "${TS_STATE_TAILSCALE_EXAMPLE}" | sudo tee /var/lib/tailscale/tailscaled.state > /dev/null
+          fi
+          sudo tailscaled
+    - name: Tailscale
+      command: |
+          sudo -E tailscale up --hostname "gitpod@nooobcoder-${GITPOD_WORKSPACE_ID}" \
+                                  --authkey "${TAILSCALE_AUTHKEY}"
+    - name: ImportGPG
+      command: >
           [[ ! -z $GNUPG_KEY  ]] &&
           gpg --verbose --batch --import <(echo $GNUPG_KEY|base64 -d) &&
-          echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf
+          echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf &&
+          git config commit.gpgsign true
+vscode:
+    extensions:
+        - mutantdino.resourcemonitor
+        - cweijan.vscode-mysql-client2
+        - Gruntfuggly.todo-tree
+        - jsDelivr.jsdelivr
+        - manuth.eslint-language-service
+        - markwylde.vscode-filesize
+        - mongodb.mongodb-vscode
+        - monokai.theme-monokai-pro-vscode
+        - ngryman.codesandbox-theme
+        - njzy.stats-bar
+        - pflannery.vscode-versionlens
+        - rangav.vscode-thunder-client
+        - redwan-hossain.auto-rename-tag-clone
+        - tombonnike.vscode-status-bar-format-toggle
+        - vlanguage.vscode-vlang
+        - vscjava.vscode-spring-initializr
+        - zaaack.markdown-editor
+        - aaron-bond.better-comments
+        - ahmadawais.shades-of-purple
+        - apollographql.vscode-apollo
+        - avraammavridis.vsc-react-documentation
+        - bengreenier.vscode-node-readme
+        - benjaminbenais.codesandbox-dark
+        - bierner.color-info
+        - bradlc.vscode-tailwindcss
+        - bungcip.better-toml
+        - chris-noring.node-snippets
+        - christian-kohler.npm-intellisense
+        - christian-kohler.path-intellisense
+        - chrmarti.regex
+        - CodeSandbox-io.codesandbox-projects
+        - CodeSandbox-io.codesandbox-projects-theme
+        - cssho.vscode-svgviewer
+        - DaltonMenezes.aura-theme
+        - Dart-Code.dart-code
+        - Dart-Code.flutter
+        - dbaeumer.vscode-eslint
+        - docsmsft.docs-markdown
+        - docsmsft.docs-preview
+        - DominicVonk.parameter-hints
+        - dsznajder.es7-react-js-snippets
+        - eamodio.gitlens
+        - ecmel.vscode-html-css
+        - EditorConfig.EditorConfig
+        - eg2.vscode-npm-script
+        - esbenp.prettier-vscode
+        - evan-buss.font-switcher
+        - formulahendry.auto-rename-tag
+        - geeebe.duplicate
+        - GitHub.codespaces
+        - GitHub.copilot-labs
+        - GitHub.copilot-nightly
+        - GitHub.github-vscode-theme
+        - GitHub.vscode-pull-request-github
+        - gitpod.gitpod-desktop
+        - golang.go
+        - GraphQL.vscode-graphql
+        - hashicorp.terraform
+        - hollowtree.vue-snippets
+        - jcbuisson.vue
+        - jeff-hykin.better-cpp-syntax
+        - k--kato.intellij-idea-keybindings
+        - me-dutour-mathieu.vscode-github-actions
+        - mechatroner.rainbow-csv
+        - mikestead.dotenv
+        - ms-python.python
+        - ms-python.vscode-pylance
+        - ms-toolsai.jupyter
+        - ms-toolsai.jupyter-keymap
+        - ms-vscode-remote.remote-containers
+        - ms-vscode-remote.remote-ssh
+        - ms-vscode-remote.remote-ssh-edit
+        - ms-vscode-remote.remote-wsl
+        - ms-vscode-remote.vscode-remote-extensionpack
+        - ms-vscode.cmake-tools
+        - ms-vscode.cpptools
+        - ms-vscode.cpptools-extension-pack
+        - ms-vscode.cpptools-themes
+        - ms-vscode.js-debug-nightly
+        - ms-vscode.vscode-typescript-next
+        - ms-vscode.vscode-typescript-tslint-plugin
+        - ms-vsliveshare.vsliveshare
+        - ms-vsliveshare.vsliveshare-audio
+        - ms-vsliveshare.vsliveshare-pack
+        - naumovs.color-highlight
+        - oderwat.indent-rainbow
+        - PKief.material-icon-theme
+        - pranaygp.vscode-css-peek
+        - Prisma.prisma
+        - Prisma.prisma-insider
+        - redhat.java
+        - redhat.vscode-xml
+        - redhat.vscode-yaml
+        - ritwickdey.LiveServer
+        - sdras.night-owl
+        - silvenon.mdx
+        - steoates.autoimport
+        - tgreen7.vs-code-node-require
+        - tomoki1207.selectline-statusbar
+        - twxs.cmake
+        - usernamehw.errorlens
+        - VisualStudioExptTeam.vscodeintellicode
+        - vscjava.vscode-java-debug
+        - vscjava.vscode-java-dependency
+        - vscjava.vscode-java-pack
+        - vscjava.vscode-java-test
+        - vscjava.vscode-maven
+        - vscode-icons-team.vscode-icons
+        - wix.vscode-import-cost
+        - xabikos.JavaScriptSnippets
+        - Zignd.html-css-class-completion
