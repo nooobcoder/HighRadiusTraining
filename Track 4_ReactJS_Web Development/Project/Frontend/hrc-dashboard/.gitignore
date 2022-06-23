@@ -102,3 +102,7 @@ deployment_keys.tar
 
 .github/.release
 release-artifacts-*
+
+.env*
+!.env.project
+!.env.vault
