@@ -11,6 +11,8 @@
 
 *This project is built with [**React18**](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html) support which means it has bleeding edge support of the latest web framework. **To get started in clicks, follow the <a href="#docker-deployment">docker deployment guide</a> below or follow the <a href="#coders-deployment">coder's guide (advanced)</a>.***
 
+⚠ All data used in the project, portrayed in the screenshot are for exemplar purposes only. The author/company owns no right on the data, and is not at all meant to be used on a production level. This was a training project and needs to be used for knowledge delivery purposes only.
+
 ![Dashboard Screenshot](Screenshots/Dashboard_scr_1.png)
 
 > [Screenshots](Screenshots)
